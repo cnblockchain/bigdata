@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="BigData">
 <meta property="og:description" content="介绍FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-15T07:13:48.000Z">
+<meta property="og:updated_time" content="2017-08-16T03:58:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop FairScheduler介绍">
 <meta name="twitter:description" content="介绍FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的">
@@ -401,10 +401,29 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的applications，所以每个applicaiton最终都能获取几乎一样多的资源。不像Hadoop默认的Scheduler(CapacityScheduler)，CapacityScheduler将applications以queue的方式组成，它可以让short applications在何时的时间内完成，而不会starving那些长期运行的applications，它也是一个合理的方式在多个用户之间共享集群。最终，Fair共享也可以与application priorities一起工作—–“priorities”作为权重来使用，以决定每个application需要获取资源的量。</p>
-<p>　　Scheduler将applications以queues的方式组织，在这些queues之间公平的共享资源。默认，所有的users共享一个queue，名称为“default”。如果application在请求资源时指定了queue，那么请求将会被提交到指定的queue中；仍然可以通过配置，根据请求中包含的user名称来分配queue。在每个queue内部，调度策略是在运行中的applicaitons之间共享资源。默认是基于内存的公平共享，不过FIFO和multi-resource with Dominant Resource Fairness也能够配置。Queues可以分级来划分资源，配置权重以特定的比例共享集群资源。</p>
-<p>　　FairScheduler允许为queues分配担保性的最小的共享资源量，这对保证某些用户、groups或者applications总能获取充足的资源是有帮助的。当一个queue中包含applications时，它至少能够获取最小量的共享资源，当queue不在需要时，那些过剩的资源将会被拆分给其他的运行中的application。这就让Scheduler在有效利用资源是，保证了queue的capacity。</p>
-<p>　　FairScheudler在默认情况下允许所有的application运行，但是这也可以通过配置文件来限制每个用户下和每个queue下运行applications的个数。这对限制一个用户一次提交大量applications是有用的，或者通过限制running applications个数来提升性能，因为大量的running applicaiton会导致创建大量的中间数据或者过多的上下文切换。限制applications不会导致随后的提交失败，只是在Scheduler queue中等待，直到先前的application结束。</p>
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的applications，所以每个applicaiton最终都能获取几乎一样多的资源。不像Hadoop默认的Scheduler(CapacityScheduler)，CapacityScheduler将applications以queue的方式组成，它可以让short applications在何时的时间内完成，而不会starving那些长期运行的applications，它也是一个合理的方式在多个用户之间共享集群。最终，Fair共享也可以与application priorities一起工作—–“priorities”作为权重来使用，以决定每个application需要获取资源的量。<br><a id="more"></a></p>
+<p>Scheduler将applications以queues的方式组织，在这些queues之间公平的共享资源。默认，所有的users共享一个queue，名称为“default”。如果application在请求资源时指定了queue，那么请求将会被提交到指定的queue中；仍然可以通过配置，根据请求中包含的user名称来分配queue。在每个queue内部，调度策略是在运行中的applicaitons之间共享资源。默认是基于内存的公平共享，不过FIFO和multi-resource with Dominant Resource Fairness也能够配置。Queues可以分级来划分资源，配置权重以特定的比例共享集群资源。  </p>
+<p>FairScheduler允许为queues分配担保性的最小的共享资源量，这对保证某些用户、groups或者applications总能获取充足的资源是有帮助的。当一个queue中包含applications时，它至少能够获取最小量的共享资源，当queue不在需要时，那些过剩的资源将会被拆分给其他的运行中的application。这就让Scheduler在有效利用资源是，保证了queue的capacity。</p>
+<p>FairScheudler在默认情况下允许所有的application运行，但是这也可以通过配置文件来限制每个用户下和每个queue下运行applications的个数。这对限制一个用户一次提交大量applications是有用的，或者通过限制running applications个数来提升性能，因为大量的running applicaiton会导致创建大量的中间数据或者过多的上下文切换。限制applications不会导致随后的提交失败，只是在Scheduler queue中等待，直到先前的application结束。
+　　</p>
+<h2 id="Hierarchical-queues"><a href="#Hierarchical-queues" class="headerlink" title="Hierarchical queues"></a>Hierarchical queues</h2><p>FairScheduler支持分层的queues。所有的queues继承自“root” queue。有效的资源在root子节点中，以典型的公平调度的方式分布；子节点再将分配给自己的资源以相同的方式分配给自己的子节点。applications只能在queue的叶子节点上调度。可以通过FairScheduler相关的配置文件，Queues可以被指定作为其他queues的子节点。</p>
+<p>Queue的名字，以其父节点path作为开始，以“.”作为分割符。比如名称为“queue1”的queue作为root的子节点，那么应该表示为“root.queue1”，名称为“queue2”的queue为“parent1”的子节点，那么应该表示为“root.parent1.queue2”。当指明一个queue时，root部分是可选的，比如“queue1”就是指queue1，而queue2指“parent1.queue2”。</p>
+<p>此外，FairScheduler允许为每个queue指定不同的policy，每个queue都可以根据用户希望的方式共享queue的资源。这些自定义的Policy可以通过实现“org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.SchedulingPolicy”来构建；FifoPolicy，FairSharePolicy(默认)，以及DominantResouceFairnessPolicy都是内置的，可以直接使用。</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>为了使用FairScheduler，首先需要在yarn-site.xml配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>定制FairScheduler涉及到2个文件。首先，scheduler有关的选项可以在yarn-site.xml中配置。此外，多数情况，用户需要创建一个“allocation”文件来列举存在的queues和它们相应的weights和capacities。这个“allocation”文件每隔10秒钟加载一次，更新的配置可以更快的生效。</p>
+<h3 id="yarn-site-xml中的配置"><a href="#yarn-site-xml中的配置" class="headerlink" title="yarn-site.xml中的配置"></a>yarn-site.xml中的配置</h3><blockquote>
+<ul>
+<li><strong>yarn.scheduler.fair.allocation.file</strong>： “allocation”文件的位置，“allocation”文件是一个用来描述queue以及它们的属性的配置文件。这个文件必须为格式严格的xml文件。如果为相对路径，那么将会在classpath下查找此文件(conf目录下)。默认值为“fair-scheduler.xml”。</li>
+<li><strong>yarn.scheduler.fair.user-as-default-queue</strong>：是否将与allocation有关的username作为默认的queue name，当queue name没有指定的时候。如果设置成false(且没有指定queue name) 或者没有设定，所有的jobs将共享“default” queue。默认值为true。</li>
+<li><strong>yarn.scheduler.fair.preemption</strong>：是否使用“preemption”(优先权，抢占)，默认为fasle，在此版本中此功能为测试性的。</li>
+<li><strong>yarn.scheduler.fair.assignmultiple</strong>：是在允许在一个心跳中，发送多个container分配信息。默认值为false。</li>
+<li><strong>yarn.scheduler.fair.max.assign</strong>：如果assignmultuple为true，那么在一次心跳中，最多发送分配container的个数。默认为-1，无限制。</li>
+<li><strong>yarn.scheduler.fair.locality.threshold.node</strong>：一个float值，在0~1之间，表示在等待获取满足node-local条件的containers时，最多放弃不满足node-local的container的机会次数，放弃的nodes个数为集群的大小的比例。默认值为-1.0表示不放弃任何调度的机会。</li>
+<li><strong>yarn.scheduler.fair.locality.threashod.rack</strong>：同上，满足rack-local。</li>
+<li><strong>yarn.scheduler.fair.sizebaseweight</strong>：是否根据application的大小(job的个数)作为权重。默认为false，如果为true，那么复杂的application将获取更多的资源。  </li>
+</ul>
+</blockquote>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>一个公平调度的例子：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">allocations</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">queue</span> <span class="attr">name</span>=<span class="string">"sample_queue"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">minResources</span>&gt;</span>10000 mb,0vcores<span class="tag">&lt;/<span class="name">minResources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">maxResources</span>&gt;</span>90000 mb,0vcores<span class="tag">&lt;/<span class="name">maxResources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">maxRunningApps</span>&gt;</span>50<span class="tag">&lt;/<span class="name">maxRunningApps</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">weight</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">weight</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">schedulingPolicy</span>&gt;</span>fair<span class="tag">&lt;/<span class="name">schedulingPolicy</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">queue</span> <span class="attr">name</span>=<span class="string">"sample_sub_queue"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">aclSubmitApps</span>&gt;</span>charlie<span class="tag">&lt;/<span class="name">aclSubmitApps</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">minResources</span>&gt;</span>5000 mb,0vcores<span class="tag">&lt;/<span class="name">minResources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">queue</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">queue</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"sample_user"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">maxRunningApps</span>&gt;</span>30<span class="tag">&lt;/<span class="name">maxRunningApps</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">user</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">userMaxAppsDefault</span>&gt;</span>5<span class="tag">&lt;/<span class="name">userMaxAppsDefault</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">queuePlacementPolicy</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">"specified"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">"primaryGroup"</span> <span class="attr">create</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">"default"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">queuePlacementPolicy</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">allocations</span>&gt;</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -446,6 +465,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/16/Spark-Dynamic-Resource-Allocation/" rel="prev" title="Spark Dynamic Resource Allocation 动态资源分配">
+                Spark Dynamic Resource Allocation 动态资源分配 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -522,7 +545,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -533,7 +556,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -544,7 +567,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -603,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hierarchical-queues"><span class="nav-number">2.</span> <span class="nav-text">Hierarchical queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yarn-site-xml中的配置"><span class="nav-number">4.1.</span> <span class="nav-text">yarn-site.xml中的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">4.2.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></div>
             
 
           </div>
