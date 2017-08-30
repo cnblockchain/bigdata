@@ -94,18 +94,22 @@
 
 
 
-<meta name="description" content="介绍FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的">
+<meta name="description" content="翻译自：https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html 介绍在一个公司内部的Hadoop Yarn集群，肯定会被多个业务、多个用户同时使用，共享Yarn的资源，如果不做资源的管理与规划，那么整个Yarn的资源很容易被某一个用户提交的Application占满，其它任务只能等待">
 <meta name="keywords" content="Hadoop,Yarn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop FairScheduler介绍">
 <meta property="og:url" content="http://bigclouder.net/2017/08/15/Hadoop-FairScheduler/index.html">
 <meta property="og:site_name" content="BigData">
-<meta property="og:description" content="介绍FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的">
+<meta property="og:description" content="翻译自：https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html 介绍在一个公司内部的Hadoop Yarn集群，肯定会被多个业务、多个用户同时使用，共享Yarn的资源，如果不做资源的管理与规划，那么整个Yarn的资源很容易被某一个用户提交的Application占满，其它任务只能等待">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-16T03:58:58.000Z">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/Fair.JPG">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/20161025213208058.jpg">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/WX20170830-015302@2x.png">
+<meta property="og:updated_time" content="2017-08-29T18:12:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop FairScheduler介绍">
-<meta name="twitter:description" content="介绍FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的">
+<meta name="twitter:description" content="翻译自：https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html 介绍在一个公司内部的Hadoop Yarn集群，肯定会被多个业务、多个用户同时使用，共享Yarn的资源，如果不做资源的管理与规划，那么整个Yarn的资源很容易被某一个用户提交的Application占满，其它任务只能等待">
+<meta name="twitter:image" content="http://ouh6z710l.bkt.clouddn.com/Fair.JPG">
 
 
 
@@ -401,15 +405,18 @@
       
 
       
-        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的applications，所以每个applicaiton最终都能获取几乎一样多的资源。不像Hadoop默认的Scheduler(CapacityScheduler)，CapacityScheduler将applications以queue的方式组成，它可以让short applications在何时的时间内完成，而不会starving那些长期运行的applications，它也是一个合理的方式在多个用户之间共享集群。最终，Fair共享也可以与application priorities一起工作—–“priorities”作为权重来使用，以决定每个application需要获取资源的量。<br><a id="more"></a></p>
+        <p>翻译自：<br><a href="https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html" target="_blank" rel="external">https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html</a></p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在一个公司内部的Hadoop Yarn集群，肯定会被多个业务、多个用户同时使用，共享Yarn的资源，如果不做资源的管理与规划，那么整个Yarn的资源很容易被某一个用户提交的Application占满，其它任务只能等待，这种当然很不合理，我们希望每个业务都有属于自己的特定资源来运行MapReduce任务，Hadoop中提供的公平调度器–Fair Scheduler，就可以满足这种需求。Fair Scheduler将整个Yarn的可用资源划分成多个资源池，每个资源池中可以配置最小和最大的可用资源（内存和CPU）、最大可同时运行Application数量、权重、以及可以提交和管理Application的用户等。<br><img src="http://ouh6z710l.bkt.clouddn.com/Fair.JPG" alt=""></p>
+<p>FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用整个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的applications，所以每个applicaiton最终都能获取几乎一样多的资源。不像Hadoop默认的Scheduler(CapacityScheduler)，CapacityScheduler将applications以queue的方式组成，它可以让short applications在何时的时间内完成，而不会starving那些长期运行的applications，它也是一个合理的方式在多个用户之间共享集群。最终，Fair共享也可以与application priorities一起工作—–“priorities”作为权重来使用，以决定每个application需要获取资源的量。<br><a id="more"></a></p>
 <p>Scheduler将applications以queues的方式组织，在这些queues之间公平的共享资源。默认，所有的users共享一个queue，名称为“default”。如果application在请求资源时指定了queue，那么请求将会被提交到指定的queue中；仍然可以通过配置，根据请求中包含的user名称来分配queue。在每个queue内部，调度策略是在运行中的applicaitons之间共享资源。默认是基于内存的公平共享，不过FIFO和multi-resource with Dominant Resource Fairness也能够配置。Queues可以分级来划分资源，配置权重以特定的比例共享集群资源。  </p>
 <p>FairScheduler允许为queues分配担保性的最小的共享资源量，这对保证某些用户、groups或者applications总能获取充足的资源是有帮助的。当一个queue中包含applications时，它至少能够获取最小量的共享资源，当queue不在需要时，那些过剩的资源将会被拆分给其他的运行中的application。这就让Scheduler在有效利用资源是，保证了queue的capacity。</p>
-<p>FairScheudler在默认情况下允许所有的application运行，但是这也可以通过配置文件来限制每个用户下和每个queue下运行applications的个数。这对限制一个用户一次提交大量applications是有用的，或者通过限制running applications个数来提升性能，因为大量的running applicaiton会导致创建大量的中间数据或者过多的上下文切换。限制applications不会导致随后的提交失败，只是在Scheduler queue中等待，直到先前的application结束。
-　　</p>
+<p><img src="http://ouh6z710l.bkt.clouddn.com/20161025213208058.jpg" alt=""><br>为了了解queue之间如何共享资源，设想两个用户A和B，各自有自己的queue（图4-4）。A开启了一个job，由于B没有请求，所以它获得了所有的资源。然后在A的job还在运行时，B开启了一个job，一段时间后，每一个job使用了一半的资源，以我们早些时候看到的方式。现在，如果B开启了第二个job，它会同B的其它job一起分享资源，所以B的每一个job占有四分之一个资源，而A继续占有一半的资源。结果是资源的用户之间平分。</p>
+<p>FairScheudler在默认情况下允许所有的application运行，但是这也可以通过配置文件来限制每个用户下和每个queue下运行applications的个数。这对限制一个用户一次提交大量applications是有用的，或者通过限制running applications个数来提升性能，因为大量的running applicaiton会导致创建大量的中间数据或者过多的上下文切换。限制applications不会导致随后的提交失败，只是在Scheduler queue中等待，直到先前的application结束。</p>
+<p>　　</p>
 <h2 id="Hierarchical-queues"><a href="#Hierarchical-queues" class="headerlink" title="Hierarchical queues"></a>Hierarchical queues</h2><p>FairScheduler支持分层的queues。所有的queues继承自“root” queue。有效的资源在root子节点中，以典型的公平调度的方式分布；子节点再将分配给自己的资源以相同的方式分配给自己的子节点。applications只能在queue的叶子节点上调度。可以通过FairScheduler相关的配置文件，Queues可以被指定作为其他queues的子节点。</p>
 <p>Queue的名字，以其父节点path作为开始，以“.”作为分割符。比如名称为“queue1”的queue作为root的子节点，那么应该表示为“root.queue1”，名称为“queue2”的queue为“parent1”的子节点，那么应该表示为“root.parent1.queue2”。当指明一个queue时，root部分是可选的，比如“queue1”就是指queue1，而queue2指“parent1.queue2”。</p>
-<p>此外，FairScheduler允许为每个queue指定不同的policy，每个queue都可以根据用户希望的方式共享queue的资源。这些自定义的Policy可以通过实现“org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.SchedulingPolicy”来构建；FifoPolicy，FairSharePolicy(默认)，以及DominantResouceFairnessPolicy都是内置的，可以直接使用。</p>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>为了使用FairScheduler，首先需要在yarn-site.xml配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>为了使用FairScheduler，首先需要在yarn-site.xml配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>yarn.resourcemanager.scheduler.class<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;<span class="name">value</span>&gt;</span>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.FairScheduler<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">property</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>定制FairScheduler涉及到2个文件。首先，scheduler有关的选项可以在yarn-site.xml中配置。此外，多数情况，用户需要创建一个“allocation”文件来列举存在的queues和它们相应的weights和capacities。这个“allocation”文件每隔10秒钟加载一次，更新的配置可以更快的生效。</p>
 <h3 id="yarn-site-xml中的配置"><a href="#yarn-site-xml中的配置" class="headerlink" title="yarn-site.xml中的配置"></a>yarn-site.xml中的配置</h3><blockquote>
 <ul>
@@ -423,7 +430,58 @@
 <li><strong>yarn.scheduler.fair.sizebaseweight</strong>：是否根据application的大小(job的个数)作为权重。默认为false，如果为true，那么复杂的application将获取更多的资源。  </li>
 </ul>
 </blockquote>
+<h3 id="分配文件格式"><a href="#分配文件格式" class="headerlink" title="分配文件格式"></a>分配文件格式</h3><p>分配文件必须是XML格式。这个格式包含5类元素：</p>
+<ol>
+<li><p>队列元素：<br>表示队列。队列元素可以选择一个可选属性”type”，当设置为’parent’可以将其设置为父队列。这个当我们想创建一个父队列而不配置任何子队列时是有用的。每个队列元素可能包含下列属性：</p>
+<blockquote>
+<ul>
+<li><strong>minResources</strong>:队列最小资源所有权，是以”X mb,Y vcores”形式。对于单一资源公平策略，vcores值被忽略。如果一个队列的最小共享不满足，则将在同一个父之前的任何其他队列中提供可用的资源。在单一资源公平策略下，如果一个队列的内存使用率低于其最小内存共享，则被认为是不满足的。在主导资源公平下，一个队列如果它的使用占主导地位的资源相对于集群容量是低于其最低份额的，那么其没认为是不满意的。如果在这个情况下，多个队列是不满足的，资源到队列是相关资源实例用和最小值中间最小的比例。注意这是可能的，一个队列低于其最小值，可能不会立即获得其最小值当其提交一个应用程序时，因为已经运行的作业可能会使用到这些资源。</li>
+<li><strong>maxResources</strong>：队列被允许的最大资源，以”X mb,Y vcores”的形式。对于单一资源的公平策略，Vcores值被忽略。如果其总使用量超过这个限制，一个队列将永远不会被分配到一个容器。</li>
+<li><strong>maxRunningApps</strong>：限制同时从队列中运行的应用程序数目。</li>
+<li><strong>maxAMShare</strong>：限制可用于运行应用程序主程序的队列的公平份额的分数。此属性只能用于子队列。例如，如果设置为1.0f，然后AMs在子队列可以达到100%的内存和CPU的公平分享。对-1.0f价值将禁用此功能，amShare不会被检查。默认值是0.5f</li>
+<li><strong>weight</strong>：非比例的于其他队列共享集群，权重默认值是1，并且一个权重是2的队列应得到作为一个队列权重越2倍多的资源。</li>
+<li><strong>schedulingPolicy</strong>：为任何队列设置调度策略。<br>这个允许的值是”fifo”,”fair”,”drf”或任何org.apache.hadoop.yarn.server.resourcemanager.scheduler.fair.SchedulingPolicy.延伸类。默认是”fair”。<br>FIFO：先按照优先级高低调度，如果优先级相同，则按照提交时间先后顺序调度，如果提交时间相同，则按照（队列或者应用程序）名称大小（字符串比较）调度；<br>FAIR：按照内存资源使用量比率调度，即按照used_memory/minShare大小调度（核心思想是按照该调度算法决定调度顺序，但还需考虑一些边界情况）；<br>DRF：借鉴了Mesos中的设计策略，按照主资源公平调度算法进行调度，具体已经在Apache Mesos调度器机制进行了介绍。</li>
+<li><strong>aclSubmitApps</strong>：可以向队列中提交应用程序的用户和/或组的列表。</li>
+<li><strong>aclAdministerApps</strong>：可以管理队列的用户和/或组的列表。目前唯一的能管理的动作是杀死一个应用程序。</li>
+<li><strong>minSharePreemptionTimeout</strong>：从其他队列试图强占容器资源之前，在最小共享下的秒数。如果没设置，队列将继承其父队列的值。</li>
+<li><strong>fairSharePreemptionTimeout</strong>：从其他队列试图强占容器资源之前，在公平共享阈值下的秒数。如果没设置，队列将继承其父队列的值。</li>
+<li><strong>fairSharePreemptionThreshold</strong>：队列的公平共享优先权阈值。如果队列等待fairSharePreemptionTimeout没有接受到fairSharePreemptionThreshold* fairShare相应的资源，其可以从其他队列强占容器资源。如果没设置，队列将继承其父队列的值。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>用户元素:<br>它代表了管理个人用户行为的设置。它们可以包含一个单一的属性：maxrunningapps，对于特定用户运行应用程序的一个限制。</p>
+</li>
+<li>userMaxAppsDefault元素：<br>对于未指定其他指定的任何用户，设置默认运行应用程序限制。</li>
+<li>defaultFairSharePreemption Timeout 元素：<br>对root队列设置公平共享强占超时时间，被root队列中的fairSharePreemptionTimeout 元素重写</li>
+<li>defaultMinSharePreemptionTimeout 元素：<br>对root队列设置最小共享强占超时时间，被root队列中defaultMinSharePreemptionTimeout元素重写</li>
+<li>defaultFairSharePreemptionThreshold 元素：<br>对root队列设置最小共享强占阈值，被root队列中的defaultFairSharePreemptionThreshold元素重写。</li>
+<li>queueMaxAppsDefault 元素：<br>为队列设置默认运行应用程序限制;被每个队列中的maxRunningApps元素重写。</li>
+<li>queueMaxAMShareDefault 元素：<br>为队列设置默认AM资源；被每个队列的maxAMShare 元素重写。</li>
+<li>defaultQueueSchedulingPolicy 元素：<br>为队列设置默认的调度策略;如果被指定的话，被每个队列中的schedulingPolicy元素重写。默认是fair</li>
+<li>queuePlacementPolicy元素：<br>其中包含一个规则元素列表，告诉调度如何放置传入的应用程序到队列。规则按照它们被列出的顺序被应用。规则可以获取参数。所有的规则接受”create”参数，这表示规则是够能创建一个新队列。”create”默认是true，如果设置为false并且该规则应该放置应用程序到队列，但是没有在分配文件中配置，我们会继续到下一个规则。最后一个规则必须是一个可能永远不发出继续的规则。有效的规则是：<blockquote>
+<ul>
+<li><strong>specified</strong>：该应用程序配放置到其去修的队列。如果应用程序需求无队列，例如，其指定”default”，我们继续。如果应用程序被需求一个队列名开始或结束是””.””，例如，命名例如”.q1”或”q1.”,将被拒绝。</li>
+<li><strong>user</strong>:应用程序被放置到名称为提交的用户的队列中。用户名的”.”将被”<em>dot</em>“替换，例如对于用户”first.last”的用户是”first_dot_last”</li>
+<li><strong>primaryGroup</strong>:应用程序被放置到一个名称为提交用户的主组的队列中，组名中的”.”被替换为”<em>dot</em>“，例如组名为”one.two”是”one_dot_two”</li>
+<li><strong>secondaryGroupExistingQueue</strong>: 应用程序被放置到一个名称为提交用户的匹配第二组名的队列中。第一个被匹配的第二组名将被选中。组名中的”.”将被替换为”<em>dot</em>”，例如一个用户的第二组名为”one.two”将被置换为“one_dot_two”，如果这个队列存在的话。</li>
+<li><strong>nestedUserQueue</strong>：嵌套规则。</li>
+<li><strong>default</strong>:该应用程序被放置在默认规则的属性queue指定的队列中。如果queue为设置，那么应用程序被放置到’root.default’队列。</li>
+<li><strong>reject</strong>:应用程序被拒绝</li>
+</ul>
+</blockquote>
+</li>
+</ol>
 <h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>一个公平调度的例子：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">allocations</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">queue</span> <span class="attr">name</span>=<span class="string">"sample_queue"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">minResources</span>&gt;</span>10000 mb,0vcores<span class="tag">&lt;/<span class="name">minResources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">maxResources</span>&gt;</span>90000 mb,0vcores<span class="tag">&lt;/<span class="name">maxResources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">maxRunningApps</span>&gt;</span>50<span class="tag">&lt;/<span class="name">maxRunningApps</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">weight</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">weight</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">schedulingPolicy</span>&gt;</span>fair<span class="tag">&lt;/<span class="name">schedulingPolicy</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">queue</span> <span class="attr">name</span>=<span class="string">"sample_sub_queue"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">aclSubmitApps</span>&gt;</span>charlie<span class="tag">&lt;/<span class="name">aclSubmitApps</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">minResources</span>&gt;</span>5000 mb,0vcores<span class="tag">&lt;/<span class="name">minResources</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">queue</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">queue</span>&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">user</span> <span class="attr">name</span>=<span class="string">"sample_user"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">maxRunningApps</span>&gt;</span>30<span class="tag">&lt;/<span class="name">maxRunningApps</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">user</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">userMaxAppsDefault</span>&gt;</span>5<span class="tag">&lt;/<span class="name">userMaxAppsDefault</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">queuePlacementPolicy</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">"specified"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">"primaryGroup"</span> <span class="attr">create</span>=<span class="string">"false"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">rule</span> <span class="attr">name</span>=<span class="string">"default"</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">queuePlacementPolicy</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">allocations</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="通过Web-UI-监控"><a href="#通过Web-UI-监控" class="headerlink" title="通过Web UI 监控"></a>通过Web UI 监控</h2><p>当前应用程序，队列，和公平共享可以通过资源管理器的web接口来检查，在<a href="http://*ResourceManager" target="_blank" rel="external">http://*ResourceManager</a> URL*/cluster/scheduler。<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20170830-015302@2x.png" alt=""><br>在web界面上的每个队列都可以看到下列字段：</p>
+<ol>
+<li>userd Resources – 队列中分配给容器的资源总和。</li>
+<li>Num Active Applications – 已接收至少一个容器的队列中的应用程序的数量。</li>
+<li>Num Pending Applications –尚未接收任何容器的队列中的应用程序的数量。</li>
+<li>Min Resources – 保证队列最小资源的配置。</li>
+<li>Max Resources – 已被允许的队列的配置的最大资源。</li>
+<li>Instantaneous Fair Share –队列的瞬时公平共享资源。这些共享只考虑活动的队列（那些运行的应用程序），和用于的调度策略。当其他队列没有使用它们时，队列可能在它们的共享之外分配资源。一个队列的资源消耗出来或低于其公平份额，而不会有瞬时容器争抢。</li>
+<li>Steady Fair Share – 队列资源的稳定的公共共享。这些共享考虑所有的队列，不论它们是否是积极的（有运行应用程序）。当配置和容量变化时，这些都被计算较少的变更。它们的意思是提供可视性，在用户期望的资源上，并因此显示在WEB 界面上。</li>
+</ol>
 
       
     </div>
@@ -545,7 +603,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -556,7 +614,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -567,7 +625,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -626,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hierarchical-queues"><span class="nav-number">2.</span> <span class="nav-text">Hierarchical queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yarn-site-xml中的配置"><span class="nav-number">4.1.</span> <span class="nav-text">yarn-site.xml中的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">4.2.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hierarchical-queues"><span class="nav-number">2.</span> <span class="nav-text">Hierarchical queues</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yarn-site-xml中的配置"><span class="nav-number">4.1.</span> <span class="nav-text">yarn-site.xml中的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分配文件格式"><span class="nav-number">4.2.</span> <span class="nav-text">分配文件格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">4.3.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过Web-UI-监控"><span class="nav-number">5.</span> <span class="nav-text">通过Web UI 监控</span></a></li></ol></div>
             
 
           </div>

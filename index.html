@@ -298,6 +298,1421 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/30/Kafka在zk中的信息详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/30/Kafka在zk中的信息详解/" itemprop="url">Kafka在zk中的信息详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T03:31:42+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/Zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">Zookeeper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>问题：</p>
+<ol>
+<li>Kafka的哪些信息记录在Zookeeper中</li>
+<li>Consumer Group消费的每个Partition的Offset信息存放在什么位置</li>
+<li>Topic的每个Partition存放在哪个Broker上的信息存放在哪里</li>
+<li>Producer跟Zookeeper究竟有没有关系？</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/30/Kafka宕机演练/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/30/Kafka宕机演练/" itemprop="url">Kafka宕机演练</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T03:02:43+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>备注：kafka全部停机的情况下，故障处理须严格按照以下步骤<br>在hcontrol界面停止kafka，模拟故障过程<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20170822-182335@2x.png" alt=""><br>1.在stdp节点停止全部的sdtp服务，列表如下： </p>
+<table>
+<thead>
+<tr>
+<th>IP 地址</th>
+<th>监测端口</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.11.94.23</td>
+<td>9100/9200/9300/9400/9500/9600</td>
+<td>2/3G数据接收</td>
+</tr>
+<tr>
+<td>10.11.94.31</td>
+<td>9100/9200/9300/9400/9500/9600</td>
+<td>LTE数据接收</td>
+</tr>
+<tr>
+<td>10.11.94.39</td>
+<td>9100/9200/9300/9400/9500/9600</td>
+<td>LTE数据接收</td>
+</tr>
+<tr>
+<td>10.11.94.46</td>
+<td>9100/9200/9300/9400/9500/9600</td>
+<td>LTE数据接收</td>
+</tr>
+<tr>
+<td>10.11.94.53</td>
+<td>9100/9200/9300/9400/9500/9600</td>
+<td>2/3G数据接收</td>
+</tr>
+<tr>
+<td>10.11.94.61</td>
+<td>9100/9200/9300/9400/9500/9600</td>
+<td>LTE数据接收</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/30/Kafka宕机演练/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/30/Kafka基本该概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/30/Kafka基本该概念/" itemprop="url">Kafka基本概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T03:02:43+08:00">
+                2017-08-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kafka/" itemprop="url" rel="index">
+                    <span itemprop="name">Kafka</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Kafka是一种高吞吐量的分布式发布订阅消息系统，它可以处理消费者规模的网站中的所有动作流数据。 这种动作（网页浏览，搜索和其他用户的行动）是在现代网络上的许多社会功能的一个关键因素。 这些数据通常是由于吞吐量的要求而通过处理日志和日志聚合来解决。 对于像Hadoop的一样的日志数据和离线分析系统，但又要求实时处理的限制，这是一个可行的解决方案。Kafka的目的是通过Hadoop的并行加载机制来统一线上和离线的消息处理，也是为了通过集群来提供实时的消费。<br>Kafka作为一种高吞吐量的分布式发布订阅消息系统，有如下特性：</p>
+<ol>
+<li>通过O(1)的磁盘数据结构提供消息的持久化，这种结构对于即使数以TB的消息存储也能够保持长时间的稳定性能。</li>
+<li>高吞吐量：即使是非常普通的硬件Kafka也可以支持每秒数百万的消息。</li>
+<li>支持通过Kafka服务器和消费机集群来分区消息。</li>
+<li>支持Hadoop并行数据加载。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/30/Kafka基本该概念/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/29/Spark-Yarn-cluster与Yarn-client/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/29/Spark-Yarn-cluster与Yarn-client/" itemprop="url">Spark Yarn-cluster与Yarn-client</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T14:49:43+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>在Spark中，有Yarn-Client和Yarn-Cluster两种模式可以运行在Yarn上，通常Yarn-cluster适用于生产环境，而Yarn-client更适用于交互，调试模式，以下是它们的区别</p>
+<h1 id="Spark插拨式资源管理"><a href="#Spark插拨式资源管理" class="headerlink" title="Spark插拨式资源管理"></a>Spark插拨式资源管理</h1><p>Spark支持Yarn,Mesos,Standalone三种集群部署模式，它们的共同点：Master服务(Yarn ResourceManager,Mesos master,Spark standalone)来决定哪些应用可以运行以及在哪什么时候运行，Slave服务(Yarn NodeManger)运行在每个节点上，节点上实际运行着Executor进程，此外还监控着它们的运行状态以及资源的消耗<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/29/Spark-Yarn-cluster与Yarn-client/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/29/map-和-flatMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/29/map-和-flatMap/" itemprop="url">map 和 flatMap</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T11:30:41+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#基本概念<br>map 和 flatMap 这两兄弟转文负责将 “一个数组转化为另外一个数组”。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> testArray = [<span class="string">"test1"</span>,<span class="string">"test1234"</span>,<span class="string">""</span>,<span class="string">"test56"</span>]</div></pre></td></tr></table></figure></p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>map函数能够被数组调用，它接受一个闭包作为参数，作用于数组中的每个元素，闭包返回一个变换后的元素，接着将所有这些变换后的元素组成一个新的数组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> anotherArray = testArray.map &#123; (string:String) -&gt; Int? <span class="keyword">in</span>  </div><div class="line">    <span class="built_in">let</span> length = string.characters.count  </div><div class="line">    guard length &gt; 0 </div><div class="line">    <span class="keyword">else</span> &#123; </div><div class="line">      <span class="built_in">return</span> nil </div><div class="line">    &#125;  </div><div class="line">    <span class="built_in">return</span> string.characters.count&#125; </div><div class="line"><span class="built_in">print</span>(anotherArray) //[Optional(5), Optional(8), nil, Optional(6)]</div></pre></td></tr></table></figure>
+<h1 id="FlatMap"><a href="#FlatMap" class="headerlink" title="FlatMap"></a>FlatMap</h1><p>flatMap很像map函数，但是它摒弃了那些值为nil的元素。<br>另外一个与map函数不同之处在于：倘若元素值不为nil情况下，flapMap能够将可选类型(optional)转换为非可选类型(non-optionals)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> anotherArray2 = testArray.flatMap &#123; (string:String) -&gt; Int? <span class="keyword">in</span> </div><div class="line">    <span class="built_in">let</span> length = string.characters.count  </div><div class="line">     guard length &gt; 0 </div><div class="line">    <span class="keyword">else</span> &#123; </div><div class="line">      <span class="built_in">return</span> nil</div><div class="line">    &#125;  </div><div class="line">    <span class="built_in">return</span> string.characters.count</div><div class="line">&#125; </div><div class="line"><span class="built_in">print</span>(anotherArray2) //[5, 8, 6]</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/28/Spark概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/28/Spark概念/" itemprop="url">Spark概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T10:49:46+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="http://ouh6z710l.bkt.clouddn.com/Apache-Spark-Streaming-ecosystem-diagram.png" alt=""></p>
+<h1 id="什么是Spark"><a href="#什么是Spark" class="headerlink" title="什么是Spark"></a>什么是Spark</h1><p>Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。Spark是UC Berkeley AMP lab (加州大学伯克利分校的AMP实验室)所开源的类Hadoop MapReduce的通用并行框架，Spark，拥有Hadoop MapReduce所具有的优点；但不同于MapReduce的是Job中间输出结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的MapReduce的算法。</p>
+<p>Spark 是一种与 Hadoop 相似的开源集群计算环境，但是两者之间还存在一些不同之处，这些有用的不同之处使 Spark 在某些工作负载方面表现得更加优越，换句话说，Spark 启用了内存分布数据集，除了能够提供交互式查询外，它还可以优化迭代工作负载。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/28/Spark概念/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/hadoop操作手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/21/hadoop操作手册/" itemprop="url">hadoop操作手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T14:52:04+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="HDFS命令"><a href="#HDFS命令" class="headerlink" title="HDFS命令"></a>HDFS命令</h1><h2 id="用户命令"><a href="#用户命令" class="headerlink" title="用户命令"></a>用户命令</h2><h3 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h3><p>命令说明：打印需要得到Hadoop的jar和所需要的lib包路径。<br>命令使用：hdfs classpath </p>
+<h3 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h3><p>命令说明：在支持Hadoop文件系统上运行文件命令。<br>命令使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs [COMMAND [COMMAND_OPTIONS]] appendToFile</div></pre></td></tr></table></figure></p>
+<p>描述：把本地文件系统中的单个src或是多个srcs复制到目标文件系统中。并且从stdin中读入并且附加至目标文件系统。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -appendToFile &lt;localsrc&gt;...&lt;dst&gt;</div></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hadoop fs -appendToFile localfile1 localfile2 /user/hadoop/hadoopfile </div><div class="line">hadoop fs -appendToFile localfile hdfs://nn.example.com/hadoop/hadoopfile</div></pre></td></tr></table></figure></p>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>描述：将参数所指示的文件的内容输出到stdout。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -cat URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -cat /file1 hdfs://nn2.example.com/file2 2）hadoop fs -cat file:///file3 /user/hadoop/file4</div></pre></td></tr></table></figure></p>
+<h3 id="checksum"><a href="#checksum" class="headerlink" title="checksum"></a>checksum</h3><p>描述：返回文件的校验信息。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -checksum URI</div></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1）hadoop fs -checksum hdfs://nn1.example.com/file1 2）hadoop fs -checksum file:///etc/hosts</div></pre></td></tr></table></figure></p>
+<h3 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h3><p>描述：改变文件所属的用户组。使用这一命令的用户必须是文件的所属用户，或者是超级用户。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -chgrp [-R] GROUP URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>-R 这一操作对整个目录结构递归执行</p>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>描述：改变文件的权限。使用这一命令的用户必须是文件的所属用户，或者是超级用户。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -chmod [-R] &lt;MODE[,MODE]... | OCTALMODE&gt; URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>-R，这一操作对整个目录结构递归执行</p>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>描述：改变文件的所属用户。使用这一命令的用户必须是文件在命令变更之前的所属用户，或者是超级用户。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -chown [-R] [OWNER][:[GROUP]] URI [URI ]</div></pre></td></tr></table></figure></p>
+<p>-R，这一操作对整个目录结构递归执行</p>
+<h3 id="copyFromLocal"><a href="#copyFromLocal" class="headerlink" title="copyFromLocal"></a>copyFromLocal</h3><p>描述：与-put命令相似，但是要限定源文件路径为本地文件系统。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -copyFromLocal &lt;localsrc&gt; URI</div></pre></td></tr></table></figure></p>
+<p>-f，将覆盖目标，若是此文件已经存在的话。</p>
+<h3 id="copyToLocal"><a href="#copyToLocal" class="headerlink" title="copyToLocal"></a>copyToLocal</h3><p>描述：与-get命令相似，但是要限定目标文件路径为本地文件系统。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -copyToLocal [-ignorecrc] [-crc] URI &lt;localdst&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><p>描述：统计匹配对应路径下的目录数，文件数，字节数（文件大小）。<br>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">hadoop fs -count [-q] [-h] [-v] &lt;paths&gt;</div><div class="line">``` </div><div class="line"></div><div class="line">-count的输出格式为DIR_COUNT, FILE_COUNT, CONTENT_SIZE, PATHNAME </div><div class="line">&gt; -q的输出格式为QUOTA, REMAINING_QUATA, SPACE_QUOTA, REMAINING_SPACE_QUOTA, DIR_COUNT, FILE_COUNT, CONTENT_SIZE, PATHNAME </div><div class="line">&gt; -h，选项显示可读的格式大小。 </div><div class="line">&gt; -v，选项显示标题行。  </div><div class="line">&gt; </div><div class="line"></div><div class="line">举例</div></pre></td></tr></table></figure>
+<p>1）hadoop fs -count hdfs://nn1.example.com/file1 hdfs://nn2.example.com/file2<br>2）hadoop fs -count -q hdfs://nn1.example.com/file1<br>3）hadoop fs -count -q -h hdfs://nn1.example.com/file1<br>4）hdfs dfs -count -q -h -v hdfs://nn1.example.com/file1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### cp</div><div class="line">描述：文件复制从源到目的地。该命令允许多个来源，但这种情况下，目标必须是一个目录。</div><div class="line">使用：</div><div class="line">``` bash</div><div class="line">hadoop fs -cp [-f] [-p | -p[topax]] URI [URI ...] &lt;dest&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>-f，将覆盖目标，若是此文件已经存在的话。<br>-p，保留文件属性（timestamps, ownership, permission，ACL，XATTR），如果-p没有arg，则保留（timestamps, ownership, permission)  </p>
+</blockquote>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2 </div><div class="line">hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2 /user/hadoop/dir</div></pre></td></tr></table></figure>
+<h3 id="createSnapshot"><a href="#createSnapshot" class="headerlink" title="createSnapshot"></a>createSnapshot</h3><p>描述：创建一个snapshot。<br>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs -createSnapshot &lt;path&gt; [&lt;snapshotName&gt;</div></pre></td></tr></table></figure>
+<h3 id="renameSnapshot"><a href="#renameSnapshot" class="headerlink" title="renameSnapshot"></a>renameSnapshot</h3><p>描述：重命名一个snapshot。<br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs -renameSnapshot &lt;path&gt; &lt;oldName&gt; &lt;newName&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="deleteSnapshot"><a href="#deleteSnapshot" class="headerlink" title="deleteSnapshot"></a>deleteSnapshot</h3><p>描述：删除一个snapshot。<br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs -deleteSnapshot &lt;path&gt; &lt;snapshotName&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p>描述：显示HDFS可用空间。<br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -df [-h] URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>1） -h,会将文件大小的数值用方便阅读的形式表示，比如用64.0M 代替67108864。 2）hadoop dfs -df /user/hadoop/dir1<br>du<br>描述：如果参数为目录，显示该目录下所有目录+文件的大小；如果参数为单个文件，则显示文件大小。<br>使用：hadoop fs -du [-s] [-h] URI [URI …]<br>1）-s,指输出所有文件大小的累加和，而不是每个文件的大小。 2）-h,会将文件大小的数值用方便阅读的形式表示，比如用64.0M 代替67108864。<br>举例：<br>1）hadoop fs -du /user/hadoop/dir1 /user/hadoop/file1 hdfs://nn.example.com/user/hadoop/dir1<br>dus<br>描述：显示文件的大小。这个命令等价于hadoop dfs -du -s。<br>使用：hadoop fs -dus <args><br>expunge<br>描述：清空回收站。<br>使用：hadoop fs -expunge<br>get<br>描述：将文件或目录从HDFS中的src拷贝到本地文件系统localdst。CRC 校验失败的文件可通过-ignorecrc 选项拷贝。文件和CRC 校验和可以通过-crc 选项拷贝。<br>使用：hadoop fs -get [-ignorecrc] [-crc] <src> <localdst><br>举例：<br>1）hadoop fs -get /user/hadoop/file localfile 2）hadoop fs -get hdfs://nn.example.com/user/hadoop/file localfile<br>getfacl<br>描述：显示文件和目录的访问控制列表（ACL）。如果一个目录有一个默认的ACL，然后setfacl的也显示默认的ACL。<br>1）-R，列出所有文件及子目录的访问控制列表（ACL）。 2）path，列出文件或目录。<br>使用：hadoop fs -getfacl [-R] <path></path><br>举例：<br>1）hadoop fs -getfacl /file 2）hadoop fs -getfacl -R /dir<br>getfattr<br>描述：显示一个文件或目录的扩展属性名和值（如果有的话）。<br>使用：hadoop fs -getfattr [-R] -n name | -d [-e en] <path></path><br>1）-R，这一操作对整个目录结构递归执行。 2）–n name,以名字匹配的扩展属性值。 3） -d：以路径匹配。 4）-encode：检索后进行编码，有效的编码为“text”, “hex”和 “base64”，编码为text括在双引号double quotes (“)，编码为“hex”和 “base64”其前缀分别为 0x和0s。 5）path:文件或目录。<br>举例：<br>1）hadoop fs -getfattr -d /file 2）hadoop fs -getfattr -R -n user.myAttr /dir<br>getmerge<br>描述：取一个源目录和目标文件作为输入，并会连接src的文件到目标本地文件。<br>1）-nl，可以设置为允许在每个文件的末尾添加一个换行符（LF）。<br>使用：hadoop fs -getmerge [-nl] <src> <localdst><br>举例：<br>1）hadoop fs -getmerge -nl /src /opt/output.txt 2）hadoop fs -getmerge -nl /src/file1.txt /src/file2.txt /output.txt<br>help<br>描述：返回命令的用法介绍。<br>使用：hadoop fs -help<br>ls<br>描述：类似于Linux的ls命令。<br>1）对于一个文件，返回文件状态以如下格式列出：文件权限，副本数，用户ID，组ID，文件大小，最近修改日期，最近修改时间，文件名 2）对于目录，返回目录下的第一层子目录和文件，与Unix 中ls 命令的结果类似；结果以如下状态列出：文件权限，用户ID，组ID，最近修改日期，最近修改时间，文件名。<br>使用：hadoop fs -ls [-d] [-h] [-R] <args><br>1） -R，这一操作对整个目录结构递归执行。 2） -d：目录被列为纯文本文件。 3） -h,会将文件大小的数值用方便阅读的形式表示，比如用64.0M 代替67108864。<br>举例：<br>1）hadoop fs -ls /user/hadoop/file1<br>lsr<br>描述：递归版本的ls。类似于命令hadoop fs -ls -R。<br>使用：hadoop fs -lsr <args><br>mkdir<br>描述：需要的URI路径作为参数，并创建目录。<br>使用：hadoop fs -mkdir [-p] <paths><br>1）-p, 该命令的行为与Unix 中mkdir -p 的行为十分相似。这一路径上的父目录如果不存在，则创建该父目录。<br>举例：<br>1）hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2 2）hadoop fs -mkdir hdfs://nn1.example.com/user/hadoop/dir hdfs://nn2.example.com/user/hadoop/dir<br>moveFromLocal<br>描述：与put 命令类似，将本地文件或目录localsrc上传到HDFS中的dst路径。但是源文件localsrc 拷贝之后自身被删除。<br>使用：hadoop fs -moveFromLocal <localsrc> <dst><br>moveToLocal<br>描述：“尚未实现”。<br>使用：hadoop fs -moveToLocal [-crc] <src> <dst><br>mv<br>描述：将文件从源路径移动到目标路径（移动之后源文件删除）。目标路径为目录的情况下，源路径可以有多个。跨文件系统的移动（本地到HDFS 或者反过来）是不允许的。<br>使用：hadoop fs -mv URI [URI …] <dest><br>举例：<br>1）hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2 2）hadoop fs -mv hdfs://nn.example.com/file1 hdfs://nn.example.com/file2 hdfs://nn.example.com/file3 hdfs://nn.example.com/dir1<br>put<br>描述：将单个src或是多个srcs从本地文件系统复制到目标文件系统。从stdin中读取输入，然后写入目标文件系统。<br>使用：hadoop fs -put <localsrc> … <dst><br>举例：<br>1）hadoop fs -put localfile /user/hadoop/hadoopfile 2）hadoop fs -put localfile1 localfile2 /user/hadoop/hadoopdir 3）hadoop fs -put localfile hdfs://nn.example.com/hadoop/hadoopfile 4）hadoop fs -put - hdfs://nn.example.com/hadoop/hadoopfile Reads the input from stdin.<br>rm<br>描述：删除指定的文件，只删除非空目录和文件。<br>使用：hadoop fs -rm [-f] [-r |-R] [-skipTrash] URI [URI …]<br>1）-f，如果这个文件不存在将不会显示诊断信息或修改退出状态以反映一个错误。 2）-R，此操作对整个目录结构递归执行。-r选项等同于-R。 3）-skipTrash，删除指定文件而不是放入垃圾回收站。<br>举例：<br>1）hadoop fs -rm hdfs://nn.example.com/file /user/hadoop/emptydir<br>rmdir<br>描述：删除一个目录。<br>使用：hadoop fs -rmdir [–ignore-fail-on-non-empty] URI [URI …]<br>–ignore-fail-on-non-empty，即使用通配符时，如果目录仍包含的文件不会失败。<br>举例：<br>1）hadoop fs -rmdir /user/hadoop/emptydir<br>rmr<br>描述：递归版本的删除。与命令hadoop fs -rm -r类似。<br>使用：hadoop fs -rmr [-skipTrash] URI [URI …]<br>setfacl<br>描述：设置文件和目录的访问控制列表（ACL）。<br>使用：hadoop fs -setfacl [-R] [-b |-k -m |-x <acl_spec> <path></path>] |[–set <acl_spec> <path></path>]<br>1）-b,基本ACL条目全部删除。对于用户，组和其他的条目将保留与权限位的兼容性。 2）-k, 删除默认的ACL。 3）-R,此操作对整个目录结构递归执行。 4）-m，修改ACL。新条目将添加到ACL，并且现有条目将被保留。 5）-x，删除指定的ACL条目。其他ACL条目将被保留。 6）–set, 完全取代ACL，丢弃所有现有条目。该acl_spec必须包括用户，组条目，以及其他与权限位的兼容性。 7）acl_spec，逗号分隔的ACL条目列表。 8）path，文件或目录进行修改。<br>举例：<br>1）hadoop fs -setfacl -m user:hadoop:rw- /file 2）hadoop fs -setfacl -x user:hadoop /file 3）hadoop fs -setfacl -b /file 4）hadoop fs -setfacl -k /dir 5）hadoop fs -setfacl –set user::rw-,user:hadoop:rw-,group::r–,other::r– /file 6）hadoop fs -setfacl -R -m user:hadoop:r-x /dir 7）hadoop fs -setfacl -m default:user:hadoop:r-x /dir<br>setfattr<br>描述：设置一个文件或目录的扩展属性名和值。<br>使用：hadoop fs -setfattr -n name [-v value] | -x name <path></path><br>1）-b，基本ACL条目全部删除。对于用户，组和其他的条目将保留与权限位的兼容性。 2）-n name,扩展属性名称。 3）-v value：扩展属性值。该值有三种不同的编码方法。如果参数双引号括起来，则该值是引号内的字符串；如果参数是0x或0X前缀，那么它被当作一个十六进制数；如果参数是0或0s开头，那么它被视为一个base64编码。 4）-x name,删除扩展属性。 5）path,文件或目录。<br>举例：<br>1）hadoop fs -setfattr -n user.myAttr -v myValue /file 2）hadoop fs -setfattr -n user.noValue /file 3）hadoop fs -setfattr -x user.myAttr /file<br>setrep<br>描述：更改文件的副本系数。如果路径为一个目录，则命令递归的修改目录树下的所有文件的副本系数。<br>使用：hadoop fs -setrep [-R] [-w] <numreplicas> <path></path><br>1）–w,标志请求命令等待复制完成。这可能潜在地需要很长的时间。 2）-R,标志被接受的向后兼容性。它没有任何效果。<br>举例：hadoop fs -setrep -w 3 /user/hadoop/dir1<br>stat<br>描述：用于返回指定路径的统计信息。<br>使用：hadoop fs -stat [format] <path></path> …<br>举例：hadoop fs -stat “%F %u:%g %b %y %n” /file<br>tail<br>描述：将文件尾部1KB的内容输出到stdout。<br>使用：hadoop fs -tail [-f] URI<br>-f,随着文件的增长，输出附加数据，和UNIX中一致。<br>举例：hadoop fs -tail pathname<br>test<br>描述：检查命令，可以检查文件是否存在、文件的大小等。<br>使用：hadoop fs -test -[defsz] URI<br>1）-e，检查文件是否存在，如果存在则返回0。 2）-z，检查文件是否是0字节，如果是则返回0。 3）-d，如果路径是一个目录，则返回1，否则返回0。 4）-f，如果路径是一个文件，返回0。 5）-s，如果路径不为空，则返回0。<br>举例：hadoop fs -test -e filename<br>text<br>描述：取一个源文件，并把源文件按照text的格式输出。允许的格式为zip和TextRecordInputStream。<br>举例：hadoop fs -text <src><br>touchz<br>描述：创建0长度的文件。<br>使用：hadoop fs -touchz URI [URI …]<br>举例：hadoop fs -touchz pathname<br>truncate<br>描述：截断匹配指定的文件模式到指定长度的所有文件。<br>使用：hadoop fs -truncate [-w] <length> <paths><br>      1）-w,标志请求块恢复命令等待完成。<br>举例：<br>1）hadoop fs -truncate 55 /user/hadoop/file1 /user/hadoop/file2 2）hadoop fs -truncate -w 127 hdfs://nn1.example.com/user/hadoop/file1<br>usage<br>描述：返回单个命令的帮助。<br>使用：hadoop fs -usage command<br>(3) fetchdt<br>命令说明：从NameNode获取授权令牌。<br>命令使用：hdfs fetchdt [–webservice <namenode_http_addr>] <path></path><br>参数说明：</namenode_http_addr></paths></length></src></numreplicas></acl_spec></acl_spec></dst></localsrc></dest></dst></src></dst></localsrc></paths></args></args></localdst></src></localdst></src></args></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/flume操作手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/21/flume操作手册/" itemprop="url">flume操作手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T13:45:47+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flume/" itemprop="url" rel="index">
+                    <span itemprop="name">Flume</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> Flume操作指南主要从设置和配置两个方面说明，若要看Flume各个组件的更详细的配置，可参照Flume官网。<br> <a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeUserGuide.html</a>  </p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="设置一个Agent"><a href="#设置一个Agent" class="headerlink" title="设置一个Agent"></a>设置一个Agent</h3><p>Flume Agent配置存在本地的配置文件中。它是一个Java Properties文件格式的文本文件。一个配置文件中可以配置一个或多个Agent。配置文件包含了一个Agent中每一个Source、Sink和Channel的属性，以及它们如何连接起来形成数据流。</p>
+<h4 id="配置各自的组件"><a href="#配置各自的组件" class="headerlink" title="配置各自的组件"></a>配置各自的组件</h4><p>每一个组件（Source、Sink和Channel）都有name、type以及跟特性type相关联的其他属性集。例如，一个Avro Source需要一个hostname或者是IP地址以及一个端口号去接收数据。一个Memory Channel的最大队列数（“capacity”），一个HDFS Sink需要知道文件系统的URI，创建文件的路径以及文件循环的频率（“hdfs.rollInternal”）等等。一个组件的所有这些属性都需要被设置在这个Flume Agent所以来的配置文件中。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/21/flume操作手册/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/hbase权限控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/21/hbase权限控制/" itemprop="url">hbase权限控制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T11:52:36+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hbase/" itemprop="url" rel="index">
+                    <span itemprop="name">Hbase</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>HBase 权限控制（简称ACL）,权限控制可对用户组以及用户进行授权，HBase 权限控制通过 AccessController 协处理器实现。</p>
+<h2 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h2><p>HBase 权限分为五种：READ(R),WRITE(R),EXECUTE(X),CREATE(C),ADMIN(A)。</p>
+<blockquote>
+<ul>
+<li>R:READ权限，读取给定范围的数据，如scan,get等</li>
+<li>W:WRITE权限，如put，delete等</li>
+<li>X:EXECUTE, 如执行协处理器endpoint</li>
+<li>C:CREATE权限, 可以建表，删除表，BULKLOAD 需要CREATE权限</li>
+<li>A：Admin 权限,可以执行集群操作，如Merge，split,balance,snapshot,assign/unassign/offline,move,list_procedures,abort_procedure  </li>
+</ul>
+</blockquote>
+<p>需要注意的是：<br>desc/list/flush /split/disable/enable 需要CREATE或者ADMIN权限listnamespace/getnamespace 需要ADMIN权限<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/21/hbase权限控制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/17/klist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -486,1042 +1901,13 @@ klist</code></p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/17/kinit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/kinit/" itemprop="url">kinit命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T11:34:57+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kerberos/" itemprop="url" rel="index">
-                    <span itemprop="name">Kerberos</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>获得或更新 Kerberos 票据授权票据（ticket-granting ticket）。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">kinit [ -l lifetime ] [ -r renewable_life ] [ -f ] [ -p ] [ -A ] [ -s start_time ] [ -S target_service ] [ -k [ -t keytab_file ] ] [ -R ] [ -v ] [ -u ] [ -c cachename ] [ principal ]</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/17/kinit/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/17/scrips/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/scrips/" itemprop="url">scrips</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-17T08:53:21+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Bash/" itemprop="url" rel="index">
-                    <span itemprop="name">Bash</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>1.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#! /bin/bash</span></div><div class="line">DAY=`/bin/date <span class="string">"+%Y%m%d%H"</span> -d <span class="string">"-1 hours"</span>`</div><div class="line"><span class="built_in">echo</span> `/bin/date <span class="string">"+%Y-%m-%d-%H"</span>-00-00` &gt;&gt; /root/statistics/cpu.log</div><div class="line">ls /home/bcstream/monitor-storm/monitor*.<span class="built_in">log</span>.<span class="variable">$DAY</span>* | xargs cat &gt; file.log</div><div class="line">      a=`cat file.log |awk -F [\|] <span class="string">'&#123;print $2&#125;'</span>|sort -n|head -1`</div><div class="line">      b=`cat file.log |awk -F [\|] <span class="string">'&#123;print $2&#125;'</span>|sort -n|tail -1`</div><div class="line">      c=`cat file.log |sort -n|wc -l`      </div><div class="line">      d=`cat file.log |awk -F [\|] <span class="string">'&#123;print $2&#125;'</span>|awk <span class="string">'&#123;a+=$1&#125;'</span>END<span class="string">'&#123;print a&#125;'</span>`</div><div class="line"><span class="built_in">echo</span> <span class="string">"max cpu_usage:"</span><span class="variable">$b</span> &gt;&gt; /root/statistics/cpu.log</div><div class="line"><span class="built_in">echo</span> <span class="string">"min cpu_usage:"</span><span class="variable">$a</span> &gt;&gt; /root/statistics/cpu.log</div><div class="line"><span class="built_in">echo</span> <span class="string">"average cpu_usage is:"</span> `awk <span class="string">'BEGIN&#123;printf "%.2f\n", '</span><span class="variable">$d</span><span class="string">'/'</span><span class="variable">$c</span><span class="string">'&#125;'</span>`  &gt;&gt; /root/statistics/cpu.log</div><div class="line">rm -rf file.log</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/17/scrips/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/16/Spark-Dynamic-Resource-Allocation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/Spark-Dynamic-Resource-Allocation/" itemprop="url">Spark Dynamic Resource Allocation 动态资源分配</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T12:00:46+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="http://lxw1234.com/archives/2015/12/593.htm" target="_blank" rel="external">http://lxw1234.com/archives/2015/12/593.htm</a>  </p>
-<p>Spark中，所谓资源单位一般指的是executors，和Yarn中的Containers一样，在Spark On Yarn模式下，通常使用–num-executors来指定Application使用的executors数量，而–executor-memory和–executor-cores分别用来指定每个executor所使用的内存和虚拟CPU核数。相信很多朋友至今在提交Spark应用程序时候都使用该方式来指定资源。</p>
-<p>假设有这样的场景，如果使用Hive，多个用户同时使用hive-cli做数据开发和分析，只有当用户提交执行了Hive SQL时候，才会向YARN申请资源，执行任务，如果不提交执行，无非就是停留在Hive-cli命令行，也就是个JVM而已，并不会浪费YARN的资源。现在想用Spark-SQL代替Hive来做数据开发和分析，也是多用户同时使用，如果按照之前的方式，以yarn-client模式运行spark-sql命令行，在启动时候指定–num-executors 10，那么每个用户启动时候都使用了10个YARN的资源（Container），这10个资源就会一直被占用着，只有当用户退出spark-sql命令行时才会释放。</p>
-<p>spark-sql On Yarn，能不能像Hive一样，执行SQL的时候才去申请资源，不执行的时候就释放掉资源呢，其实从Spark1.2之后，对于On Yarn模式，已经支持动态资源分配（Dynamic Resource Allocation），这样，就可以根据Application的负载（Task情况），动态的增加和减少executors，这种策略非常适合在YARN上使用spark-sql做数据开发和分析，以及将spark-sql作为长服务来使用的场景。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/15/Hadoop-FairScheduler/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/15/Hadoop-FairScheduler/" itemprop="url">Hadoop FairScheduler介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T11:34:56+08:00">
-                2017-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/Yarn/" itemprop="url" rel="index">
-                    <span itemprop="name">Yarn</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用这个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的applications，所以每个applicaiton最终都能获取几乎一样多的资源。不像Hadoop默认的Scheduler(CapacityScheduler)，CapacityScheduler将applications以queue的方式组成，它可以让short applications在何时的时间内完成，而不会starving那些长期运行的applications，它也是一个合理的方式在多个用户之间共享集群。最终，Fair共享也可以与application priorities一起工作—–“priorities”作为权重来使用，以决定每个application需要获取资源的量。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/15/Hadoop-FairScheduler/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/11/flume详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/11/flume详解/" itemprop="url">flume详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T20:23:25+08:00">
-                2017-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flume/" itemprop="url" rel="index">
-                    <span itemprop="name">Flume</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="什么是flume"><a href="#什么是flume" class="headerlink" title="什么是flume"></a>什么是flume</h2><p><img src="http://ouh6z710l.bkt.clouddn.com/UserGuide_image00.png" alt="flume"><br>flume 作为 cloudera 开发的实时日志收集系统，受到了业界的认可与广泛应用。Flume 初始的发行版本目前被统称为 Flume OG（original generation），属于 cloudera。但随着 FLume 功能的扩展，Flume OG 代码工程臃肿、核心组件设计不合理、核心配置不标准等缺点暴露出来，尤其是在 Flume OG 的最后一个发行版本 0.94.0 中，日志传输不稳定的现象尤为严重，为了解决这些问题，2011 年 10 月 22 号，cloudera 完成了 Flume-728，对 Flume 进行了里程碑式的改动：重构核心组件、核心配置以及代码架构，重构后的版本统称为 Flume NG（next generation）；改动的另一原因是将 Flume 纳入 apache 旗下，cloudera Flume 改名为 Apache Flume。<br>官方用户手册：<a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeUserGuide.html</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/11/flume详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/11/sqoop2使用实例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/11/sqoop2使用实例/" itemprop="url">sqoop2使用实例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T19:26:41+08:00">
-                2017-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Sqoop2/" itemprop="url" rel="index">
-                    <span itemprop="name">Sqoop2</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Sqoop是一款开源的工具，主要用于在Hadoop和传统的数据库(MySQL、postgresql等)进行数据的传递，可以将一个关系型数据库（例如：mysql、Oracle、Postgres等）中的数据导进到hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中。<br>Sqoop中一大亮点就是可以通过hadoop的mapreduce把数据从关系型数据库中导入数据到HDFS。Sqoop目前版本已经到了1.99.7，我们可以在其官网上看到所有的版本，Sqoop1.99.7是属于sqoop2，Sqoop1的最高版本为1.4.6<br>sqoop2的官方文档：<a href="http://sqoop.apache.org/docs/1.99.7/index.html" target="_blank" rel="external">http://sqoop.apache.org/docs/1.99.7/index.html</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/11/sqoop2使用实例/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/10/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/10/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T20:56:46+08:00">
-                2017-08-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/HDFS/" itemprop="url" rel="index">
-                    <span itemprop="name">HDFS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/10/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1565,7 +1951,7 @@ klist</code></p>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1576,7 +1962,7 @@ klist</code></p>
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1587,7 +1973,7 @@ klist</code></p>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

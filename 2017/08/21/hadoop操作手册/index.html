@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hadoop," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="HDFS命令用户命令classpath命令说明：打印需要得到Hadoop的jar和所需要的lib包路径。命令使用：hdfs classpath  dfs命令说明：在支持Hadoop文件系统上运行文件命令。命令使用：1hdfs dfs [COMMAND [COMMAND_OPTIONS]] appendToFile 描述：把本地文件系统中的单个src或是多个srcs复制到目标文件系统中。并且从std">
+<meta name="keywords" content="Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop操作手册">
+<meta property="og:url" content="http://bigclouder.net/2017/08/21/hadoop操作手册/index.html">
+<meta property="og:site_name" content="BigData">
+<meta property="og:description" content="HDFS命令用户命令classpath命令说明：打印需要得到Hadoop的jar和所需要的lib包路径。命令使用：hdfs classpath  dfs命令说明：在支持Hadoop文件系统上运行文件命令。命令使用：1hdfs dfs [COMMAND [COMMAND_OPTIONS]] appendToFile 描述：把本地文件系统中的单个src或是多个srcs复制到目标文件系统中。并且从std">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-21T09:31:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hadoop操作手册">
+<meta name="twitter:description" content="HDFS命令用户命令classpath命令说明：打印需要得到Hadoop的jar和所需要的lib包路径。命令使用：hdfs classpath  dfs命令说明：在支持Hadoop文件系统上运行文件命令。命令使用：1hdfs dfs [COMMAND [COMMAND_OPTIONS]] appendToFile 描述：把本地文件系统中的单个src或是多个srcs复制到目标文件系统中。并且从std">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bigclouder.net/2017/08/21/hadoop操作手册/"/>
+
+
+
+
+
+  <title>hadoop操作手册 | BigData</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BigData</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专注于大数据技术</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/hadoop操作手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hadoop操作手册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T14:52:04+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HDFS命令"><a href="#HDFS命令" class="headerlink" title="HDFS命令"></a>HDFS命令</h1><h2 id="用户命令"><a href="#用户命令" class="headerlink" title="用户命令"></a>用户命令</h2><h3 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h3><p>命令说明：打印需要得到Hadoop的jar和所需要的lib包路径。<br>命令使用：hdfs classpath </p>
+<h3 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h3><p>命令说明：在支持Hadoop文件系统上运行文件命令。<br>命令使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs [COMMAND [COMMAND_OPTIONS]] appendToFile</div></pre></td></tr></table></figure></p>
+<p>描述：把本地文件系统中的单个src或是多个srcs复制到目标文件系统中。并且从stdin中读入并且附加至目标文件系统。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -appendToFile &lt;localsrc&gt;...&lt;dst&gt;</div></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hadoop fs -appendToFile localfile1 localfile2 /user/hadoop/hadoopfile </div><div class="line">hadoop fs -appendToFile localfile hdfs://nn.example.com/hadoop/hadoopfile</div></pre></td></tr></table></figure></p>
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>描述：将参数所指示的文件的内容输出到stdout。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -cat URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -cat /file1 hdfs://nn2.example.com/file2 2）hadoop fs -cat file:///file3 /user/hadoop/file4</div></pre></td></tr></table></figure></p>
+<h3 id="checksum"><a href="#checksum" class="headerlink" title="checksum"></a>checksum</h3><p>描述：返回文件的校验信息。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -checksum URI</div></pre></td></tr></table></figure></p>
+<p>举例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">1）hadoop fs -checksum hdfs://nn1.example.com/file1 2）hadoop fs -checksum file:///etc/hosts</div></pre></td></tr></table></figure></p>
+<h3 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h3><p>描述：改变文件所属的用户组。使用这一命令的用户必须是文件的所属用户，或者是超级用户。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -chgrp [-R] GROUP URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>-R 这一操作对整个目录结构递归执行</p>
+<h3 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h3><p>描述：改变文件的权限。使用这一命令的用户必须是文件的所属用户，或者是超级用户。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -chmod [-R] &lt;MODE[,MODE]... | OCTALMODE&gt; URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>-R，这一操作对整个目录结构递归执行</p>
+<h3 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h3><p>描述：改变文件的所属用户。使用这一命令的用户必须是文件在命令变更之前的所属用户，或者是超级用户。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -chown [-R] [OWNER][:[GROUP]] URI [URI ]</div></pre></td></tr></table></figure></p>
+<p>-R，这一操作对整个目录结构递归执行</p>
+<h3 id="copyFromLocal"><a href="#copyFromLocal" class="headerlink" title="copyFromLocal"></a>copyFromLocal</h3><p>描述：与-put命令相似，但是要限定源文件路径为本地文件系统。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -copyFromLocal &lt;localsrc&gt; URI</div></pre></td></tr></table></figure></p>
+<p>-f，将覆盖目标，若是此文件已经存在的话。</p>
+<h3 id="copyToLocal"><a href="#copyToLocal" class="headerlink" title="copyToLocal"></a>copyToLocal</h3><p>描述：与-get命令相似，但是要限定目标文件路径为本地文件系统。<br>使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -copyToLocal [-ignorecrc] [-crc] URI &lt;localdst&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><p>描述：统计匹配对应路径下的目录数，文件数，字节数（文件大小）。<br>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">hadoop fs -count [-q] [-h] [-v] &lt;paths&gt;</div><div class="line">``` </div><div class="line"></div><div class="line">-count的输出格式为DIR_COUNT, FILE_COUNT, CONTENT_SIZE, PATHNAME </div><div class="line">&gt; -q的输出格式为QUOTA, REMAINING_QUATA, SPACE_QUOTA, REMAINING_SPACE_QUOTA, DIR_COUNT, FILE_COUNT, CONTENT_SIZE, PATHNAME </div><div class="line">&gt; -h，选项显示可读的格式大小。 </div><div class="line">&gt; -v，选项显示标题行。  </div><div class="line">&gt; </div><div class="line"></div><div class="line">举例</div></pre></td></tr></table></figure>
+<p>1）hadoop fs -count hdfs://nn1.example.com/file1 hdfs://nn2.example.com/file2<br>2）hadoop fs -count -q hdfs://nn1.example.com/file1<br>3）hadoop fs -count -q -h hdfs://nn1.example.com/file1<br>4）hdfs dfs -count -q -h -v hdfs://nn1.example.com/file1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### cp</div><div class="line">描述：文件复制从源到目的地。该命令允许多个来源，但这种情况下，目标必须是一个目录。</div><div class="line">使用：</div><div class="line">``` bash</div><div class="line">hadoop fs -cp [-f] [-p | -p[topax]] URI [URI ...] &lt;dest&gt;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>-f，将覆盖目标，若是此文件已经存在的话。<br>-p，保留文件属性（timestamps, ownership, permission，ACL，XATTR），如果-p没有arg，则保留（timestamps, ownership, permission)  </p>
+</blockquote>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2 </div><div class="line">hadoop fs -cp /user/hadoop/file1 /user/hadoop/file2 /user/hadoop/dir</div></pre></td></tr></table></figure>
+<h3 id="createSnapshot"><a href="#createSnapshot" class="headerlink" title="createSnapshot"></a>createSnapshot</h3><p>描述：创建一个snapshot。<br>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs -createSnapshot &lt;path&gt; [&lt;snapshotName&gt;</div></pre></td></tr></table></figure>
+<h3 id="renameSnapshot"><a href="#renameSnapshot" class="headerlink" title="renameSnapshot"></a>renameSnapshot</h3><p>描述：重命名一个snapshot。<br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs -renameSnapshot &lt;path&gt; &lt;oldName&gt; &lt;newName&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="deleteSnapshot"><a href="#deleteSnapshot" class="headerlink" title="deleteSnapshot"></a>deleteSnapshot</h3><p>描述：删除一个snapshot。<br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hdfs dfs -deleteSnapshot &lt;path&gt; &lt;snapshotName&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><p>描述：显示HDFS可用空间。<br>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop fs -df [-h] URI [URI ...]</div></pre></td></tr></table></figure></p>
+<p>1） -h,会将文件大小的数值用方便阅读的形式表示，比如用64.0M 代替67108864。 2）hadoop dfs -df /user/hadoop/dir1<br>du<br>描述：如果参数为目录，显示该目录下所有目录+文件的大小；如果参数为单个文件，则显示文件大小。<br>使用：hadoop fs -du [-s] [-h] URI [URI …]<br>1）-s,指输出所有文件大小的累加和，而不是每个文件的大小。 2）-h,会将文件大小的数值用方便阅读的形式表示，比如用64.0M 代替67108864。<br>举例：<br>1）hadoop fs -du /user/hadoop/dir1 /user/hadoop/file1 hdfs://nn.example.com/user/hadoop/dir1<br>dus<br>描述：显示文件的大小。这个命令等价于hadoop dfs -du -s。<br>使用：hadoop fs -dus <args><br>expunge<br>描述：清空回收站。<br>使用：hadoop fs -expunge<br>get<br>描述：将文件或目录从HDFS中的src拷贝到本地文件系统localdst。CRC 校验失败的文件可通过-ignorecrc 选项拷贝。文件和CRC 校验和可以通过-crc 选项拷贝。<br>使用：hadoop fs -get [-ignorecrc] [-crc] <src> <localdst><br>举例：<br>1）hadoop fs -get /user/hadoop/file localfile 2）hadoop fs -get hdfs://nn.example.com/user/hadoop/file localfile<br>getfacl<br>描述：显示文件和目录的访问控制列表（ACL）。如果一个目录有一个默认的ACL，然后setfacl的也显示默认的ACL。<br>1）-R，列出所有文件及子目录的访问控制列表（ACL）。 2）path，列出文件或目录。<br>使用：hadoop fs -getfacl [-R] <path></path><br>举例：<br>1）hadoop fs -getfacl /file 2）hadoop fs -getfacl -R /dir<br>getfattr<br>描述：显示一个文件或目录的扩展属性名和值（如果有的话）。<br>使用：hadoop fs -getfattr [-R] -n name | -d [-e en] <path></path><br>1）-R，这一操作对整个目录结构递归执行。 2）–n name,以名字匹配的扩展属性值。 3） -d：以路径匹配。 4）-encode：检索后进行编码，有效的编码为“text”, “hex”和 “base64”，编码为text括在双引号double quotes (“)，编码为“hex”和 “base64”其前缀分别为 0x和0s。 5）path:文件或目录。<br>举例：<br>1）hadoop fs -getfattr -d /file 2）hadoop fs -getfattr -R -n user.myAttr /dir<br>getmerge<br>描述：取一个源目录和目标文件作为输入，并会连接src的文件到目标本地文件。<br>1）-nl，可以设置为允许在每个文件的末尾添加一个换行符（LF）。<br>使用：hadoop fs -getmerge [-nl] <src> <localdst><br>举例：<br>1）hadoop fs -getmerge -nl /src /opt/output.txt 2）hadoop fs -getmerge -nl /src/file1.txt /src/file2.txt /output.txt<br>help<br>描述：返回命令的用法介绍。<br>使用：hadoop fs -help<br>ls<br>描述：类似于Linux的ls命令。<br>1）对于一个文件，返回文件状态以如下格式列出：文件权限，副本数，用户ID，组ID，文件大小，最近修改日期，最近修改时间，文件名 2）对于目录，返回目录下的第一层子目录和文件，与Unix 中ls 命令的结果类似；结果以如下状态列出：文件权限，用户ID，组ID，最近修改日期，最近修改时间，文件名。<br>使用：hadoop fs -ls [-d] [-h] [-R] <args><br>1） -R，这一操作对整个目录结构递归执行。 2） -d：目录被列为纯文本文件。 3） -h,会将文件大小的数值用方便阅读的形式表示，比如用64.0M 代替67108864。<br>举例：<br>1）hadoop fs -ls /user/hadoop/file1<br>lsr<br>描述：递归版本的ls。类似于命令hadoop fs -ls -R。<br>使用：hadoop fs -lsr <args><br>mkdir<br>描述：需要的URI路径作为参数，并创建目录。<br>使用：hadoop fs -mkdir [-p] <paths><br>1）-p, 该命令的行为与Unix 中mkdir -p 的行为十分相似。这一路径上的父目录如果不存在，则创建该父目录。<br>举例：<br>1）hadoop fs -mkdir /user/hadoop/dir1 /user/hadoop/dir2 2）hadoop fs -mkdir hdfs://nn1.example.com/user/hadoop/dir hdfs://nn2.example.com/user/hadoop/dir<br>moveFromLocal<br>描述：与put 命令类似，将本地文件或目录localsrc上传到HDFS中的dst路径。但是源文件localsrc 拷贝之后自身被删除。<br>使用：hadoop fs -moveFromLocal <localsrc> <dst><br>moveToLocal<br>描述：“尚未实现”。<br>使用：hadoop fs -moveToLocal [-crc] <src> <dst><br>mv<br>描述：将文件从源路径移动到目标路径（移动之后源文件删除）。目标路径为目录的情况下，源路径可以有多个。跨文件系统的移动（本地到HDFS 或者反过来）是不允许的。<br>使用：hadoop fs -mv URI [URI …] <dest><br>举例：<br>1）hadoop fs -mv /user/hadoop/file1 /user/hadoop/file2 2）hadoop fs -mv hdfs://nn.example.com/file1 hdfs://nn.example.com/file2 hdfs://nn.example.com/file3 hdfs://nn.example.com/dir1<br>put<br>描述：将单个src或是多个srcs从本地文件系统复制到目标文件系统。从stdin中读取输入，然后写入目标文件系统。<br>使用：hadoop fs -put <localsrc> … <dst><br>举例：<br>1）hadoop fs -put localfile /user/hadoop/hadoopfile 2）hadoop fs -put localfile1 localfile2 /user/hadoop/hadoopdir 3）hadoop fs -put localfile hdfs://nn.example.com/hadoop/hadoopfile 4）hadoop fs -put - hdfs://nn.example.com/hadoop/hadoopfile Reads the input from stdin.<br>rm<br>描述：删除指定的文件，只删除非空目录和文件。<br>使用：hadoop fs -rm [-f] [-r |-R] [-skipTrash] URI [URI …]<br>1）-f，如果这个文件不存在将不会显示诊断信息或修改退出状态以反映一个错误。 2）-R，此操作对整个目录结构递归执行。-r选项等同于-R。 3）-skipTrash，删除指定文件而不是放入垃圾回收站。<br>举例：<br>1）hadoop fs -rm hdfs://nn.example.com/file /user/hadoop/emptydir<br>rmdir<br>描述：删除一个目录。<br>使用：hadoop fs -rmdir [–ignore-fail-on-non-empty] URI [URI …]<br>–ignore-fail-on-non-empty，即使用通配符时，如果目录仍包含的文件不会失败。<br>举例：<br>1）hadoop fs -rmdir /user/hadoop/emptydir<br>rmr<br>描述：递归版本的删除。与命令hadoop fs -rm -r类似。<br>使用：hadoop fs -rmr [-skipTrash] URI [URI …]<br>setfacl<br>描述：设置文件和目录的访问控制列表（ACL）。<br>使用：hadoop fs -setfacl [-R] [-b |-k -m |-x <acl_spec> <path></path>] |[–set <acl_spec> <path></path>]<br>1）-b,基本ACL条目全部删除。对于用户，组和其他的条目将保留与权限位的兼容性。 2）-k, 删除默认的ACL。 3）-R,此操作对整个目录结构递归执行。 4）-m，修改ACL。新条目将添加到ACL，并且现有条目将被保留。 5）-x，删除指定的ACL条目。其他ACL条目将被保留。 6）–set, 完全取代ACL，丢弃所有现有条目。该acl_spec必须包括用户，组条目，以及其他与权限位的兼容性。 7）acl_spec，逗号分隔的ACL条目列表。 8）path，文件或目录进行修改。<br>举例：<br>1）hadoop fs -setfacl -m user:hadoop:rw- /file 2）hadoop fs -setfacl -x user:hadoop /file 3）hadoop fs -setfacl -b /file 4）hadoop fs -setfacl -k /dir 5）hadoop fs -setfacl –set user::rw-,user:hadoop:rw-,group::r–,other::r– /file 6）hadoop fs -setfacl -R -m user:hadoop:r-x /dir 7）hadoop fs -setfacl -m default:user:hadoop:r-x /dir<br>setfattr<br>描述：设置一个文件或目录的扩展属性名和值。<br>使用：hadoop fs -setfattr -n name [-v value] | -x name <path></path><br>1）-b，基本ACL条目全部删除。对于用户，组和其他的条目将保留与权限位的兼容性。 2）-n name,扩展属性名称。 3）-v value：扩展属性值。该值有三种不同的编码方法。如果参数双引号括起来，则该值是引号内的字符串；如果参数是0x或0X前缀，那么它被当作一个十六进制数；如果参数是0或0s开头，那么它被视为一个base64编码。 4）-x name,删除扩展属性。 5）path,文件或目录。<br>举例：<br>1）hadoop fs -setfattr -n user.myAttr -v myValue /file 2）hadoop fs -setfattr -n user.noValue /file 3）hadoop fs -setfattr -x user.myAttr /file<br>setrep<br>描述：更改文件的副本系数。如果路径为一个目录，则命令递归的修改目录树下的所有文件的副本系数。<br>使用：hadoop fs -setrep [-R] [-w] <numreplicas> <path></path><br>1）–w,标志请求命令等待复制完成。这可能潜在地需要很长的时间。 2）-R,标志被接受的向后兼容性。它没有任何效果。<br>举例：hadoop fs -setrep -w 3 /user/hadoop/dir1<br>stat<br>描述：用于返回指定路径的统计信息。<br>使用：hadoop fs -stat [format] <path></path> …<br>举例：hadoop fs -stat “%F %u:%g %b %y %n” /file<br>tail<br>描述：将文件尾部1KB的内容输出到stdout。<br>使用：hadoop fs -tail [-f] URI<br>-f,随着文件的增长，输出附加数据，和UNIX中一致。<br>举例：hadoop fs -tail pathname<br>test<br>描述：检查命令，可以检查文件是否存在、文件的大小等。<br>使用：hadoop fs -test -[defsz] URI<br>1）-e，检查文件是否存在，如果存在则返回0。 2）-z，检查文件是否是0字节，如果是则返回0。 3）-d，如果路径是一个目录，则返回1，否则返回0。 4）-f，如果路径是一个文件，返回0。 5）-s，如果路径不为空，则返回0。<br>举例：hadoop fs -test -e filename<br>text<br>描述：取一个源文件，并把源文件按照text的格式输出。允许的格式为zip和TextRecordInputStream。<br>举例：hadoop fs -text <src><br>touchz<br>描述：创建0长度的文件。<br>使用：hadoop fs -touchz URI [URI …]<br>举例：hadoop fs -touchz pathname<br>truncate<br>描述：截断匹配指定的文件模式到指定长度的所有文件。<br>使用：hadoop fs -truncate [-w] <length> <paths><br>      1）-w,标志请求块恢复命令等待完成。<br>举例：<br>1）hadoop fs -truncate 55 /user/hadoop/file1 /user/hadoop/file2 2）hadoop fs -truncate -w 127 hdfs://nn1.example.com/user/hadoop/file1<br>usage<br>描述：返回单个命令的帮助。<br>使用：hadoop fs -usage command<br>(3) fetchdt<br>命令说明：从NameNode获取授权令牌。<br>命令使用：hdfs fetchdt [–webservice <namenode_http_addr>] <path></path><br>参数说明：</namenode_http_addr></paths></length></src></numreplicas></acl_spec></acl_spec></dst></localsrc></dest></dst></src></dst></localsrc></paths></args></args></localdst></src></localdst></src></args></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/flume操作手册/" rel="next" title="flume操作手册">
+                <i class="fa fa-chevron-left"></i> flume操作手册
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/28/Spark概念/" rel="prev" title="Spark概念">
+                Spark概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg"
+               alt="Kiwi" />
+          <p class="site-author-name" itemprop="name">Kiwi</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cnblockchain/bigdata" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2960664564" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HDFS命令"><span class="nav-number">1.</span> <span class="nav-text">HDFS命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户命令"><span class="nav-number">1.1.</span> <span class="nav-text">用户命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#classpath"><span class="nav-number">1.1.1.</span> <span class="nav-text">classpath</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dfs"><span class="nav-number">1.1.2.</span> <span class="nav-text">dfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat"><span class="nav-number">1.1.3.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#checksum"><span class="nav-number">1.1.4.</span> <span class="nav-text">checksum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chgrp"><span class="nav-number">1.1.5.</span> <span class="nav-text">chgrp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chmod"><span class="nav-number">1.1.6.</span> <span class="nav-text">chmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chown"><span class="nav-number">1.1.7.</span> <span class="nav-text">chown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#copyFromLocal"><span class="nav-number">1.1.8.</span> <span class="nav-text">copyFromLocal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#copyToLocal"><span class="nav-number">1.1.9.</span> <span class="nav-text">copyToLocal</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count"><span class="nav-number">1.1.10.</span> <span class="nav-text">count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#createSnapshot"><span class="nav-number">1.1.11.</span> <span class="nav-text">createSnapshot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#renameSnapshot"><span class="nav-number">1.1.12.</span> <span class="nav-text">renameSnapshot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deleteSnapshot"><span class="nav-number">1.1.13.</span> <span class="nav-text">deleteSnapshot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#df"><span class="nav-number">1.1.14.</span> <span class="nav-text">df</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kiwi</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

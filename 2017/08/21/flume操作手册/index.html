@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="flume," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Flume操作指南主要从设置和配置两个方面说明，若要看Flume各个组件的更详细的配置，可参照Flume官网。 http://flume.apache.org/FlumeUserGuide.html   设置设置一个AgentFlume Agent配置存在本地的配置文件中。它是一个Java Properties文件格式的文本文件。一个配置文件中可以配置一个或多个Agent。配置文件包含了一个Ag">
+<meta name="keywords" content="flume">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flume操作手册">
+<meta property="og:url" content="http://bigclouder.net/2017/08/21/flume操作手册/index.html">
+<meta property="og:site_name" content="BigData">
+<meta property="og:description" content="Flume操作指南主要从设置和配置两个方面说明，若要看Flume各个组件的更详细的配置，可参照Flume官网。 http://flume.apache.org/FlumeUserGuide.html   设置设置一个AgentFlume Agent配置存在本地的配置文件中。它是一个Java Properties文件格式的文本文件。一个配置文件中可以配置一个或多个Agent。配置文件包含了一个Ag">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/flume-1.png">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/flume-2.png">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/flume-3.png">
+<meta property="og:updated_time" content="2017-08-21T06:49:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flume操作手册">
+<meta name="twitter:description" content="Flume操作指南主要从设置和配置两个方面说明，若要看Flume各个组件的更详细的配置，可参照Flume官网。 http://flume.apache.org/FlumeUserGuide.html   设置设置一个AgentFlume Agent配置存在本地的配置文件中。它是一个Java Properties文件格式的文本文件。一个配置文件中可以配置一个或多个Agent。配置文件包含了一个Ag">
+<meta name="twitter:image" content="http://ouh6z710l.bkt.clouddn.com/flume-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bigclouder.net/2017/08/21/flume操作手册/"/>
+
+
+
+
+
+  <title>flume操作手册 | BigData</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BigData</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专注于大数据技术</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/flume操作手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">flume操作手册</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T13:45:47+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flume/" itemprop="url" rel="index">
+                    <span itemprop="name">Flume</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p> Flume操作指南主要从设置和配置两个方面说明，若要看Flume各个组件的更详细的配置，可参照Flume官网。<br> <a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeUserGuide.html</a>  </p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="设置一个Agent"><a href="#设置一个Agent" class="headerlink" title="设置一个Agent"></a>设置一个Agent</h3><p>Flume Agent配置存在本地的配置文件中。它是一个Java Properties文件格式的文本文件。一个配置文件中可以配置一个或多个Agent。配置文件包含了一个Agent中每一个Source、Sink和Channel的属性，以及它们如何连接起来形成数据流。</p>
+<h4 id="配置各自的组件"><a href="#配置各自的组件" class="headerlink" title="配置各自的组件"></a>配置各自的组件</h4><p>每一个组件（Source、Sink和Channel）都有name、type以及跟特性type相关联的其他属性集。例如，一个Avro Source需要一个hostname或者是IP地址以及一个端口号去接收数据。一个Memory Channel的最大队列数（“capacity”），一个HDFS Sink需要知道文件系统的URI，创建文件的路径以及文件循环的频率（“hdfs.rollInternal”）等等。一个组件的所有这些属性都需要被设置在这个Flume Agent所以来的配置文件中。<br><a id="more"></a></p>
+<h4 id="把各个组件串起来"><a href="#把各个组件串起来" class="headerlink" title="把各个组件串起来"></a>把各个组件串起来</h4><p>Flume Agent需要知道加载什么样的组件，以及如何将这些组件按照循序串起来形成数据流。这就需要列出Agent中每一个Source、Sink和Channel的名字，然后为每一个Source和Sink指定连接的Channel。例如，一个Agent从一个叫avroWeb的Avro Source通过一个叫做file-channel的File Channel传输Event到一个叫hdfs-cluster1的HDFS Sink中。这个配置文件就需要包含这些组件的名字，并且file-channel作为avroWeb和hdfs-cluster1共享的Channel。</p>
+<h4 id="启动一个Agent"><a href="#启动一个Agent" class="headerlink" title="启动一个Agent"></a>启动一个Agent</h4><p>Agent通过一个叫做flume-ng的shell脚本启动，flume-ng位于Flume分发包的bin目录下。你需要在命令行指定Agent的名字、配置文件目录以及对应的配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bin/flume-ng agent -n <span class="variable">$agent_name</span> -c conf -f conf/flume-conf.properties.template</div></pre></td></tr></table></figure></p>
+<p>一个简单的例子， 这里我们举一个配置文件例子，描述单节点Flume部署。这个配置文件用户生成Event并且把他们顺序地打印到console上。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># example.conf: A single-node Flume configuration # Name the components on this agent </div><div class="line">a1.sources = r1 </div><div class="line">a1.sinks = k1 </div><div class="line">a1.channels = c1 # Describe/configure the source </div><div class="line">a1.sources.r1.type = netcat </div><div class="line">a1.sources.r1.bind = localhost </div><div class="line">a1.sources.r1.port = 44444 # Describe the sink </div><div class="line">a1.sinks.k1.type = logger # Use a channel which buffers events in memory </div><div class="line">a1.channels.c1.type = memory </div><div class="line">a1.channels.c1.capacity = 1000 </div><div class="line">a1.channels.c1.transactionCapacity = 100 # Bind the source and sink to the channel a1.sources.r1.channels = c1 </div><div class="line">a1.sinks.k1.channel = c1</div></pre></td></tr></table></figure></p>
+<p>这个配置文件定义了一个单独的叫做a1的Agent。a1有一个在44444端口上监听数据的Source，一个把Event暂存到Memory的Channel以及一个把Event数据打印到console的Sink。这个配置文件命名了各种各样的组件，然后描述了他们的类型和配置参数。一个给定的配置文件可能定义了多个命名的Agent；当一个给定的Flume进程要被启动时，一个标志会传进去来告诉它到底哪个命名的Agent要被启动。<br>基于这个配置文件，我们可以通过以下方式启动Flume：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bin/flume-ng agent --conf conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO,console</div></pre></td></tr></table></figure></p>
+<p>注意在一个完整的部署中，我们通常会多包含一个配置：–conf=<conf-dir>。<conf-dir>目录包含一个叫做flume-env.sh的shell脚本和一个log4j配置文件。这个例子中我们传入了一个Java选项强制Flume把日志记录在console上，并且不使用定制的环境脚本。<br>从另一个shell终端，我们可以telnet 44444端口然后发送一个Event：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ telnet localhost 44444 Trying 127.0.0.1... Connected to localhost.localdomain (127.0.0.1). Escape character is <span class="string">'^]'</span>. Hello world! &lt;ENTER&gt; OK</div></pre></td></tr></table></figure></conf-dir></conf-dir></p>
+<p>之前的Flume启动终端上就会用日志形式输出传入的Event。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">16/06/19 15:32:19 INFO source.NetcatSource: Source starting 16/06/19 15:32:19 INFO source.NetcatSource: Created serverSocket:sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:44444] 16/06/19 15:32:34 INFO sink.LoggerSink: Event: &#123; headers:&#123;&#125; body: 48 65 6C 6C 6F 20 77 6F 72 6C 64 21 0D Hello world!. &#125;</div></pre></td></tr></table></figure></p>
+<p>祝贺你，你已经成功配置并部署了一个Flume Agent！下边的文章更详细的讲述了Agent 的配置。</p>
+<h3 id="数据采集"><a href="#数据采集" class="headerlink" title="数据采集"></a>数据采集</h3><p>Flume支持很多从不同数据源采集数据的机制</p>
+<h4 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h4><p>Flume分发包中的一个Avro客户端可以通过Avro RPC机制将一个给定的文件发送给Flume Avro Source。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bin/flume-ng avro-client -H localhost -p 41414 -F /usr/logs/log.10</div></pre></td></tr></table></figure></p>
+<p>上边的命令会发送/usr/logs/log.10的内容发送到监听那个端口的Flume Source上。</p>
+<h4 id="执行命令"><a href="#执行命令" class="headerlink" title="执行命令"></a>执行命令</h4><p>Flume分发包中有一个exec Source可一个执行一个给定的命令，并且消费的输出。一个输出的一行。例如以’\r’或’\n’或两者结尾的文本。<br>注：Flume不支持tail作为一个Source。不过你可以封装tail命令到一个exec Source中从而流化文件。</p>
+<h4 id="网络流"><a href="#网络流" class="headerlink" title="网络流"></a>网络流</h4><p>Flume支持一下的机制去从常用的日志流中读取数据，例如:  </p>
+<blockquote>
+<ul>
+<li>Avro  </li>
+<li>Thrift  </li>
+<li>Syslog  </li>
+<li>Netcat  </li>
+</ul>
+</blockquote>
+<h3 id="配置多Agent流"><a href="#配置多Agent流" class="headerlink" title="配置多Agent流"></a>配置多Agent流</h3><p><img src="http://ouh6z710l.bkt.clouddn.com/flume-1.png" alt=""><br>为了使数据跨多个Agent和hop传输，前一个Agent的Sink和当前Agent的Source需要时Avro类型的，并且Sink指向Source的hostname和port。</p>
+<h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>日志收集中一个非常常见的场景是大量的日志生产客户端向少量的和存储系统关联的消费端Agent发送数据。例如，从成百上千个Web服务器收集日志然后发送到十几个写入HDFS集群的Agent。<br><img src="http://ouh6z710l.bkt.clouddn.com/flume-2.png" alt=""><br>这可以通过配置多个第一层的带有Avro Sink的Agent，并且所Avro Sink都指向一个单的Agent的Avro Source上。第二层Agent的Source合并接收过来的数据到单独的Channel中，然后由Sink消费并发送到目的地。</p>
+<h3 id="拆分流（多路输出）"><a href="#拆分流（多路输出）" class="headerlink" title="拆分流（多路输出）"></a>拆分流（多路输出）</h3><p>Flume支持多路输出Event到一个或多个目的地。可以通过定义一个流多路输出器，它来复制或选择性路由一个Event到一个或多个Channel中。<br><img src="http://ouh6z710l.bkt.clouddn.com/flume-3.png" alt=""><br>上边的例子显示了一个叫“foo”的Agent的一个Source扇出数据流到三个不同的Channel中。这个扇出可以是复制或者多路输出。在复制流的情况下，每一个Event被发送到三个Channel中。在多路输出的情况下，一个Event根据它的属性和预定义值的匹配情况被传送到可用Channel一个子集中，例如，如果一个Event的属性叫做txnType，并且被设置为“customer”，然后它应该被传送到channel1和channel3中，如果被设置为“vendor”，它应该被传送到channel2中，否则channel3中。这些映射都可以在配置文件中进行配置。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>前边的文章已经介绍过了，Flume Agent配置是从一个具有分层属性的Java属性文件格式的文件中读取的。</p>
+<h3 id="定义数据流"><a href="#定义数据流" class="headerlink" title="定义数据流"></a>定义数据流</h3><p>要在一个Flume Agent中定义数据流，你需要通过一个Channel将Source和Sink连接起来。你需要列出给定Agent的Source、Sink和Channel。一个Source可以指定多个Channel，但是一个Sink只能指定一个Channel。格式如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list the sources, sinks and channels for the agent </span></div><div class="line">&lt;Agent&gt;.sources = &lt;Source&gt; </div><div class="line">&lt;Agent&gt;.sinks = &lt;Sink&gt; </div><div class="line">&lt;Agent&gt;.channels = &lt;Channel1&gt; &lt;Channel2&gt; <span class="comment"># set channel for source &lt;Agent&gt;.sources.&lt;Source&gt;.channels = &lt;Channel1&gt; &lt;Channel2&gt; ... # set channel for sink &lt;Agent&gt;.sinks.&lt;Sink&gt;.channel = &lt;Channel1&gt;</span></div></pre></td></tr></table></figure></p>
+<p>例如，一个叫做agent_foo的Agent从一个外部的Avro客户端读取数据，然后通过Memory Channel将数据发送到HDFS上。配置文件如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list the sources, sinks and channels for the agent </span></div><div class="line">agent_foo.sources = avro-appserver-src-1 </div><div class="line">agent_foo.sinks = hdfs-sink-1 </div><div class="line">agent_foo.channels = mem-channel-1 <span class="comment"># set channel for source agent_foo.sources.avro-appserver-src-1.channels = mem-channel-1 # set channel for sink agent_foo.sinks.hdfs-sink-1.channel = mem-channel-1</span></div></pre></td></tr></table></figure></p>
+<p>这个配置将会使Event通过一个叫mem-channel-1的Memory Channel从avro-AppSrv-source流向hdfs-Cluster1-sink。当Agent使用此配置文件启动的时候，它就会实例化这个数据流。</p>
+<h3 id="配置各自的组件-1"><a href="#配置各自的组件-1" class="headerlink" title="配置各自的组件"></a>配置各自的组件</h3><p>定义数据流之后，你需要设置每一个Source、Sink和Channel的属性。属性位于每个组件类型配置的层次命名空间下。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># properties for sources </span></div><div class="line">&lt;Agent&gt;.sources.&lt;Source&gt;.&lt;someProperty&gt; = &lt;someValue&gt; <span class="comment"># properties for channels </span></div><div class="line">&lt;Agent&gt;.channel.&lt;Channel&gt;.&lt;someProperty&gt; = &lt;someValue&gt; <span class="comment"># properties for sinks </span></div><div class="line">&lt;Agent&gt;.sources.&lt;Sink&gt;.&lt;someProperty&gt; = &lt;someValue&gt;</div></pre></td></tr></table></figure></p>
+<p>Flume的每一个组件都需要设置“type”属性，以便理解到底需要的是那种组件对象。每一个Source、Sink和Channel类型都有它自己的属性集。这些属性都需要根据需要设置。就像前边的一个通过mem-channel-1的Memory Channel从avro-AppSrv-source流向hdfs-Cluster1-sink的数据流的例子，下边是这些组件配置的例子：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">agent_foo.sources = avro-AppSrv-source </div><div class="line">agent_foo.sinks = hdfs-Cluster1-sink </div><div class="line">agent_foo.channels = mem-channel-1 <span class="comment"># set channel for sources, sinks # properties of avro-AppSrv-source </span></div><div class="line">agent_foo.sources.avro-AppSrv-source.type = avro agent_foo.sources.avro-AppSrv-source.bind = localhost agent_foo.sources.avro-AppSrv-source.port = 10000 <span class="comment"># properties of mem-channel-1 </span></div><div class="line">agent_foo.channels.mem-channel-1.type = memory </div><div class="line">agent_foo.channels.mem-channel-1.capacity = 1000 </div><div class="line">agent_foo.channels.mem-channel-1.transactionCapacity = 100 <span class="comment"># properties of hdfs-Cluster1-sink </span></div><div class="line">agent_foo.sinks.hdfs-Cluster1-sink.type = hdfs </div><div class="line">agent_foo.sinks.hdfs-Cluster1-sink.hdfs.path = hdfs://namenode/flume/webdata</div></pre></td></tr></table></figure></p>
+<p>3.一个Agent中添加多个数据流<br>一个简单的Flume Agent可以包含多个独立的数据流配置。你可以在配置中列出多个Source、Sink和Channel。这些组件能够互联起来形成数据流：<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list the sources, sinks and channels for the agent </span></div><div class="line">&lt;Agent&gt;.sources = &lt;Source1&gt; &lt;Source2&gt; </div><div class="line">&lt;Agent&gt;.sinks = &lt;Sink1&gt; &lt;Sink2&gt; </div><div class="line">&lt;Agent&gt;.channels = &lt;Channel1&gt; &lt;Channel2&gt;</div></pre></td></tr></table></figure></p>
+<p>之后你就可以连接Source和Sink到它们各自的Channel上，从而形成不同的数据流。例如，如果你需要在一个Agent中设置两个数据流，一个从外部Avro客户端流向外部HDFS，另一个从tail的输出流向Avro Sink，下边就是实现这么个数据流的配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list the sources, sinks and channels in the </span></div><div class="line">agent agent_foo.sources = avro-AppSrv-source1 <span class="built_in">exec</span>-tail-source2 agent_foo.sinks = hdfs-Cluster1-sink1 avro-forward-sink2 agent_foo.channels = mem-channel-1 file-channel-2 <span class="comment"># flow </span></div><div class="line"><span class="comment">#1 configuration </span></div><div class="line">agent_foo.sources.avro-AppSrv-source1.channels = mem-channel-1 agent_foo.sinks.hdfs-Cluster1-sink1.channel = mem-channel-1 <span class="comment"># flow </span></div><div class="line"><span class="comment">#2 configuration </span></div><div class="line">agent_foo.sources.exec-tail-source2.channels = file-channel-2 agent_foo.sinks.avro-forward-sink2.channel = file-channel-2</div></pre></td></tr></table></figure></p>
+<p>4.配置一个多Agent数据流<br>为设置一个多层的数据流，你需要在第一跳上使用一个Avro/Thrift Sink指向下一跳的Avro/Thrift Source。这就会使第一个Flume Agent传输Event到下一个Flume Agent。例如，如果你在使用Avro客户端周期性的发送文件（每个Event包含一个文件）到本地Flume Agent，然后本地Agent又把Event传输到另一个和最终存储系统挂载的Flume Agent上。看下边的例子<br>Weblog Agent配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list sources, sinks and channels in the agent </span></div><div class="line">agent_foo.sources = avro-AppSrv-source </div><div class="line">agent_foo.sinks = avro-forward-sink </div><div class="line">agent_foo.channels = file-channel <span class="comment"># define the flow agent_foo.sources.avro-AppSrv-source.channels = file-channel agent_foo.sinks.avro-forward-sink.channel = file-channel # avro sink properties </span></div><div class="line">agent_foo.sources.avro-forward-sink.type = avro agent_foo.sources.avro-forward-sink.hostname = 10.1.1.100 agent_foo.sources.avro-forward-sink.port = 10000 <span class="comment"># configure other pieces</span></div></pre></td></tr></table></figure></p>
+<p>HDFS Agent配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list sources, sinks and channels in the agent </span></div><div class="line">agent_foo.sources = avro-collection-source a</div><div class="line">gent_foo.sinks = hdfs-sink agent_foo.channels = mem-channel <span class="comment"># define the flow </span></div><div class="line">agent_foo.sources.avro-collection-source.channels = mem-channel agent_foo.sinks.hdfs-sink.channel = mem-channel <span class="comment"># avro sink properties agent_foo.sources.avro-collection-source.type = avro agent_foo.sources.avro-collection-source.bind = 10.1.1.100 agent_foo.sources.avro-collection-source.port = 10000 # configure other pieces</span></div></pre></td></tr></table></figure></p>
+<p>这里我们连接Weblog Agent的avro-forward-sink到HDFS Agent的avro-collection-source。这就会使来自外部appserver Source的Event最终存储到HDFS中。</p>
+<h3 id="扇出数据流"><a href="#扇出数据流" class="headerlink" title="扇出数据流"></a>扇出数据流</h3><p>前边的章节已经讨论过，Flume支持从一个Source扇出数据到多个Channel中。有两种扇出模式：复制（replicating）和多路（multiplexing）。在复制流中，Event被发送到所有配置Channel中。在多路流中，Event被发送到一个特定的子集。为扇出数据流，你需要为这个Source指定一个Channel列表以及扇出的策略。这是通过添加一个Channel “selector”（可以是复制或者多路）实现的。然后如果多路的模式，还需进一步指定选择规则。如果不指定“selector”，默认是复制。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># List the sources, sinks and channels for the agent </span></div><div class="line">&lt;Agent&gt;.sources = &lt;Source1&gt; </div><div class="line">&lt;Agent&gt;.sinks = &lt;Sink1&gt; &lt;Sink2&gt; </div><div class="line">&lt;Agent&gt;.channels = &lt;Channel1&gt; &lt;Channel2&gt; <span class="comment"># set list of channels for source (separated by space) </span></div><div class="line">&lt;Agent&gt;.sources.&lt;Source1&gt;.channels = &lt;Channel1&gt; &lt;Channel2&gt; <span class="comment"># set channel for sinks </span></div><div class="line">&lt;Agent&gt;.sinks.&lt;Sink1&gt;.channel = &lt;Channel1&gt; &lt;Agent&gt;.sinks.&lt;Sink2&gt;.channel = &lt;Channel2&gt; &lt;Agent&gt;.sources.&lt;Source1&gt;.selector.type = replicating</div></pre></td></tr></table></figure></p>
+<p>多路选择还有一些其他的配置来使数据流分叉。这就需要指定一个Event属性到一个Channel集合的映射。选择器会检查Event Header上配置的每一个属性。如果它匹配了指定的值，那么这个Event就会被发送到跟这个值映射的所有Channel上。如果没有任何匹配，这个Event就会被发送到发送到默认配置的Channel集合上：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Mapping for multiplexing selector &lt;Agent&gt;.sources.&lt;Source1&gt;.selector.type = multiplexing &lt;Agent&gt;.sources.&lt;Source1&gt;.selector.header = &lt;someHeader&gt; &lt;Agent&gt;.sources.&lt;Source1&gt;.selector.mapping.&lt;Value1&gt; = &lt;Channel1&gt; &lt;Agent&gt;.sources.&lt;Source1&gt;.selector.mapping.&lt;Value2&gt; = &lt;Channel1&gt; &lt;Channel2&gt; </span></div><div class="line">&lt;Agent&gt;.sources.&lt;Source1&gt;.selector.mapping.&lt;Value3&gt; = &lt;Channel2&gt; <span class="comment">#... &lt;Agent&gt;.sources.&lt;Source1&gt;.selector.default = &lt;Channel2&gt;</span></div></pre></td></tr></table></figure></p>
+<p>为每个值的映射的Channel集合允许重叠。<br>下边的例子是一个单一流，它多路输出到两个路径上。名叫agent_foo的Agent有一个单一的Avro Source和两个Channel连接到两个Sink上：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># list the sources, sinks and channels in the agent </span></div><div class="line">agent_foo.sources = avro-AppSrv-source1 </div><div class="line">agent_foo.sinks = hdfs-Cluster1-sink1 avro-forward-sink2 agent_foo.channels = mem-channel-1 file-channel-2 <span class="comment"># set channels for source </span></div><div class="line">agent_foo.sources.avro-AppSrv-source1.channels = mem-channel-1 file-channel-2 <span class="comment"># set channel for sinks </span></div><div class="line">agent_foo.sinks.hdfs-Cluster1-sink1.channel = mem-channel-1 agent_foo.sinks.avro-forward-sink2.channel = file-channel-2 <span class="comment"># channel selector configuration </span></div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.type = multiplexing agent_foo.sources.avro-AppSrv-source1.selector.header = State agent_foo.sources.avro-AppSrv-source1.selector.mapping.CA = mem-channel-1 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.mapping.NY = mem-channel-1 file-channel-2 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.default = mem-channel-1</div></pre></td></tr></table></figure></p>
+<p>多路选择器检查Event中一个叫做“State”的Header属性。如果它的值是“CA”，这个Event就会被发送到mem-channel-1，如果它是“AZ”，这个Event就会被发送到file-channel-2，或者如果它是“NY”，那么这个Event就会被发送到这两个Channel上。如果“State” Header属性没有设置或者没有匹配上以上3个的任何一个，这个Event就被发送到mem-channel-1上，它是默认的。<br>多路选择器也支持可选的Channel。为了为Header指定可选的Channel，“optional”配置参数需要像下边的方式一样使用：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># channel selector configuration </span></div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.type = multiplexing agent_foo.sources.avro-AppSrv-source1.selector.header = State agent_foo.sources.avro-AppSrv-source1.selector.mapping.CA = mem-channel-1 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.mapping.NY = mem-channel-1 file-channel-2 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.optional.CA = mem-channel-1 file-channel-2 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2 </div><div class="line">agent_foo.sources.avro-AppSrv-source1.selector.default = mem-channel-1</div></pre></td></tr></table></figure></p>
+<p>多路选择器将会首先尝试向必需的Channel上写入，即使这些必需的Channel中有任何一个没有成功消费Event，这整个事务将会失败。事务将会在所有的必需的Channel上重试，一旦多有必需的Channel都成功的消费了Event，多路选择器才会尝试向可选的Channel上写入。并且可选的Channel中有任何消费Event失败的，Flume也会简单忽略它并且不会重试。<br>如果一个特殊Header的可选Channel集合和必选Channel集合有重叠的，那么这些Channel就被认为是必选的，那自然在这些Channel的失败会导致所有Channel的重试。例如，上边的例子中，“CA” Header对应的mem-channel-1就被认为是必选的Channel，尽管它同时被标记为必选和可选的，对这个Channel的写入失败将会导致跟这个选择器关联的所有Channel上重试。<br>注意如果一个Header并没有配置任何必选的Channel，那么这个Event将会被写入默认的Channel上，并且将会尝试写入到跟这个Header关联的可选Channel上。如果指定了可选的Channel，而没有指定必选的Channel，依然会导致Event被发送到默认的Channel上。如果没有Channel被指定为默认的并且也没有必选的，选择器会尝试将Event写入到可选的Channel中。这种情况下，任何的失败都会被简单忽略并且不在重试。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flume/" rel="tag"># flume</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/hbase权限控制/" rel="next" title="hbase权限控制">
+                <i class="fa fa-chevron-left"></i> hbase权限控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/21/hadoop操作手册/" rel="prev" title="hadoop操作手册">
+                hadoop操作手册 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg"
+               alt="Kiwi" />
+          <p class="site-author-name" itemprop="name">Kiwi</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cnblockchain/bigdata" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2960664564" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置"><span class="nav-number">1.</span> <span class="nav-text">设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置一个Agent"><span class="nav-number">1.1.</span> <span class="nav-text">设置一个Agent</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置各自的组件"><span class="nav-number">1.1.1.</span> <span class="nav-text">配置各自的组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#把各个组件串起来"><span class="nav-number">1.1.2.</span> <span class="nav-text">把各个组件串起来</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动一个Agent"><span class="nav-number">1.1.3.</span> <span class="nav-text">启动一个Agent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据采集"><span class="nav-number">1.2.</span> <span class="nav-text">数据采集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RPC"><span class="nav-number">1.2.1.</span> <span class="nav-text">RPC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行命令"><span class="nav-number">1.2.2.</span> <span class="nav-text">执行命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络流"><span class="nav-number">1.2.3.</span> <span class="nav-text">网络流</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置多Agent流"><span class="nav-number">1.3.</span> <span class="nav-text">配置多Agent流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并"><span class="nav-number">1.4.</span> <span class="nav-text">合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拆分流（多路输出）"><span class="nav-number">1.5.</span> <span class="nav-text">拆分流（多路输出）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义数据流"><span class="nav-number">2.1.</span> <span class="nav-text">定义数据流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置各自的组件-1"><span class="nav-number">2.2.</span> <span class="nav-text">配置各自的组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扇出数据流"><span class="nav-number">2.3.</span> <span class="nav-text">扇出数据流</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kiwi</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
