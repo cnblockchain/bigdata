@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="zookeeper,kerberos," />
 
 
 
@@ -94,13 +94,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="BigData">
-<meta property="og:url" content="http://bigclouder.net/categories/HDFS/index.html">
+<meta name="description" content="zookeeper开启kerberos后，需要使用jass的方式，进行连接  设定，修改zookeeper-env.sh1export CLIENT_JVMFLAGS=&quot;-Djava.security.auth.login.config=$JAAS_PATH&quot;   其中$JAAS_PATH 为JAAS文件的绝对路径  配置jaas文件查看jaas.conf文件，如下所示： 12345678Clie">
+<meta name="keywords" content="zookeeper,kerberos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper使用kerberos认证连接">
+<meta property="og:url" content="http://bigclouder.net/2017/08/31/zookeeper使用kerberos认证连接/index.html">
 <meta property="og:site_name" content="BigData">
+<meta property="og:description" content="zookeeper开启kerberos后，需要使用jass的方式，进行连接  设定，修改zookeeper-env.sh1export CLIENT_JVMFLAGS=&quot;-Djava.security.auth.login.config=$JAAS_PATH&quot;   其中$JAAS_PATH 为JAAS文件的绝对路径  配置jaas文件查看jaas.conf文件，如下所示： 12345678Clie">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-31T05:47:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BigData">
+<meta name="twitter:title" content="zookeeper使用kerberos认证连接">
+<meta name="twitter:description" content="zookeeper开启kerberos后，需要使用jass的方式，进行连接  设定，修改zookeeper-env.sh1export CLIENT_JVMFLAGS=&quot;-Djava.security.auth.login.config=$JAAS_PATH&quot;   其中$JAAS_PATH 为JAAS文件的绝对路径  配置jaas文件查看jaas.conf文件，如下所示： 12345678Clie">
 
 
 
@@ -129,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://bigclouder.net/categories/HDFS/"/>
+  <link rel="canonical" href="http://bigclouder.net/2017/08/31/zookeeper使用kerberos认证连接/"/>
 
 
 
 
 
-  <title>分类: HDFS | BigData</title>
+  <title>zookeeper使用kerberos认证连接 | BigData</title>
   
 
 
@@ -154,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -282,55 +287,198 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>HDFS<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/31/zookeeper使用kerberos认证连接/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/08/10/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">zookeeper使用kerberos认证连接</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-10T20:56:46+08:00"
-              content="2017-08-10" >
-          08-10
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T10:23:39+08:00">
+                2017-08-31
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index">
+                    <span itemprop="name">zookeeper</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/kerberos/" itemprop="url" rel="index">
+                    <span itemprop="name">kerberos</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>zookeeper开启kerberos后，需要使用jass的方式，进行连接</p>
+<ol>
+<li>设定，修改zookeeper-env.sh<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> CLIENT_JVMFLAGS=<span class="string">"-Djava.security.auth.login.config=<span class="variable">$JAAS_PATH</span>"</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中$JAAS_PATH 为JAAS文件的绝对路径</p>
+<ol>
+<li><p>配置jaas文件<br>查看jaas.conf文件，如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Client &#123;</div><div class="line">  com.sun.security.auth.module.Krb5LoginModule required</div><div class="line">  useKeyTab=true</div><div class="line">  keyTab="/etc/security/keytabs/zk.service.keytab"</div><div class="line">  storeKey=true</div><div class="line">  useTicketCache=false</div><div class="line">  principal="zookeeper/hc1@BCHKDC";</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>重启zk集群，使用zkClis.sh -server hostname:port 方式访问</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/cmss/bch/bc1.3.4/zookeeper/bin/zkCli.sh -server hc1:2181</div></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zookeeper/" rel="tag"># zookeeper</a>
+          
+            <a href="/tags/kerberos/" rel="tag"># kerberos</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/30/Kafka在zk中的信息详解/" rel="next" title="Kafka在zk中的信息详解">
+                <i class="fa fa-chevron-left"></i> Kafka在zk中的信息详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/31/kafka常见操作/" rel="prev" title="kafka常见操作">
+                kafka常见操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -338,6 +486,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -374,7 +526,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -385,7 +537,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -396,7 +548,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -466,7 +618,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Kiwi</span>
+  <span class="author" itemprop="copyrightHolder">Kiwi</span>  
 </div>
 
 
@@ -480,6 +632,13 @@
     NexT.Pisces
   </a>
 </div>
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
 
 
         
@@ -571,10 +730,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 

@@ -96,7 +96,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="BigData">
-<meta property="og:url" content="http://bigclouder.net/tags/Kerberos/index.html">
+<meta property="og:url" content="http://bigclouder.net/tags/kerberos/index.html">
 <meta property="og:site_name" content="BigData">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://bigclouder.net/tags/Kerberos/"/>
+  <link rel="canonical" href="http://bigclouder.net/tags/kerberos/"/>
 
 
 
 
 
-  <title>标签: Kerberos | BigData</title>
+  <title>标签: kerberos | BigData</title>
   
 
 
@@ -289,7 +289,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>Kerberos<small>标签</small>
+        <h1>kerberos<small>标签</small>
         </h1>
       </div>
 
@@ -301,37 +301,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/08/17/klist/" itemprop="url">
+            <a class="post-title-link" href="/2017/08/31/zookeeper使用kerberos认证连接/" itemprop="url">
               
-                <span itemprop="name">klist命令</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-17T13:01:23+08:00"
-              content="2017-08-17" >
-          08-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/17/kinit/" itemprop="url">
-              
-                <span itemprop="name">kinit命令</span>
+                <span itemprop="name">zookeeper使用kerberos认证连接</span>
               
             </a>
         
@@ -339,9 +311,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-17T11:34:57+08:00"
-              content="2017-08-17" >
-          08-17
+              datetime="2017-08-31T10:23:39+08:00"
+              content="2017-08-31" >
+          08-31
         </time>
       </div>
 
@@ -401,7 +373,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -412,7 +384,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -423,7 +395,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -493,7 +465,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Kiwi</span>
+  <span class="author" itemprop="copyrightHolder">Kiwi</span>  
 </div>
 
 
@@ -507,6 +479,13 @@
     NexT.Pisces
   </a>
 </div>
+<div>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
 
 
         
@@ -936,6 +915,45 @@
     // handle and trigger popup window;
     $('.popup-trigger').click(function(e) {
       e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+opPropagation();
       if (isfetched === false) {
         searchFunc(path, 'local-search-input', 'local-search-result');
       } else {

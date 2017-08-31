@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[kafka常见操作]]></title>
+    <url>%2F2017%2F08%2F31%2Fkafka%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[Kafka脚本常用配置参数kafka-console-consumer.sh该脚本用于消费消息 –from-beginning : 设定消费的方式 –topic : 创建的topic的名称 –zookeeper REQUIRED: 指定连接到的zookeeper的节点信息，可以设置多个zk节点以便进行failover –group : 指定一个消费者组在consumer端，不需要指定broke-list，而是通过zookeeper和topic找到所有的持有topic消息的broker kafka-console-producer.sh该脚本用于创建消息 –topic REQUIRED: 指定产生消息的topic –broker-list REQUIRED: 指定往哪些broker推送消费消息 kafka-topic.sh –create: 创建一个topic –describe: 列出topic的细节信息 –list: 列出所有的topic –partitions : 列出指定分区的数量 –replication-factor : 指定复制的副本的数量 –zookeeper REQUIRED: 指定连接到的zookeeper的节点信息，可以设置多个zk节点以便进行failover –topic : 创建topic的名称 Kafka的简单流程创建topic12[kafka@hc1 ~]$ kafka-topics.sh --create --zookeeper hc1:2181 --replication-factor 2 --partitions 3 --topic kiwiCreated topic "kiwi". 配置producer产生消息12345[kafka@hc1 ~]$ kafka-console-producer.sh --broker-list hc1:6777 --topic kiwi123hello world 配置consumer消费消息123456[kafka@hc1 ~]$ kafka-console-consumer.sh --zookeeper hc1:2181 --topic kiwi --from-beginning Using the ConsoleConsumer with old consumer is deprecated and will be removed in a future major release. Consider using the new consumer by passing [bootstrap-server] instead of [zookeeper].123hello world Kafka topic 详解12345[kafka@hc1 ~]$ kafka-topics.sh --zookeeper hc1:2181 --describe --topic kiwiTopic:kiwi PartitionCount:3 ReplicationFactor:2 Configs: Topic: kiwi Partition: 0 Leader: 2 Replicas: 2,1 Isr: 2,1 Topic: kiwi Partition: 1 Leader: 0 Replicas: 0,2 Isr: 0,2 Topic: kiwi Partition: 2 Leader: 1 Replicas: 1,0 Isr: 1,0 每个partition有不同的leader，Leader所在的broker同时也是Replicas所在的broker(ID号一样) 每个partition副本集都有一个leader leader指的是partition副本集中的leader，它负责读写，然后负责将数据复制到其它的broker上 一个Topic的所有partition会比较均匀的分布到多个broker上 “isr” 全称 “in-sync replicas”. 代表这现在包含这个partion副本的broker节点.]]></content>
+      <categories>
+        <category>Kafka</category>
+      </categories>
+      <tags>
+        <tag>Kafka</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[zookeeper使用kerberos认证连接]]></title>
+    <url>%2F2017%2F08%2F31%2Fzookeeper%E4%BD%BF%E7%94%A8kerberos%E8%AE%A4%E8%AF%81%E8%BF%9E%E6%8E%A5%2F</url>
+    <content type="text"><![CDATA[zookeeper开启kerberos后，需要使用jass的方式，进行连接 设定，修改zookeeper-env.sh1export CLIENT_JVMFLAGS="-Djava.security.auth.login.config=$JAAS_PATH" 其中$JAAS_PATH 为JAAS文件的绝对路径 配置jaas文件查看jaas.conf文件，如下所示： 12345678Client &#123; com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true keyTab="/etc/security/keytabs/zk.service.keytab" storeKey=true useTicketCache=false principal="zookeeper/hc1@BCHKDC";&#125; 重启zk集群，使用zkClis.sh -server hostname:port 方式访问 1/cmss/bch/bc1.3.4/zookeeper/bin/zkCli.sh -server hc1:2181]]></content>
+      <categories>
+        <category>zookeeper</category>
+        <category>kerberos</category>
+      </categories>
+      <tags>
+        <tag>zookeeper</tag>
+        <tag>kerberos</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Kafka在zk中的信息详解]]></title>
     <url>%2F2017%2F08%2F30%2FKafka%E5%9C%A8zk%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF%E8%AF%A6%E8%A7%A3%2F</url>
     <content type="text"><![CDATA[问题： Kafka的哪些信息记录在Zookeeper中 Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？]]></content>
@@ -182,17 +206,6 @@
       <tags>
         <tag>sqoop</tag>
         <tag>sqoop2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Hello World]]></title>
-    <url>%2F2017%2F08%2F10%2Fhello-world%2F</url>
-    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
-      <categories>
-        <category>HDFS</category>
-      </categories>
-      <tags>
-        <tag>测试</tag>
       </tags>
   </entry>
 </search>
