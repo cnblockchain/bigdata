@@ -186,7 +186,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">专注于大数据技术</p>
+        <p class="site-subtitle">专注于数据库、大数据技术</p>
       
   </div>
 
@@ -312,12 +312,748 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/29/Spark-Yarn-cluster与Yarn-client/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/29/Spark-Yarn-cluster与Yarn-client/" itemprop="url">Spark Yarn-cluster与Yarn-client</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T14:49:43+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>在Spark中，有Yarn-Client和Yarn-Cluster两种模式可以运行在Yarn上，通常Yarn-cluster适用于生产环境，而Yarn-client更适用于交互，调试模式，以下是它们的区别</p>
+<h1 id="Spark插拨式资源管理"><a href="#Spark插拨式资源管理" class="headerlink" title="Spark插拨式资源管理"></a>Spark插拨式资源管理</h1><p>Spark支持Yarn,Mesos,Standalone三种集群部署模式，它们的共同点：Master服务(Yarn ResourceManager,Mesos master,Spark standalone)来决定哪些应用可以运行以及在哪什么时候运行，Slave服务(Yarn NodeManger)运行在每个节点上，节点上实际运行着Executor进程，此外还监控着它们的运行状态以及资源的消耗<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/29/Spark-Yarn-cluster与Yarn-client/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/29/map-和-flatMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/29/map-和-flatMap/" itemprop="url">map 和 flatMap</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T11:30:41+08:00">
+                2017-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#基本概念<br>map 和 flatMap 这两兄弟转文负责将 “一个数组转化为另外一个数组”。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> testArray = [<span class="string">"test1"</span>,<span class="string">"test1234"</span>,<span class="string">""</span>,<span class="string">"test56"</span>]</div></pre></td></tr></table></figure></p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>map函数能够被数组调用，它接受一个闭包作为参数，作用于数组中的每个元素，闭包返回一个变换后的元素，接着将所有这些变换后的元素组成一个新的数组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> anotherArray = testArray.map &#123; (string:String) -&gt; Int? <span class="keyword">in</span>  </div><div class="line">    <span class="built_in">let</span> length = string.characters.count  </div><div class="line">    guard length &gt; 0 </div><div class="line">    <span class="keyword">else</span> &#123; </div><div class="line">      <span class="built_in">return</span> nil </div><div class="line">    &#125;  </div><div class="line">    <span class="built_in">return</span> string.characters.count&#125; </div><div class="line"><span class="built_in">print</span>(anotherArray) //[Optional(5), Optional(8), nil, Optional(6)]</div></pre></td></tr></table></figure>
+<h1 id="FlatMap"><a href="#FlatMap" class="headerlink" title="FlatMap"></a>FlatMap</h1><p>flatMap很像map函数，但是它摒弃了那些值为nil的元素。<br>另外一个与map函数不同之处在于：倘若元素值不为nil情况下，flapMap能够将可选类型(optional)转换为非可选类型(non-optionals)。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> anotherArray2 = testArray.flatMap &#123; (string:String) -&gt; Int? <span class="keyword">in</span> </div><div class="line">    <span class="built_in">let</span> length = string.characters.count  </div><div class="line">     guard length &gt; 0 </div><div class="line">    <span class="keyword">else</span> &#123; </div><div class="line">      <span class="built_in">return</span> nil</div><div class="line">    &#125;  </div><div class="line">    <span class="built_in">return</span> string.characters.count</div><div class="line">&#125; </div><div class="line"><span class="built_in">print</span>(anotherArray2) //[5, 8, 6]</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/28/Spark概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/28/Spark概念/" itemprop="url">Spark概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-28T10:49:46+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="http://ouh6z710l.bkt.clouddn.com/Apache-Spark-Streaming-ecosystem-diagram.png" alt=""></p>
+<h1 id="什么是Spark"><a href="#什么是Spark" class="headerlink" title="什么是Spark"></a>什么是Spark</h1><p>Apache Spark 是专为大规模数据处理而设计的快速通用的计算引擎。Spark是UC Berkeley AMP lab (加州大学伯克利分校的AMP实验室)所开源的类Hadoop MapReduce的通用并行框架，Spark，拥有Hadoop MapReduce所具有的优点；但不同于MapReduce的是Job中间输出结果可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地适用于数据挖掘与机器学习等需要迭代的MapReduce的算法。</p>
+<p>Spark 是一种与 Hadoop 相似的开源集群计算环境，但是两者之间还存在一些不同之处，这些有用的不同之处使 Spark 在某些工作负载方面表现得更加优越，换句话说，Spark 启用了内存分布数据集，除了能够提供交互式查询外，它还可以优化迭代工作负载。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/28/Spark概念/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/hadoop操作手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/21/hadoop操作手册/" itemprop="url">hadoop操作手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T14:52:04+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">Hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="HDFS命令"><a href="#HDFS命令" class="headerlink" title="HDFS命令"></a>HDFS命令</h1><h2 id="用户命令"><a href="#用户命令" class="headerlink" title="用户命令"></a>用户命令</h2><h3 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h3><p>命令说明：打印需要得到Hadoop的jar和所需要的lib包路径。<br>命令使用：hdfs classpath </p>
+<h3 id="dfs"><a href="#dfs" class="headerlink" title="dfs"></a>dfs</h3><p>命令说明：在支持Hadoop文件系统上运行文件命令。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/21/hadoop操作手册/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/flume操作手册/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/21/flume操作手册/" itemprop="url">flume操作手册</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T13:45:47+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Flume/" itemprop="url" rel="index">
+                    <span itemprop="name">Flume</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> Flume操作指南主要从设置和配置两个方面说明，若要看Flume各个组件的更详细的配置，可参照Flume官网。<br> <a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeUserGuide.html</a>  </p>
+<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="设置一个Agent"><a href="#设置一个Agent" class="headerlink" title="设置一个Agent"></a>设置一个Agent</h3><p>Flume Agent配置存在本地的配置文件中。它是一个Java Properties文件格式的文本文件。一个配置文件中可以配置一个或多个Agent。配置文件包含了一个Agent中每一个Source、Sink和Channel的属性，以及它们如何连接起来形成数据流。</p>
+<h4 id="配置各自的组件"><a href="#配置各自的组件" class="headerlink" title="配置各自的组件"></a>配置各自的组件</h4><p>每一个组件（Source、Sink和Channel）都有name、type以及跟特性type相关联的其他属性集。例如，一个Avro Source需要一个hostname或者是IP地址以及一个端口号去接收数据。一个Memory Channel的最大队列数（“capacity”），一个HDFS Sink需要知道文件系统的URI，创建文件的路径以及文件循环的频率（“hdfs.rollInternal”）等等。一个组件的所有这些属性都需要被设置在这个Flume Agent所以来的配置文件中。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/21/flume操作手册/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/21/hbase权限控制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="name" content="姚昕">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -472,9 +1208,9 @@
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/17/klist/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="name" content="姚昕">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -673,9 +1409,9 @@ klist</code></p>
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/17/kinit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="name" content="姚昕">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -820,9 +1556,9 @@ klist</code></p>
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/17/scrips/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="name" content="姚昕">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -966,9 +1702,9 @@ klist</code></p>
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/16/Spark-Dynamic-Resource-Allocation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="name" content="姚昕">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1095,462 +1831,11 @@ klist</code></p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/15/Hadoop-FairScheduler/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/15/Hadoop-FairScheduler/" itemprop="url">Hadoop FairScheduler介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T11:34:56+08:00">
-                2017-08-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/Yarn/" itemprop="url" rel="index">
-                    <span itemprop="name">Yarn</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>翻译自：<br><a href="https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html" target="_blank" rel="external">https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-site/FairScheduler.html</a></p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在一个公司内部的Hadoop Yarn集群，肯定会被多个业务、多个用户同时使用，共享Yarn的资源，如果不做资源的管理与规划，那么整个Yarn的资源很容易被某一个用户提交的Application占满，其它任务只能等待，这种当然很不合理，我们希望每个业务都有属于自己的特定资源来运行MapReduce任务，Hadoop中提供的公平调度器–Fair Scheduler，就可以满足这种需求。Fair Scheduler将整个Yarn的可用资源划分成多个资源池，每个资源池中可以配置最小和最大的可用资源（内存和CPU）、最大可同时运行Application数量、权重、以及可以提交和管理Application的用户等。<br><img src="http://ouh6z710l.bkt.clouddn.com/Fair.JPG" alt=""></p>
-<p>FairScheduler是一个资源分配方式，在整个时间线上，所有的applications平均的获取资源。Hadoop NextGen能够调度多种类型的资源。默认情况下，FairScheduler只是对内存资源做公平的调度(分配)。当集群中只有一个application运行时，那么此application占用整个集群资源。当其他的applications提交后，那些释放的资源将会被分配给新的applications，所以每个applicaiton最终都能获取几乎一样多的资源。不像Hadoop默认的Scheduler(CapacityScheduler)，CapacityScheduler将applications以queue的方式组成，它可以让short applications在何时的时间内完成，而不会starving那些长期运行的applications，它也是一个合理的方式在多个用户之间共享集群。最终，Fair共享也可以与application priorities一起工作—–“priorities”作为权重来使用，以决定每个application需要获取资源的量。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/15/Hadoop-FairScheduler/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/11/flume详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/11/flume详解/" itemprop="url">flume详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T20:23:25+08:00">
-                2017-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Flume/" itemprop="url" rel="index">
-                    <span itemprop="name">Flume</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="什么是flume"><a href="#什么是flume" class="headerlink" title="什么是flume"></a>什么是flume</h2><p><img src="http://ouh6z710l.bkt.clouddn.com/UserGuide_image00.png" alt="flume"><br>flume 作为 cloudera 开发的实时日志收集系统，受到了业界的认可与广泛应用。Flume 初始的发行版本目前被统称为 Flume OG（original generation），属于 cloudera。但随着 FLume 功能的扩展，Flume OG 代码工程臃肿、核心组件设计不合理、核心配置不标准等缺点暴露出来，尤其是在 Flume OG 的最后一个发行版本 0.94.0 中，日志传输不稳定的现象尤为严重，为了解决这些问题，2011 年 10 月 22 号，cloudera 完成了 Flume-728，对 Flume 进行了里程碑式的改动：重构核心组件、核心配置以及代码架构，重构后的版本统称为 Flume NG（next generation）；改动的另一原因是将 Flume 纳入 apache 旗下，cloudera Flume 改名为 Apache Flume。<br>官方用户手册：<a href="http://flume.apache.org/FlumeUserGuide.html" target="_blank" rel="external">http://flume.apache.org/FlumeUserGuide.html</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/11/flume详解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/11/sqoop2使用实例/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/11/sqoop2使用实例/" itemprop="url">sqoop2使用实例</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T19:26:41+08:00">
-                2017-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Sqoop2/" itemprop="url" rel="index">
-                    <span itemprop="name">Sqoop2</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Sqoop是一款开源的工具，主要用于在Hadoop和传统的数据库(MySQL、postgresql等)进行数据的传递，可以将一个关系型数据库（例如：mysql、Oracle、Postgres等）中的数据导进到hadoop的HDFS中，也可以将HDFS的数据导进到关系型数据库中。<br>Sqoop中一大亮点就是可以通过hadoop的mapreduce把数据从关系型数据库中导入数据到HDFS。Sqoop目前版本已经到了1.99.7，我们可以在其官网上看到所有的版本，Sqoop1.99.7是属于sqoop2，Sqoop1的最高版本为1.4.6<br>sqoop2的官方文档：<a href="http://sqoop.apache.org/docs/1.99.7/index.html" target="_blank" rel="external">http://sqoop.apache.org/docs/1.99.7/index.html</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/11/sqoop2使用实例/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1584,9 +1869,9 @@ klist</code></p>
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg"
-               alt="Kiwi" />
-          <p class="site-author-name" itemprop="name">Kiwi</p>
+               src="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg"
+               alt="姚昕" />
+          <p class="site-author-name" itemprop="name">姚昕</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
           
@@ -1596,7 +1881,7 @@ klist</code></p>
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1607,7 +1892,7 @@ klist</code></p>
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1618,7 +1903,7 @@ klist</code></p>
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1688,7 +1973,7 @@ klist</code></p>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Kiwi</span>  
+  <span class="author" itemprop="copyrightHolder">姚昕</span>  
 </div>
 
 

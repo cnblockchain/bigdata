@@ -98,18 +98,18 @@
 
 
 
-<meta name="description" content="问题：  Kafka的哪些信息记录在Zookeeper中 Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？">
+<meta name="description" content="问题： Kafka的哪些信息记录在Zookeeper中zk中consumers、config、brokers、controller_epoch都是Kafka相关的znode  Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？">
 <meta name="keywords" content="Kafka,Zookeeper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kafka在zk中的信息详解">
 <meta property="og:url" content="http://bigclouder.net/2017/08/30/Kafka在zk中的信息详解/index.html">
 <meta property="og:site_name" content="BigData">
-<meta property="og:description" content="问题：  Kafka的哪些信息记录在Zookeeper中 Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？">
+<meta property="og:description" content="问题： Kafka的哪些信息记录在Zookeeper中zk中consumers、config、brokers、controller_epoch都是Kafka相关的znode  Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-29T19:33:08.000Z">
+<meta property="og:updated_time" content="2017-09-05T01:57:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kafka在zk中的信息详解">
-<meta name="twitter:description" content="问题：  Kafka的哪些信息记录在Zookeeper中 Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？">
+<meta name="twitter:description" content="问题： Kafka的哪些信息记录在Zookeeper中zk中consumers、config、brokers、controller_epoch都是Kafka相关的znode  Consumer Group消费的每个Partition的Offset信息存放在什么位置 Topic的每个Partition存放在哪个Broker上的信息存放在哪里 Producer跟Zookeeper究竟有没有关系？">
 
 
 
@@ -189,7 +189,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">专注于大数据技术</p>
+        <p class="site-subtitle">专注于数据库、大数据技术</p>
       
   </div>
 
@@ -318,9 +318,9 @@
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/30/Kafka在zk中的信息详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Kiwi">
+      <meta itemprop="name" content="姚昕">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -421,8 +421,8 @@
 
       
         <p>问题：</p>
+<h1 id="Kafka的哪些信息记录在Zookeeper中"><a href="#Kafka的哪些信息记录在Zookeeper中" class="headerlink" title="Kafka的哪些信息记录在Zookeeper中"></a>Kafka的哪些信息记录在Zookeeper中</h1><p>zk中consumers、config、brokers、controller_epoch都是Kafka相关的znode</p>
 <ol>
-<li>Kafka的哪些信息记录在Zookeeper中</li>
 <li>Consumer Group消费的每个Partition的Offset信息存放在什么位置</li>
 <li>Topic的每个Partition存放在哪个Broker上的信息存放在哪里</li>
 <li>Producer跟Zookeeper究竟有没有关系？</li>
@@ -459,8 +459,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/30/Kafka宕机演练/" rel="next" title="Kafka宕机演练">
-                <i class="fa fa-chevron-left"></i> Kafka宕机演练
+              <a href="/2017/08/30/Kafka基本该概念/" rel="next" title="Kafka基本概念">
+                <i class="fa fa-chevron-left"></i> Kafka基本概念
               </a>
             
           </div>
@@ -523,13 +523,22 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://ouh6z710l.bkt.clouddn.com/WechatIMG6570.jpeg"
-               alt="Kiwi" />
-          <p class="site-author-name" itemprop="name">Kiwi</p>
+               src="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg"
+               alt="姚昕" />
+          <p class="site-author-name" itemprop="name">姚昕</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
           
@@ -539,7 +548,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -550,7 +559,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -561,7 +570,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -611,6 +620,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kafka的哪些信息记录在Zookeeper中"><span class="nav-number">1.</span> <span class="nav-text">Kafka的哪些信息记录在Zookeeper中</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -631,7 +656,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Kiwi</span>  
+  <span class="author" itemprop="copyrightHolder">姚昕</span>  
 </div>
 
 
