@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="n7cP0Ev7dCSQxFCLmu3ZM5WcdRxwl8lTNzodZ4rkuQg" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="dj60UPGgkl" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="[TOC] 0 概述本文档是针对HControl下stack1.3.5所著。 1 关于本手册HControl是BC-Hadoop及大云大数据套件的管理软件，主要作用是能够自动化部署、启停、配置、监控整个集群，集群里的服务可以包括：HDFS、YARN、Mapreduce2、Spark、Tez、Metrics、Hive、HBase、Sqoop2、ZooKeeper、Storm、Impala、Flume">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigData">
+<meta property="og:url" content="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/index.html">
+<meta property="og:site_name" content="BigData">
+<meta property="og:description" content="[TOC] 0 概述本文档是针对HControl下stack1.3.5所著。 1 关于本手册HControl是BC-Hadoop及大云大数据套件的管理软件，主要作用是能够自动化部署、启停、配置、监控整个集群，集群里的服务可以包括：HDFS、YARN、Mapreduce2、Spark、Tez、Metrics、Hive、HBase、Sqoop2、ZooKeeper、Storm、Impala、Flume">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/hcontrol_img/login.png">
+<meta property="og:image" content="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/hcontrol_img/addnewhost.png">
+<meta property="og:image" content="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/hcontrol_img/newhostleader.png">
+<meta property="og:image" content="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/hcontrol_img/deletehost.png">
+<meta property="og:updated_time" content="2017-10-11T02:46:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BigData">
+<meta name="twitter:description" content="[TOC] 0 概述本文档是针对HControl下stack1.3.5所著。 1 关于本手册HControl是BC-Hadoop及大云大数据套件的管理软件，主要作用是能够自动化部署、启停、配置、监控整个集群，集群里的服务可以包括：HDFS、YARN、Mapreduce2、Spark、Tez、Metrics、Hive、HBase、Sqoop2、ZooKeeper、Storm、Impala、Flume">
+<meta name="twitter:image" content="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/hcontrol_img/login.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/"/>
+
+
+
+
+
+  <title> | BigData</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?true";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BigData</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专注于数据库、大数据技术</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/10/11/HControl管理员手册1.3.5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-11T10:45:46+08:00">
+                2017-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="0-概述"><a href="#0-概述" class="headerlink" title="0 概述"></a>0 概述</h1><p>本文档是针对HControl下stack1.3.5所著。</p>
+<h1 id="1-关于本手册"><a href="#1-关于本手册" class="headerlink" title="1 关于本手册"></a>1 关于本手册</h1><p>HControl是BC-Hadoop及大云大数据套件的管理软件，主要作用是能够自动化部署、启停、配置、监控整个集群，集群里的服务可以包括：HDFS、YARN、Mapreduce2、Spark、Tez、Metrics、Hive、HBase、Sqoop2、ZooKeeper、Storm、Impala、Flume、Kafka、Kerberos、Mahout、Ntp、Ranger、LDAP等。本文档主要针对管理员用户，详细介绍如何使用HControl来进行集群的操作和管理，以及对部署过程中常见的问题进行了描述。  </p>
+<h1 id="2-系统运行环境与安装"><a href="#2-系统运行环境与安装" class="headerlink" title="2 系统运行环境与安装"></a>2 系统运行环境与安装</h1><p>安装部署HControl之前，你必须了解所需要的环境，这包括每一台机器所需要的硬件环境及软件环境。</p>
+<h2 id="2-1-硬件环境"><a href="#2-1-硬件环境" class="headerlink" title="2.1    硬件环境"></a>2.1    硬件环境</h2><table>
+<thead>
+<tr>
+<th>软件名称</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPU</td>
+<td>2GHZ，8核</td>
+</tr>
+<tr>
+<td>内存</td>
+<td>16G</td>
+</tr>
+<tr>
+<td>硬盘</td>
+<td>基本配置接口</td>
+</tr>
+<tr>
+<td>网络</td>
+<td>千兆网络</td>
+</tr>
+<tr>
+<td>节点数</td>
+<td>4（测试ha至少4台）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-2-软件环境"><a href="#2-2-软件环境" class="headerlink" title="2.2    软件环境"></a>2.2    软件环境</h2><table>
+<thead>
+<tr>
+<th>硬件名称</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>操作系统</td>
+<td>centos/rhel6.5或是bclinux</td>
+</tr>
+<tr>
+<td>软件源YUM</td>
+<td>内网：10.254.2.95；外网：223.105.0.153</td>
+</tr>
+<tr>
+<td>JDK</td>
+<td>1.7或者1.8版本</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-3-软件的安装"><a href="#2-3-软件的安装" class="headerlink" title="2.3    软件的安装"></a>2.3    软件的安装</h2><h3 id="2-3-1-yum源配置"><a href="#2-3-1-yum源配置" class="headerlink" title="2.3.1 yum源配置"></a>2.3.1 yum源配置</h3><ul>
+<li>内网访问地址：10.128.2.95（例如安装hcontrol1.3.5的版本，地址为: <a href="http://10.128.2.95/bch/1.3.5/centos/6.8/x86_64)【虚拟机访问http地址为10.128.2.95；物理机访问http地址为10.254.2.95】" target="_blank" rel="external">http://10.128.2.95/bch/1.3.5/centos/6.8/x86_64)【虚拟机访问http地址为10.128.2.95；物理机访问http地址为10.254.2.95】</a></li>
+<li>外网访问地址：223.105.0.153:88<h3 id="2-3-2-安装前准备"><a href="#2-3-2-安装前准备" class="headerlink" title="2.3.2 安装前准备"></a>2.3.2 安装前准备</h3></li>
+</ul>
+<ul>
+<li>集群机器要求:  </li>
+<li>确保集群各机器为英文操作系统.目前支持CentOS 6.5和Red Hat Enterprise Linux6.5<ul>
+<li>JDK版本为1.7版  </li>
+<li>OpenSSL版本为1.6 以上</li>
+<li>Python版本为2.6.6或者以上  </li>
+<li>确保集群各机器root密码一致   </li>
+</ul>
+</li>
+<li>规划要求：  </li>
+<li>在部署前，请先做好规划，各节点部署哪种组件。</li>
+<li>主机要求：  </li>
+<li>确认/etc/hosts包含所有主机；    <ul>
+<li>关闭防火墙：service iptables stop  </li>
+<li>关闭selinux: setenforce 0  </li>
+<li>检查openssl版本：至少为30  </li>
+<li>禁用THP。<h3 id="2-3-3-安装HControl"><a href="#2-3-3-安装HControl" class="headerlink" title="2.3.3 安装HControl"></a>2.3.3 安装HControl</h3></li>
+</ul>
+</li>
+<li>配置repo源（用root用户登录）  </li>
+<li>下载bch-centos.repo文件<pre><code>cd /etc/yum.repos.d/
+物理机执行：wget http://{repo_address}/bch/1.3.5/centos/6.8/x86_64/bch-centos.repo  
+虚拟机执行:wget http://{repo_address}/bch/1.3.5/centos/6.8/x86_64/bch-centos-virtual.repo  
+注意：（该目录下/etc/yum.repos.d/目录下请保证只有bch的相关repo包）
+</code></pre><ul>
+<li>配置bch-centos.repo<br>修改bch-centtos.repo中的ip地址为{repo_address}配置的值。  </li>
+<li>检查仓库配置是否正确<br>命令：yum repolist<br>若显示bch-centos-1.3.5 134（该数字不为0），说明配置OK；否则请检查bch-centos.repo配置</li>
+</ul>
+</li>
+<li>安装HControl-server </li>
+<li>在需要安装HControl-Server的主节点上执行yum install ambari-server；  <ul>
+<li>修改ambari-properties配置文件：/etc/ambari-server/conf/ambari.properties；配置jdk的下载地址为  ；配置api.csrfPrevention.allowed.uris=<a href="http://localhost:8080,http://{server-IP}:8080/,http://bdoc.com/；其中{servre-IP}是ambari-server所在主机的iP地址；" target="_blank" rel="external">http://localhost:8080,http://{server-IP}:8080/,http://bdoc.com/；其中{servre-IP}是ambari-server所在主机的iP地址；</a></li>
+<li>执行命令：ambar-server setup，根据向导选择默认值即可；  </li>
+<li>启动：ambari-server start  </li>
+</ul>
+</li>
+<li>安装ambari-agent</li>
+<li>在集群所有节点上（包括HControl-Server）执行yum install ambari-agent安装HControl-Agent；  <ul>
+<li>在所有节点修改ambari-agent.ini配置文件：/etc/ambari-agent/conf/ambari-agent.ini；  </li>
+<li>修改其中的hostname为：hcontrol-server所在的机器的主机名；  </li>
+<li>启动agent：在所有节点执行命令ambari-agent start。<br>###2.3.4 部署HControl<br>在浏览器中输入{ Your.HControl.Server.IP }:8080登录到HControl Server页面，在登录表单中输入用户名和密码admin/HCq1w2E#R$，登录到HControl部署控制台。</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>输入集群名称；</li>
+<li>选择stack1.3.5,输入地址<a href="http://{repo_address}/bch/1.3.5/centos/6.8/x86_64/（修改{repo_address}为真实yum地址）；" target="_blank" rel="external">http://{repo_address}/bch/1.3.5/centos/6.8/x86_64/（修改{repo_address}为真实yum地址）；</a></li>
+<li>输入主机名（已回车隔开）</li>
+<li>根据页面提示注册agent;</li>
+<li>选择安装的服务；</li>
+<li>根据提示填写对应的属性（比如hive、ranger需要填写数据库密码等）</li>
+<li>检查主机服务是否在正确主机；</li>
+<li><p>完成部署</p>
+<h2 id="2-4软件的卸载"><a href="#2-4软件的卸载" class="headerlink" title="2.4软件的卸载"></a>2.4软件的卸载</h2><p>卸载请参考《HC安装文档》中卸载篇章</p>
+<h1 id="3-系统功能介绍"><a href="#3-系统功能介绍" class="headerlink" title="3 系统功能介绍"></a>3 系统功能介绍</h1><p>功能介绍分三个角色，分别介绍：</p>
+<h2 id="3-1-管理员用户"><a href="#3-1-管理员用户" class="headerlink" title="3.1 管理员用户"></a>3.1 管理员用户</h2><h3 id="3-1-用户管理"><a href="#3-1-用户管理" class="headerlink" title="3.1 用户管理"></a>3.1 用户管理</h3></li>
+</ol>
+<ul>
+<li>权限管理功能，HControl管理员登录之后，可以对当前所有用户、用户组、以及权限进行管理修改。  </li>
+<li>创建管理员，管理员用户拥有操作和查看HControl的权限。  </li>
+<li>创建普通用户，普通用户只有查看HControl的权限。  </li>
+<li>管理员用户可对用户、用户组、以及权限进行修改管理。  </li>
+</ul>
+<h3 id="3-2-仪表盘管理"><a href="#3-2-仪表盘管理" class="headerlink" title="3.2 仪表盘管理"></a>3.2 仪表盘管理</h3><ul>
+<li>仪表盘添加删除。</li>
+<li>仪表盘编辑。</li>
+<li>历史配置，实现配置的高效管理。</li>
+<li>heatmap，可全局设置警告颜色显示。</li>
+</ul>
+<h3 id="3-3-服务管理"><a href="#3-3-服务管理" class="headerlink" title="3.3 服务管理"></a>3.3 服务管理</h3><ul>
+<li>服务添加删除，该功能可以实现对HControl下所有服务的删除和添加，在使用的时候会更加灵活。</li>
+<li>服务启停，该功能实现对服务状态的控制。</li>
+<li>服务检查，该功能可以实现对服务状态的检查。</li>
+<li>删除组件，通过组件删除，实现组件位置的灵活调配。</li>
+<li>启动HA，启动HA后将实现集群的高可用，提高集群的安全性。</li>
+<li>服务配置文件管理，实现各个服务配置信息的界面化管理。</li>
+<li>开启维护模式。</li>
+<li>服务快速链接，实现相关链接的界面化跳转，体验更好</li>
+</ul>
+<h3 id="3-4-主机管理"><a href="#3-4-主机管理" class="headerlink" title="3.4 主机管理"></a>3.4 主机管理</h3><ul>
+<li>组件启停。</li>
+<li>节点筛选功能，在节点较多的情况下实现节点快速查找。</li>
+<li>节点添加删除，实现节点灵活配置</li>
+</ul>
+<h3 id="3-5-告警管理"><a href="#3-5-告警管理" class="headerlink" title="3.5 告警管理"></a>3.5 告警管理</h3><ul>
+<li>邮件提醒，实现邮件告警，方便用户运维。</li>
+<li>仪表盘监控，实现对各个组件以及服务器性能指标的监控</li>
+</ul>
+<h3 id="3-6-审计日志管理"><a href="#3-6-审计日志管理" class="headerlink" title="3.6 审计日志管理"></a>3.6 审计日志管理</h3><ul>
+<li>hc-server升级日志管理</li>
+<li>yarn审计日志的管理；</li>
+<li>hive审计日志的管理；</li>
+<li>hbase审计日志的管理。</li>
+</ul>
+<h2 id="3-2-普通用户"><a href="#3-2-普通用户" class="headerlink" title="3.2 普通用户"></a>3.2 普通用户</h2><p>普通用户仅具有登录查看服务的功能，无法对服务进行操作。</p>
+<h2 id="3-3-特殊用户"><a href="#3-3-特殊用户" class="headerlink" title="3.3 特殊用户"></a>3.3 特殊用户</h2><p>特殊用户，是指管理员用户通过用户管理对该用户进行一定的权限配置，从而可以对集群进行相关操作的用户。</p>
+<h2 id="3-4-运维工作者"><a href="#3-4-运维工作者" class="headerlink" title="3.4 运维工作者"></a>3.4 运维工作者</h2><p>概述：主要针对运维人员，详细介绍HControl运维过程中的巡检操作、监控告警信息，并对其间遇到的一些问题进行阐述。具体操作操作请查阅《132之运维文档》</p>
+<h1 id="4-操作指南"><a href="#4-操作指南" class="headerlink" title="4 操作指南"></a>4 操作指南</h1><h2 id="4-1-用户管理"><a href="#4-1-用户管理" class="headerlink" title="4.1 用户管理"></a>4.1 用户管理</h2><p>1、登录操作<br>（1）在浏览器中输入<a href="http://{Your.HControl.Server.IP}:8080，进入管理员登录页面；" target="_blank" rel="external">http://{Your.HControl.Server.IP}:8080，进入管理员登录页面；</a><br>（2）在登录表单中输入用户名和密码，默认均为admin，点击提交完成管理员登录，登录页面如下：<br><img src="hcontrol_img/login.png" alt=""><br>2、修改用户权限<br>（1）作为管理员进入管理员页面；<br>（2）点击页面右侧Admin下拉菜单中的“管理HControl”；<br>（3）选择左侧导航栏中“权限”，可看到页面有operator和read-only两种角色；<br>（4） 若想对某个用户赋予某种权限只需要把该用户拉入该角色当中即可。<br>3、管理用户<br>（1）用管理员身份登录到HControl平台；<br>（2）选择导航栏的Admin来查看HControl Web用户，点击Service Accounts查看用户及用户组信息。<br>4、设置用户状态<br>（1）进入管理员界面并点击“用户”；<br>（2）点击需要修改的用户的用户名；<br>（3）点击status状态下拉框，并选择想赋予该用户的状态；<br>5、创建本地组<br>（1）进入管理员界面并点击点击“群组”；<br>（2）点击创建groups名；<br>（3）输入一个唯一的groups名；<br>（4）点击保存groups，操作页面如下图所示<br>6、添加用户到组当中<br>（1）进入管理页面，点击“群组”，进入群组管理页面；<br>（2）点击需要修改的组名；<br>（3）点击Local Members当中的输入框，并输入一个存在的用户名；<br>（4）点击保存按钮，即完成了对用户的添加，页面如下图所示：<br>7、编辑组当中的用户<br>（1）进入管理页面，点击Groups接口进入Group管理页面；<br>（2）点击需要修改的组名；<br>（3）点击铅笔图片后，该组当中的用户都会变为可编辑状态，在输入框中完成编辑或完成对用户的删除操作；<br>（4）点击保存，操作界面如下：<br>8、删除本地组<br>（1）进入管理页面，群组页面；<br>（2）点击需要修改的组名；<br>（3）点击“删除群组”按钮即可完成对当前组的删除。    </p>
+<h2 id="4-2-仪表盘管理"><a href="#4-2-仪表盘管理" class="headerlink" title="4.2 仪表盘管理"></a>4.2 仪表盘管理</h2><h3 id="4-2-1-指标管理"><a href="#4-2-1-指标管理" class="headerlink" title="4.2.1 指标管理"></a>4.2.1 指标管理</h3><p>在首页选择菜单栏中“仪表盘”，可对仪表盘进行编辑。在“仪表盘”中，可以根据使用习惯对Widgets面板进行定制，通过鼠标拖动可以改变控件的布局，恢复“仪表盘默认布局”可恢复默认布局。</p>
+<ol>
+<li>将鼠标指针移动到需要操作的Widget上，点击左上角删除标识，即可移除；  </li>
+<li>向“仪表盘”中添加Widget操作，可根据页面向导提示，添加即可。</li>
+</ol>
+<h4 id="4-2-1-1-查看历史指标信息"><a href="#4-2-1-1-查看历史指标信息" class="headerlink" title="4.2.1.1 查看历史指标信息"></a>4.2.1.1 查看历史指标信息</h4><p>1.点开需要查看的指标，点击左右箭头可看到最近1小时、4小时、1周、1月、1年的指标。</p>
+<h3 id="4-2-2-热力图"><a href="#4-2-2-热力图" class="headerlink" title="4.2.2 热力图"></a>4.2.2 热力图</h3><p>热力图以另外一种热图的方式直观的展示出了Widgets中所监控的信息。在首页选择菜单栏中“仪表盘”，选择“热力图”选项，可对热力图进行一个查看和编辑。</p>
+<h3 id="4-2-3-配置历史"><a href="#4-2-3-配置历史" class="headerlink" title="4.2.3 配置历史"></a>4.2.3 配置历史</h3><p>在首页选择菜单栏中“仪表盘”，选择“历史配置”选项。历史配置中对每一个服务的配置文件修改信息作了一次汇总，用户可用查看服务之前的配置文件，点击跳转到服务的配置页面，提高用户体验。如图所示：</p>
+<h2 id="4-3-服务管理"><a href="#4-3-服务管理" class="headerlink" title="4.3 服务管理"></a>4.3 服务管理</h2><h3 id="4-3-1-服务增删"><a href="#4-3-1-服务增删" class="headerlink" title="4.3.1 服务增删"></a>4.3.1 服务增删</h3><p>1、添加服务和删除组件<br>（1）在首页点击“服务”，进入“服务”页面。<br><strong>添加服务</strong><br>若需要添加服务，则执行如下操作：<br>在左侧服务栏目下方点击“操作”下拉框，并选中“添加服务”；<br>点击“添加服务”按钮后会弹出导航框，弹出导航框如下图所示：<br>在导航框中选择自己需要添加的服务，点击“下一步”；<br>按照提示完成该服务的安装，完成安装后会提示安装成功。<br><strong>删除服务</strong><br>如需要删除服务，则执行如下步骤：<br>选择需要移除的服务，在“服务操作”中，点击停止，等待服务停止后，点击删除，即可：</p>
+<h3 id="4-3-2-服务启停"><a href="#4-3-2-服务启停" class="headerlink" title="4.3.2 服务启停"></a>4.3.2 服务启停</h3><p>1、服务启停<br>（1）在首页点击服务，进入服务页面；<br>（2）在左侧服务栏中选择需要启停的服务，点击该服务名称；<br>（3）点击“服务操作”下拉框，点击“停止”即可实现该服务的停止，若需要启动该服务则点击“启动”，即可实现启动该服务。</p>
+<h3 id="4-3-3-服务检测"><a href="#4-3-3-服务检测" class="headerlink" title="4.3.3 服务检测"></a>4.3.3 服务检测</h3><p>（1）在首页点击“服务”，进入“服务”页面：<br>（2）在左侧服务栏中选择需要启停的服务，点击该服务名称：<br>（3）点击“服务操作”下拉框，点击“运行服务检测”，会弹出一个提示框：<br>（4）点击“确认”，即可实现对该服务的检查。</p>
+<h3 id="4-3-4-下载客户端配置"><a href="#4-3-4-下载客户端配置" class="headerlink" title="4.3.4 下载客户端配置"></a>4.3.4 下载客户端配置</h3><p>（1）在首页点击“服务”，进入“服务”页面：<br>（2）在左侧服务栏中选择对应的服务，点击该服务名称：<br>（3）点击“服务操作”下拉框，点击“下载客户端配置”，会弹出一个提示框：<br>（4）点击“确认”，即可完成对该服务的客户端配置的下载。</p>
+<h3 id="4-3-5-维修模式启停"><a href="#4-3-5-维修模式启停" class="headerlink" title="4.3.5 维修模式启停"></a>4.3.5 维修模式启停</h3><p>开启维护模式和关闭维护模式<br>（1）在首页点击“服务”，进入“服务”页面：<br>（2）在左侧服务栏中选择对应的服务，点击该服务名称：<br><strong>开启维护模式</strong><br>若开启维护模式，执行如下操作：<br>（1）点击“服务操作”下拉框，点击“开启维护模式”后会弹出提示框：<br>（2）点击“确认”；<br>（3）等待几分钟后即可开启维护模式。<br><strong>关闭维护模式</strong><br>若关闭维护模式，则执行如下操作：<br>（1）点击“服务操作”下拉框，点击“关闭维护模式”：<br>（2）点击“确认”；即可关闭维护模式：  </p>
+<h3 id="4-3-6-配置修改"><a href="#4-3-6-配置修改" class="headerlink" title="4.3.6 配置修改"></a>4.3.6 配置修改</h3><p>注意：【HControl当中，每个服务都有其各自需要的配置文件，因此修改配置是针对某个服务的配置信息进行修改】。<br>（1）在首页点击“服务”，进入“服务”页面；<br>（2）在左侧服务栏中选择需要修改配置的服务，点击该服务名称进入该服务的页面；<br>（3）点击页面中间“配置”按键，进入该服务的配置页面；<br><strong>若修改原有配置则继续执行以下操作：</strong><br>（1）在页面当中找到需要修改的配置参数，寻找参数有两种方式：第一种方式是直接把所有的配置组展开，然后寻找，第二种方式则是在配置搜索栏当中输入需要修改的参数名称，完成配置参数的快速查找；<br>（2）在需要修改的参数如数框中输入新的参数值；<br>（3）点击“保存”，弹出提示框后点击“确认”；<br>（4）再保存新的配置参数后，页面中间会有一个新的警告条，点击“重启”按钮，即可。<br><strong>若需要新增配置项则继续执行如下操作：</strong><br>（1）找到有“增加属性”操作的组；<br>（2）点击“增加属性”后会弹出一个表单框，表单中包含Type、key、value三个字段，其中Type名称为配置保存的配置文件名，key为添加属性的键名，value为值名，在表单中输入相对应的属性值，弹出框如图所示：<br>（3）点击“添加”：<br>（4）点击“保存”，弹出提示框后点击“确认”：<br>（5）保存新的配置参数后，页面中间会有一个新的警告条，点击“重启”按钮。<br><strong>创建配置组</strong><br>注意：【HControl一开始默认将集群中的所有主机都归为一个组，这样修改配置后会同步到安装服务的每一台主机上。管理配置组的功能就是可以管理集群中该组机器的配置，其他机器不受影响。设置过程中，选择Manage Config Groups，来建立新的分组，重新分配主机，可以改变组内机器的默认配置】。<br>（1）在首页选中自己需要添加配置组的服务，然后在首页点击“服务”，进入“服务”页面；<br>（2）点击“配置”按钮进入配置页面：<br>（3）点击“管理配置组”，将弹出添加配置组的表单，在表单左侧点击+，弹出配置组添加框，操作框所示，在弹出框内输入组名和描述，点击“确认”：<br>（4）选中左侧新添加的组名，点击主机框下方加号，将弹出主机选择框，选择框如图27所示，选中该配置组中需要添加的主机，点击“确认”即完成了配置组的添加：</p>
+<h3 id="4-3-7-快速链接"><a href="#4-3-7-快速链接" class="headerlink" title="4.3.7 快速链接"></a>4.3.7 快速链接</h3><p>注意：【在HControl平台当中所有服务都有与之对应的“快速链接”，通过该功能可以查看与相关组件的一些详细信息，如日志，组件详细信息页面等。】  </p>
+<ol>
+<li>在首页点击“服务”，进入“服务”页面；   </li>
+<li>在左侧服务栏中选择需要修改配置的服务，点击该服务名称进入该服务的页面；</li>
+<li>点击Quik Links下拉框并选中需要查看的信息，页面即会跳转到该页面，值得注意的是，在使用该功能前需要配置本地主机名，实现主机名与IP地址的映射。</li>
+</ol>
+<h3 id="4-3-8-高可用管理"><a href="#4-3-8-高可用管理" class="headerlink" title="4.3.8 高可用管理"></a>4.3.8 高可用管理</h3><p>一、HDFS中的NameNode和Yarn中Resource Manage的高可用功能，启动HA集群中至少需要3台主机】；</p>
+<p>二、hbase、haproxy、historyserver、ldap、ranger、hive、slider、storm、ntp的高可用请参考如下步骤；（注意mr、ldap、slider以及ranger高可用建议先安装haproxy）</p>
+<h4 id="4-3-8-1-HDFS和YARN高可用"><a href="#4-3-8-1-HDFS和YARN高可用" class="headerlink" title="4.3.8.1 HDFS和YARN高可用"></a>4.3.8.1 HDFS和YARN高可用</h4><p>操作步骤如下：  </p>
+<ol>
+<li>在首页点击“服务”，进入“服务”页面：  </li>
+<li>在左侧服务栏中选择“HDFS”或是“YARN”的服务，点击该服务名称：  </li>
+<li>点击”服务操作”下拉框，点击“启用NameNode(ResourceManager)高可用”，此时会弹出一个提示框：  </li>
+<li>点击“确认”后会弹出启动高可用的提示向导，点击“下一步”即可实现对高可用的启动：  </li>
+<li>当启动成功后会提示启动成功，若在启动过程中有遇到失败，可以参考日志提示解决后继续：</li>
+</ol>
+<h4 id="4-3-8-2-Hive高可用"><a href="#4-3-8-2-Hive高可用" class="headerlink" title="4.3.8.2 Hive高可用"></a>4.3.8.2 Hive高可用</h4><p>通过hc页面，在点击hive服务的服务操作中添加添加多个Hiveserver2和metastore，并遵循如下步骤：</p>
+<p>（1）HiveServer2高可用配置</p>
+<table>
+<thead>
+<tr>
+<th><strong>参数名称</strong></th>
+<th><strong>参数值</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hive.server2.support.dynamic.service.discovery</td>
+<td>true</td>
+</tr>
+<tr>
+<td>hive.server2.zookeeper.namespace</td>
+<td>hiveserver2</td>
+</tr>
+<tr>
+<td>hive.zookeeper.quorum</td>
+<td>host1:2181,host2:2181,host3:2181</td>
+</tr>
+<tr>
+<td>hive.zookeeper.client.port</td>
+<td>2181</td>
+</tr>
+</tbody>
+</table>
+<p>通过beeline/JDBC连接串测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">beeline</div><div class="line">!connect jdbc:hive2://hostt1:2181,host2:2181,host3:2181/default;serviceDiscoveryMode=zookeeper;zooKeeperNamespace=hiveserver2</div></pre></td></tr></table></figure>
+<p>输入用户名hive，密码是用户自定义配置。 说明：客户端连接的时候，会从zookeeper选择hiveserver2节点连接。</p>
+<p>说明：hiveserver的数量由hive并发数决定，平均1个hiveserver并发不要超过100</p>
+<p>（2）HiveMetastore高可用</p>
+<p>通过hc页面添加多个hivemetastore（点击hive服务的服务操作中添加metastore即可），修改如下配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hive.metastore.uris=thrift://metahost1:9083,thrift://metahost2:9083</div></pre></td></tr></table></figure>
+<p>说明：Hivemetastore的“HA机制”比较简单，不需要Zookeeper参与，直接启动多个即可，HiveServer2在使用Hivemetastore时会有简单重试机制，依次访问这几个Hivemetastore实例</p>
+<h4 id="4-3-8-3-LDAP高可用"><a href="#4-3-8-3-LDAP高可用" class="headerlink" title="4.3.8.3 LDAP高可用"></a>4.3.8.3 LDAP高可用</h4><p>（1）操作步骤如下：</p>
+<ol>
+<li>在首页点击“服务”，进入“服务”页面；</li>
+<li><p>在左侧服务栏中选择“LDAP”的服务，点击该服务名称；</p>
+</li>
+<li><p>点击右侧”服务操作”下拉框，点击“+添加 LDAP Server”,选择即将安装的主机名；</p>
+</li>
+<li><p>点击确认；</p>
+</li>
+<li><p>重启haproxy</p>
+</li>
+</ol>
+<p><strong>注意：</strong>由于ranger需要同步ldap数据，故启动ldap高可用后，请注意检查和修改ranger如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ranger.ldap.url=ldap://virtualip:390</div><div class="line">ranger.usersync.ldap.url=ldap://virtualip:390</div></pre></td></tr></table></figure>
+<p>​       如果hadoop需要同步ldap数据，注意启动ldap高可用后，请检查和修改core-site中如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hadoop.security.group.mapping.ldap.url=ldap://virtualip:390</div></pre></td></tr></table></figure>
+<h4 id="4-3-8-4-MR-HistoryServer高可用"><a href="#4-3-8-4-MR-HistoryServer高可用" class="headerlink" title="4.3.8.4 MR HistoryServer高可用"></a>4.3.8.4 MR HistoryServer高可用</h4><p>（1）操作步骤如下：</p>
+<ol>
+<li>在首页点击“服务”，进入“服务”页面；</li>
+<li>在左侧服务栏中选择“BC-MAPREDUCE2”的服务，点击该服务名称；</li>
+<li>点击右侧”服务操作”下拉框，点击“+添加 History Server”,选择即将安装的主机名；</li>
+<li>点击确认；</li>
+<li>重启haproxy</li>
+</ol>
+<h4 id="4-3-8-5-Ranger高可用"><a href="#4-3-8-5-Ranger高可用" class="headerlink" title="4.3.8.5 Ranger高可用"></a>4.3.8.5 Ranger高可用</h4><p>（1）操作步骤如下：  </p>
+<ol>
+<li>在首页点击“服务”，进入“服务”页面：  </li>
+<li>在左侧服务栏中选择“Ranger”的服务，点击该服务名称：</li>
+<li>点击”服务操作”下拉框，点击“启用Ranger高可用”,输入负载均衡（haproxy中虚拟ip）地址，例如<a href="http://ip:6081" target="_blank" rel="external">http://ip:6081</a>,</li>
+<li>根据提示点击下一步选择备用ranger admin地址</li>
+<li>根据提示点击下一步即可；</li>
+<li>重启haproxy</li>
+</ol>
+<h4 id="4-3-8-6-Haproxy高可用"><a href="#4-3-8-6-Haproxy高可用" class="headerlink" title="4.3.8.6 Haproxy高可用"></a>4.3.8.6 Haproxy高可用</h4><p>页面添加多个haproxy（注意填写主机virtualaddress虚拟IP地址）。haproxy的用户和密码分别为haproxy和haproxy@admin。</p>
+<p><strong>注意</strong>：</p>
+<p>1.同一网段内各组keepalived配置中的virtual_router_id [大小不能超过255]不可重复（在高级keepalived下virtaul_router_id）</p>
+<h4 id="4-3-8-7-Kerberos高可用"><a href="#4-3-8-7-Kerberos高可用" class="headerlink" title="4.3.8.7 Kerberos高可用"></a>4.3.8.7 Kerberos高可用</h4><p>操作步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 完成kerberos的开启（参考4.3.9中kerberos开启）；</div><div class="line">2. 修改kerberos配置中slave host为备用kerberos的主机名；</div><div class="line">3. 前往备kerberos所在节点，点击“+添加 Kerberos Server”，选择即将安装的主机名；</div><div class="line">4. 进入主kerberos server所在节点，点击重启;</div><div class="line">5. 进入备用kerberos server所在节点，点击重启;</div><div class="line">6. 页面上更改配置 is_dump 为true，并从kerberos server 备节点后台登录kadmin，密码为开启kerberos时页面配置的密码，执行ktadd host/&#123;slave_hostname&#125;， 重启master kdc ;</div><div class="line">7. 将主kerberos server 节点 的/var/kerberos/krb5kdc/.k5.BCHKDC 文件scp到备用kerberos server对应的目录 /var/kerberos/krb5kdc/目录下，启动备kerberos server；</div><div class="line">8. 后台主备节点登录kadmin，密码为开启kerberos时页面配置的密码，分别执行ktadd kiprop/&#123;master_hostname&#125; ktadd kiprop/&#123;slave_hostname&#125; </div><div class="line">9. 页面更改配置 incr_db_prop为true  krb.stopped.enabled为true，重启master kdc，启动 slave kdc</div><div class="line">10. 页面更改配置krb.stopped.enabled为false，保存。</div></pre></td></tr></table></figure>
+<h4 id="4-3-8-8-Slider高可用"><a href="#4-3-8-8-Slider高可用" class="headerlink" title="4.3.8.8 Slider高可用"></a>4.3.8.8 Slider高可用</h4><p>（1）操作步骤如下：  </p>
+<ol>
+<li>在首页点击“服务”，进入“服务”页面：  </li>
+<li>在左侧服务栏中选择“BC-Slider”的服务，点击该服务名称：</li>
+<li>点击“服务操作”下拉框，选择“+添加 SliderRouteNode”，选择节点安装该组件，点击确定；</li>
+<li>根据页面提示重启slider;</li>
+<li>重启haproxy</li>
+</ol>
+<h4 id="4-3-8-9-NTP高可用"><a href="#4-3-8-9-NTP高可用" class="headerlink" title="4.3.8.9 NTP高可用"></a>4.3.8.9 NTP高可用</h4><p>（1）操作步骤如下：  </p>
+<ol>
+<li>在首页点击“主机”，进入“主机”页面：  </li>
+<li>选择需要部署NTP的主机，点击进入对应主机名称，进入主机页面：</li>
+<li>点击“+添加”下拉框，选择“NTP Server”，点击确定。</li>
+</ol>
+<h4 id="4-3-8-10-Storm高可用"><a href="#4-3-8-10-Storm高可用" class="headerlink" title="4.3.8.10 Storm高可用"></a>4.3.8.10 Storm高可用</h4><p>（1）nimbus高可用操作步骤如下：  </p>
+<ol>
+<li>在首页点击“主机”，进入“主机”页面：  </li>
+<li>选择需要部署Nimbus的主机，点击进入对应主机名称，进入主机页面：</li>
+<li>点击“+添加”下拉框，选择“Nimbus”，点击确定。</li>
+</ol>
+<p>（2）storm server ui 高可用操作步骤：</p>
+<ol>
+<li>在首页点击“主机”，进入“主机”页面：  </li>
+<li>选择需要部署Nimbus的主机，点击进入对应主机名称，进入主机页面：</li>
+<li>点击“+添加”下拉框，选择“Storm UI Server”，点击确定；</li>
+<li>根据页面提示重启storm；</li>
+<li>重启haproxy</li>
+</ol>
+<p>当开启kerberos后，访问server ui目前有问题，已提jira给storm组相关同事<a href="http://10.254.0.20:8088/browse/STREAMING-1177。" target="_blank" rel="external">http://10.254.0.20:8088/browse/STREAMING-1177。</a></p>
+<h4 id="4-3-8-11-数据库高可用"><a href="#4-3-8-11-数据库高可用" class="headerlink" title="4.3.8.11 数据库高可用"></a>4.3.8.11 数据库高可用</h4><p>Impala/hive/ranger使用的是mysql的数据库，在实际实施过程中，建议使用rdb数据库。开启数据库高可用方式如下：</p>
+<p>1.rdb安装</p>
+<p>请参考&lt;其他说明之rdb部署&gt;一节</p>
+<p>2.服务驱动包替换</p>
+<p>（1）hive驱动包替换方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.把最新的jar包命名为mysql-connector-java.jar放到hc server的/var/lib/ambari-server/resources/下</div><div class="line">2.把最新的jar包命名为mysql-connector-java.jar放到hive server2/metastore所在节点的/usr/share/java/目录下</div><div class="line">3.重启下hive服务</div><div class="line">4.检测hive server2/metastore的/cmss/bch/bc1.3.5/hive/lib/下是否有最新的mysql-connector-java.jar,若有即生效。</div></pre></td></tr></table></figure>
+<p>（2）impala驱动包替换方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">将要替换的驱动包替换到impala目录/cmss/bch/bc1.3.5/impala/fe/target/dependency/下，并重启impala生效。</div></pre></td></tr></table></figure>
+<p>（3）ranger驱动包替换方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1.在ambari-server节点执行ambari-server setup --jdbc-dirver=新包地址 --jdbc-db=mysql;</div><div class="line">2.重启ranger即可</div></pre></td></tr></table></figure>
+<p>3.元数据数据库创建和登录用户</p>
+<p>（1）hive操作步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/usr/lib/bcrdb/bin/mysql -pbcrdb</div><div class="line">CREATE USER &apos;hive&apos;@&apos;%&apos; IDENTIFIED BY &apos;password&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;hive&apos;@&apos;%&apos;;</div><div class="line">FLUSH PRIVILEGES;</div><div class="line">create database hive;</div><div class="line">其中password是hive的数据库密码</div><div class="line"></div><div class="line">修改HC上hive的mysql的连接串Database URL为：</div><div class="line">jdbc:mysql://host1:3306,host2:3306,host3:3306/hive?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;failOverReadOnly=false&amp;useSSL=false</div><div class="line">其中host1/host2/host3指安装rdb的主机名称，请根据实际修改</div></pre></td></tr></table></figure>
+<p>（2）impala操作步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/usr/lib/bcrdb/bin/mysql -pbcrdb</div><div class="line">CREATE USER &apos;impala&apos;@&apos;%&apos; IDENTIFIED BY &apos;password&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;impala&apos;@&apos;%&apos;;</div><div class="line">FLUSH PRIVILEGES;</div><div class="line">create database impala;</div><div class="line">其中password是impala的数据库密码</div><div class="line"></div><div class="line">修改HC上Impala的连接串Database URL为：</div><div class="line">jdbc:mysql://host1:3306,host2:3306,host3:3306/impala?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;failOverReadOnly=false&amp;useSSL=false</div><div class="line">其中host1/host2/host3指安装rdb的主机名称，请根据实际修改</div></pre></td></tr></table></figure>
+<p>（3）ranger操作步骤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">/usr/lib/bcrdb/bin/mysql -pbcrdb</div><div class="line">CREATE USER &apos;rangerdba&apos;@&apos;%&apos; IDENTIFIED BY &apos;rangerdba&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;rangerdba&apos;@&apos;%&apos; WITH GRANT OPTION;</div><div class="line">FLUSH PRIVILEGES;</div><div class="line"></div><div class="line">修改HC上ranger的连接串JDBC connect string for a Ranger database为</div><div class="line">jdbc:mysql://host1:3306,host2:3306,host3:3306/ranger?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;failOverReadOnly=false&amp;useSSL=false</div><div class="line">连接串ranger.jpa.audit.jdbc.url为：</div><div class="line">jdbc:mysql://host1:3306,host2:3306,host3:3306/ranger_audit?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;failOverReadOnly=false&amp;useSSL=false</div><div class="line">其中host1/host2/host3指安装rdb的主机名称，请根据实际修改</div></pre></td></tr></table></figure>
+<h3 id="4-3-9-kerberos启停"><a href="#4-3-9-kerberos启停" class="headerlink" title="4.3.9 kerberos启停"></a>4.3.9 kerberos启停</h3><p><strong>（1）开启kerberos</strong></p>
+<ul>
+<li><p>开启HC界面后，选择菜单栏“管理”–&gt;”Kerberos”–&gt;”启用kerberos”;</p>
+</li>
+<li><p>选择 未安装 MIT KDC，勾选 集群未安装KDC Server 多选框，（如果是已经开通过一次kerberos，停用之后再次开启，则选择 已存在MIT KDC，并勾选所有多选框）；</p>
+</li>
+<li><p>修改如下四个配置</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">例如：其中master为安装kdc所在的节点的主机名； BCHKDC是域名，qwe是密码</div><div class="line">KDC host = master</div><div class="line">Realm name = BCHKDC</div><div class="line">Kadmin host = master</div><div class="line">Admin password = qwe123</div></pre></td></tr></table></figure>
+<ul>
+<li>其他步骤默认即可。</li>
+</ul>
+<p><strong>（2）停用kerberos</strong></p>
+<ul>
+<li><p>选择菜单栏—&gt;管理–&gt;kerberos–&gt;停用kerberos，根据向导选择默认步骤即可</p>
+<p><strong>备注</strong>：开启kerberos后，所有服务走kerberos认证，如kerberos挂，则所有服务不能使用，故默认开启kerbeors后禁止停止kerberos服务。若测试页面kerberos服务的停止操作，需修改配置krb.stopped.enabled =true，方可停止。</p>
+</li>
+</ul>
+<h4 id="4-3-9-1-开启kerberos后注意事项"><a href="#4-3-9-1-开启kerberos后注意事项" class="headerlink" title="4.3.9.1 开启kerberos后注意事项"></a>4.3.9.1 开启kerberos后注意事项</h4><p>（1）hive的service check若出现检测超时，请手动修改执行check的主机下的该文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/cmss/bch/bc1.3.5/hive/hcatalog/etc/hcatalog/proto-hive-site.xml</div><div class="line">配置里面的hive.metastore.uris为真实配置</div></pre></td></tr></table></figure>
+<h3 id="4-3-10-bcid配置"><a href="#4-3-10-bcid配置" class="headerlink" title="4.3.10 bcid配置"></a>4.3.10 bcid配置</h3><h4 id="4-3-10-1-hadoop的bcid认证开启配置"><a href="#4-3-10-1-hadoop的bcid认证开启配置" class="headerlink" title="4.3.10.1 hadoop的bcid认证开启配置"></a>4.3.10.1 hadoop的bcid认证开启配置</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hadoop.security.enable.bdoc.authentication</td>
+<td>true</td>
+<td>core-site</td>
+</tr>
+</tbody>
+</table>
+<h4 id="4-3-10-2-hive的bcid认证开启配置"><a href="#4-3-10-2-hive的bcid认证开启配置" class="headerlink" title="4.3.10.2 hive的bcid认证开启配置"></a>4.3.10.2 hive的bcid认证开启配置</h4><p>hive的bcid认证依赖hadoop的bcid认证开启，请先配置hadoop的bcid后再配置hive的bcid</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hive.security.authenticator.manager</td>
+<td>org.apache.hadoop.hive.ql.security.BdocUserAuthenticator</td>
+<td>hiveserver2-site</td>
+</tr>
+</tbody>
+</table>
+<p>开启bcid认证后，连接方式需加入id和key，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hive2://hiveserver2:10000/default?hadoop.security.bdoc.access.id=0aca8fd72c0e57dad87f;hadoop.security.bdoc.access.key=hive</div><div class="line">或者</div><div class="line">jdbc:hive2://hostt1:2181,host2:2181,host3:2181/default;serviceDiscoveryMode=zookeeper;zooKeeperNamespace=hiveserver2;hadoop.security.bdoc.access.id=0aca8fd72c0e57dad87f;hadoop.security.bdoc.access.key=hive</div></pre></td></tr></table></figure>
+<h4 id="4-3-10-3-spark-thrift-server配置bcid"><a href="#4-3-10-3-spark-thrift-server配置bcid" class="headerlink" title="4.3.10.3 spark thrift server配置bcid"></a>4.3.10.3 spark thrift server配置bcid</h4><p>（1）在yarn的配置fair-scheduler中增加配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;queue name=&quot;spark&quot;&gt;</div><div class="line">&lt;aclAdministerApps&gt;spark&lt;/aclAdministerApps&gt;</div><div class="line">&lt;aclSubmitApps&gt;spark&lt;/aclSubmitApps&gt;</div><div class="line">&lt;/queue&gt;</div></pre></td></tr></table></figure>
+<p>（2）在spark配置spark-defaults中增加属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">spark.hadoop.hadoop.security.bdoc.access.key=admin</div><div class="line">spark.hadoop.hadoop.security.bdoc.access.id=admin</div></pre></td></tr></table></figure>
+<p>在Thrift Startup Parameters中增加指定提交队列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">--queue root.spark</div><div class="line">完整内容如下：</div><div class="line">--master yarn --deploy-mode client  --driver-memory 1g --driver-cores 1 --num-executors 1  --executor-cores 1 --executor-memory 1g --queue root.spark</div></pre></td></tr></table></figure>
+<h4 id="4-3-10-4-开启bcid认证后注意事项"><a href="#4-3-10-4-开启bcid认证后注意事项" class="headerlink" title="4.3.10.4 开启bcid认证后注意事项"></a>4.3.10.4 开启bcid认证后注意事项</h4><p>（1）service check报错admin未配置或者不能为空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.检查resourcemanager下是否有/cmss/bch/bc1.3.5/hadoop/etc/hadoop/bdoc-password.txt，</div><div class="line">2.若无，拷贝namenode所在节点的文件到resoucemanager的目录/cmss/bch/bc1.3.5/hadoop/etc/hadoop/下，页面重启resourcemanager即可；</div><div class="line">3.若有，页面重启resourcemanager即可</div></pre></td></tr></table></figure>
+<h3 id="4-3-11-hadoop混合模式配置"><a href="#4-3-11-hadoop混合模式配置" class="headerlink" title="4.3.11  hadoop混合模式配置"></a>4.3.11  hadoop混合模式配置</h3><p>混合认证开启的前提：kerberos和bcid已经开启。</p>
+<p>混合认证配置属性如下：</p>
+<p>hadoop.security.authentication=compatible</p>
+<p>在hc页面删除如下服务的相关属性并重启：</p>
+<p>hdfs中的 dfs.datanode.kerberos.principal  和 dfs.datanode.keytab.file 并重启hdfs mapreduce</p>
+<p>yarn中的yarn.nodemanager.principal 和 yarn.nodemanager.keytab并重启yarn</p>
+<p>重启其他服务</p>
+<h3 id="4-3-12-agent心跳管理"><a href="#4-3-12-agent心跳管理" class="headerlink" title="4.3.12 agent心跳管理"></a>4.3.12 agent心跳管理</h3><p>agent心跳丢失默认不开启。文件/etc/ambari-server/conf/ambari.properties，涉及参数说明如下</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto.shutdown.datanode.if.lost.hearbeat</td>
+<td>false</td>
+</tr>
+<tr>
+<td>auto.shutdown.datanode.check.interval</td>
+<td>180000</td>
+</tr>
+<tr>
+<td>auto.shutdown.datanode.check.delay</td>
+<td>300000</td>
+</tr>
+</tbody>
+</table>
+<p>说明如下：</p>
+<p>(1)auto.shutdown.datanode.if.lost.hearbeat——-发现了丢失心跳的datanode，是否主动通知namenode下线DataNode，默认不开启此功能</p>
+<p>(2)auto.shutdown.datanode.check.interval——默认每3分钟检测一次，是否有丢失心跳的host以及该host上是否有DataNode.<br>(3)auto.shutdown.datanode.check.delay——测心跳丢失host信息的初始延迟时间，默认是web页面打开5分钟后开始检测。</p>
+<h3 id="4-3-13-server超时配置"><a href="#4-3-13-server超时配置" class="headerlink" title="4.3.13 server超时配置"></a>4.3.13 server超时配置</h3><p>页面超时配置：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user.inactivity.timeout.default</td>
+<td>1800</td>
+</tr>
+</tbody>
+</table>
+<p>单位秒，由于网络环境质量无法保证，故建议初始安装阶段可以延长改该值。</p>
+<h2 id="4-4-主机管理"><a href="#4-4-主机管理" class="headerlink" title="4.4 主机管理"></a>4.4 主机管理</h2><h3 id="4-4-1-主机增删"><a href="#4-4-1-主机增删" class="headerlink" title="4.4.1 主机增删"></a>4.4.1 主机增删</h3><p>注意：【在部署完集群后，HControl还可以在原来部署集群的基础上去添加和删除主机，以提高操作的灵活性。】  </p>
+<p>在首页点击Hosts，即可进入主机列表页面。</p>
+<p><strong>增加主机</strong></p>
+<p>若需要添加主机，则继续执行如下操作：  </p>
+<p>（1）点击左上角“操作”下拉框。<br>（2）选中“添加新主机”，此时会弹出导航框，弹框如下图所示：<br><img src="hcontrol_img/addnewhost.png" alt=""><br>（3）添加主机的操作步骤与部署时相似，参考HControl部署文档。<br><img src="hcontrol_img/newhostleader.png" alt=""> </p>
+<p><strong>删除主机</strong></p>
+<p>若需要在集群上删除一个主机，则继续执行如下操作：<br>（1）点击“主机”列表页中需要删除的主机名称，进入主机组件详情页；<br>（2）点击“主机操作”下拉框，选择“删除主机”，操作页面如下图；<br>（3）弹出框后点击“确认”，进入删除程序，根据提示完成删除操作。<br><img src="hcontrol_img/deletehost.png" alt=""></p>
+<h3 id="4-4-2-组件启停"><a href="#4-4-2-组件启停" class="headerlink" title="4.4.2 组件启停"></a>4.4.2 组件启停</h3><p>​        在首页选择菜单栏中“主机”，进入“主机”页面，选择需要操作的主机，点击进入。在主机页面，右侧主机操作中选择在“启动所有组件”或是“停止所有组件”。</p>
+<ol>
+<li>在首页点击Hosts，即可进入主机列表页面。  </li>
+<li>选中组件所在主机，并点击该主机名即可进入该主机的概览页面。  </li>
+<li>在主机概览页面左栏有改主机中所有的组件及状态。<br><strong>若想启动某个组件，则执行如下操作：</strong><br>（1）选中一个状态为stop的组件，并点击该组件的下拉框。<br>（2）在下拉框中选择start，弹出确认框后点击ok。<br>（3）等待1分钟左右即可实现该组件的启动，执行页面所示。<br><strong>若想停止某个组件，则执行如下操作：</strong><br>（1）选中一个状态为started的组件，并点击该组件的下拉框;<br>（2）在下拉框中选择stop，弹出确认框后点击”确认”；<br>（3）等待1分钟左右即可实现该组件的停止：</li>
+</ol>
+<h3 id="4-4-3-维护模式启停"><a href="#4-4-3-维护模式启停" class="headerlink" title="4.4.3 维护模式启停"></a>4.4.3 维护模式启停</h3><p>​        在首页选择菜单栏中“主机”，进入“主机”页面，选择需要操作的主机，点击进入。在主机页面，右侧主机操作中选择在“开启维护模式”或是“关闭维护模式”</p>
+<h3 id="4-4-4-机架设置"><a href="#4-4-4-机架设置" class="headerlink" title="4.4.4 机架设置"></a>4.4.4 机架设置</h3><p>​        在首页选择菜单栏中“主机”，进入“主机”页面，选择需要操作的主机，点击进入。在主机页面，右侧主机操作中选择在“设置机架”</p>
+<h3 id="4-4-5-主机删选"><a href="#4-4-5-主机删选" class="headerlink" title="4.4.5 主机删选"></a>4.4.5 主机删选</h3><p>注意：【在多主机集群当中主机筛选功能可以快速找到特定的主机。在筛选主机时可以通过主机的状态特性来查找，也可以通过主机的物理特性来定位，当主机存在多网卡的情况，主机列表当中所显示的IP地址为与hostname相应的第一个IP。】  </p>
+<p>1、在首页点击Hosts，即可进入主机列表页面。<br><strong>若想通过主机状态来筛选主机，则继续执行如下操作：</strong><br>(1)点击左上方Filter下拉框。<br>(2)在该下拉框中有Healthy、Master Down、Slave Down、Restart、Lost Heartbeat、Alert等状态，选中你想筛选的主机状态，其中Healthy表示运良好的主机，Master Down表示有Master挂掉的主机，Slave Down表示有Slave挂掉的主机，Restart表示可执行Restart的主机，Lost Heartbeat表示失去心跳的主机，Alert表示有警告的主机。<br>(3)在列表中将展现出你所想筛选的主机。<br><strong>若想通过主机的物理信息筛选主机，则继续执行如下操作：</strong><br>(1)在列表头部有一些筛选输入框，包括主机名、IP、Cores等信息，在这些输入框中输入你想筛选主机的物理特性，操作页面所示。<br>(2)在列表中将展现出你所想筛选的主机:</p>
+<h2 id="4-5-告警管理"><a href="#4-5-告警管理" class="headerlink" title="4.5 告警管理"></a>4.5 告警管理</h2><h3 id="4-5-1-告警组操作"><a href="#4-5-1-告警组操作" class="headerlink" title="4.5.1 告警组操作"></a>4.5.1 告警组操作</h3><p>​      选择操作“管理告警组”，进入“管理告警组”页面，可对告警组进行编辑。</p>
+<h3 id="4-5-2-告警组管理"><a href="#4-5-2-告警组管理" class="headerlink" title="4.5.2 告警组管理"></a>4.5.2 告警组管理</h3><p>​      选择下拉菜单中对应的组，可看到对应组件的告警定义、告警状态、告警最后修改时间以及告警的状态。</p>
+<h2 id="4-6-审计日志管理"><a href="#4-6-审计日志管理" class="headerlink" title="4.6 审计日志管理"></a>4.6 审计日志管理</h2><h3 id="4-6-1-hc-server审计日志"><a href="#4-6-1-hc-server审计日志" class="headerlink" title="4.6.1 hc-server审计日志"></a>4.6.1 hc-server审计日志</h3><p>​      修改ambari-server所在节点上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/etc/ambari-server/conf/ambari.properties中</div><div class="line">auditlog.enabled=true</div></pre></td></tr></table></figure>
+<p>​      重启ambari-server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ambari-server restart</div></pre></td></tr></table></figure>
+<h3 id="4-6-2-yarn审计日志"><a href="#4-6-2-yarn审计日志" class="headerlink" title="4.6.2 yarn审计日志"></a>4.6.2 yarn审计日志</h3><p>​       在首页点击左侧的服务YARN，选择配置，在“Advanced”下选择“高级yarn-log4j”，在文本框中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">rm.audit.logger=INFO,console,RMAUDIT</div><div class="line">log4j.logger.org.apache.hadoop.yarn.server.resourcemanager.RMAuditLogger=$&#123;rm.audit.logger&#125;</div><div class="line">log4j.additivity.org.apache.hadoop.yarn.server.resourcemanager.RMAuditLogger=false</div><div class="line">log4j.appender.RMAUDIT=org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.RMAUDIT.File=$&#123;hadoop.log.dir&#125;/rm-audit.log</div><div class="line">log4j.appender.RMAUDIT.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.RMAUDIT.layout.ConversionPattern=%d&#123;ISO8601&#125; %p %c&#123;2&#125;: %m%n</div><div class="line">log4j.appender.RMAUDIT.DatePattern=.yyyy-MM-dd</div><div class="line"></div><div class="line">nm.audit.logger=INFO,console,NMAUDIT</div><div class="line">log4j.logger.org.apache.hadoop.yarn.server.nodemanager.NMAuditLogger=$&#123;nm.audit.logger&#125;</div><div class="line">log4j.additivity.org.apache.hadoop.yarn.server.nodemanager.NMAuditLogger=false</div><div class="line">log4j.appender.NMAUDIT=org.apache.log4j.DailyRollingFileAppender</div><div class="line">log4j.appender.NMAUDIT.File=$&#123;hadoop.log.dir&#125;/nm-audit.log</div><div class="line">log4j.appender.NMAUDIT.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.NMAUDIT.layout.ConversionPattern=%d&#123;ISO8601&#125; %p %c&#123;2&#125;: %m%n</div><div class="line">log4j.appender.NMAUDIT.DatePattern=.yyyy-MM-dd</div></pre></td></tr></table></figure>
+<p>根据页面提示，重启yarn等服务</p>
+<h3 id="4-6-3-hive审计日志"><a href="#4-6-3-hive审计日志" class="headerlink" title="4.6.3 hive审计日志"></a>4.6.3 hive审计日志</h3><p>​       在首页点击左侧的服务Hive，选择配置，在“Advanced”下选择“高级hive-log4j”，在文本框中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">rm.audit.logger=INFO,console,RMAUDIT</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.parse.SemanticAnalyzer=INFO ,auditap</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.Driver=INFO ,auditap</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.exec.mr.ExecDriver=INFO ,auditap</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.exec.mr.MapRedTask=INFO ,auditap</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.exec.mr.MapredLocalTask=INFO ,auditap</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.exec.Task=INFO ,auditap</div><div class="line">log4j.logger.org.apache.hadoop.hive.ql.session.SessionState=INFO ,auditap</div><div class="line"></div><div class="line">log4j.logger.org.apache.hadoop.hive.metastore.HiveMetaStore.audit=INFO,auditap</div><div class="line">log4j.appender.auditap=org.apache.log4j.FileAppender</div><div class="line">log4j.appender.auditap.File=/var/log/cmss/hive/hive-audit.log</div><div class="line">log4j.appender.auditap.Append=false </div><div class="line">log4j.appender.auditap.layout=org.apache.log4j.PatternLayout</div><div class="line">log4j.appender.auditap.layout.ConversionPattern=[%d&#123;HH:mm:ss:SSS&#125;][%C-%M] -%m%n</div></pre></td></tr></table></figure>
+<p>根据页面提示，重启hive等服务。</p>
+<h2 id="4-7-其他说明"><a href="#4-7-其他说明" class="headerlink" title="4.7 其他说明"></a>4.7 其他说明</h2><h3 id="4-7-1-Ranger服务安装"><a href="#4-7-1-Ranger服务安装" class="headerlink" title="4.7.1 Ranger服务安装"></a>4.7.1 Ranger服务安装</h3><p>（1）ranger服务添加</p>
+<ul>
+<li><p>通过hc的”添加服务“添加ranger;（注意执行ambari-server setup –jdbc-db=mysql –jdbc-driver=/usr/share/java/mysql-connector-java.jar;ranger需要rangerdba用户通过密码访问ranger的数据库，请确认在安装时选择的数据库的节点上执行如下命令)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">CREATE USER &apos;rangerdba&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;rangerdba&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;rangerdba&apos;@&apos;localhost&apos;;</div><div class="line">CREATE USER &apos;rangerdba&apos;@&apos;%&apos; IDENTIFIED BY &apos;rangerdba&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;rangerdba&apos;@&apos;%&apos;;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;rangerdba&apos;@&apos;localhost&apos; WITH GRANT OPTION;</div><div class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;rangerdba&apos;@&apos;%&apos; WITH GRANT OPTION;</div><div class="line">FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
+</li>
+<li><p>完成服务添加（如出现rangerdba用户被数据库拒绝，请检查密码是否正确；如出现driver not in path,请先跳过，在ranger页面配置的Ranger-Admin-Properties中）修改SQL_CONNECTOR_JAR=真实路径，然后安装即可；</p>
+</li>
+</ul>
+<p>（2）ranger_hive_plugin使用</p>
+<p>修改hive如下属性</p>
+<ul>
+<li><p>Settings下Choose Authorization的认证方式为Ranger;</p>
+<p>在hiveserver2-site下，修改如下属性</p>
+<p>| 属性                                  | 属性值                                      |<br>| ———————————– | —————————————- |<br>| hive.security.authorization.enabled | true                                     |<br>| hive.security.authenticator.manager | org.apache.hadoop.hive.ql.security.SessionStateConfigUserAuthenticator |<br>| hive.security.authorization.manager | org.apache.ranger.authorization.hive.authorizer.RangerHiveAuthorizerFactory |</p>
+<p>在hive-site中修改如下属性：</p>
+<p>| 属性                                  | 属性值                                      |<br>| ———————————– | —————————————- |<br>| hive.security.authorization.enabled | true                                     |<br>| hive.server2.enable.doAs            | false                                    |<br>| hive.conf.restricted.list           | hive.security.authenticator.manager,hive.security.authorization.manager,hive.users.in.admin.role,hive.security.authorization.enabled |</p>
+</li>
+</ul>
+<p>​       重启hive</p>
+<p>（3）ranger_hdfs_plugin使用</p>
+<ul>
+<li>修改hdfs属性如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">勾选Enable Ranger for HDFS</div></pre></td></tr></table></figure>
+<p>备注：如需完成hadoop的ldap同步，请修改如下属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">修改hadoop.group.enable.ldap属性为true;</div><div class="line">修改hadoop.security.group.mapping.ldap.url属性为localhost为ldap_server所在主机地址--当启动ldap高可用时，请注意修改为虚拟ldap://ip:390</div><div class="line">重启hdfs</div></pre></td></tr></table></figure>
+<p>（4）ranger_hbase_plugin使用</p>
+<ul>
+<li>修改hbase属性如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">勾选Enable Ranger for HBASE</div></pre></td></tr></table></figure>
+<ul>
+<li>根据页面提示重启相关服务</li>
+</ul>
+<p>（5）ranger_kafka_plugin使用</p>
+<ul>
+<li>修改kafka属性如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">勾选Enable Ranger for KAFKA</div></pre></td></tr></table></figure>
+<ul>
+<li>根据页面提示重启相关服务</li>
+</ul>
+<p>（6）启动hive的ranger插件后，hive的service-check可能不过，原因是因为amabri-qa并没有被授权，解决方法如下：</p>
+<p>增加ambari-qa用户到并同步到ldap中，登录ranger:6080，点击策略授权（所有权限）即可。</p>
+<p>初始化ldap数据，初始化脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">dn: dc=hadoop,dc=apache,dc=org</div><div class="line">objectClass: top</div><div class="line">objectClass: domain</div><div class="line"></div><div class="line">dn: ou=users,dc=hadoop,dc=apache,dc=org</div><div class="line">objectClass: organizationalUnit</div><div class="line">objectClass: top</div><div class="line">ou: users</div><div class="line"></div><div class="line">dn: ou=groups,dc=hadoop,dc=apache,dc=org</div><div class="line">objectClass: organizationalUnit</div><div class="line">objectClass: top</div><div class="line">ou: groups</div><div class="line"></div><div class="line">dn: ou=orgs,dc=hadoop,dc=apache,dc=org</div><div class="line">objectClass: organizationalUnit</div><div class="line">objectClass: top</div><div class="line">ou: orgs</div><div class="line"></div><div class="line">dn: cn=ambari-qa,ou=users,dc=hadoop,dc=apache,dc=org</div><div class="line">objectClass: person</div><div class="line">objectClass: top</div><div class="line">cn: ambari-qa</div><div class="line">sn: ambari-qa</div><div class="line"></div><div class="line">dn: cn= hdfs,ou=groups,dc=hadoop,dc=apache,dc=org</div><div class="line">objectClass: groupofnames</div><div class="line">objectClass: top</div><div class="line">cn: hdfs</div><div class="line">member:cn=ambari-qa,ou=users,dc=hadoop,dc=apache,dc=org</div></pre></td></tr></table></figure>
+<p>（7）启动ldap高可用后，请注意修改如下服务的对应配置为ldap:virtual_ip:390</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>文件</th>
+<th>属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDFS</td>
+<td>高级 core-site</td>
+<td>hadoop.security.group.mapping.ldap.url</td>
+</tr>
+<tr>
+<td>Ranger</td>
+<td>LDAP Settings</td>
+<td>ranger.ldap.url</td>
+</tr>
+<tr>
+<td></td>
+<td>高级ranger-ugsync-site</td>
+<td>ranger.usersync.ldap.url</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-7-2-Ranger插件Test-Connection配置"><a href="#4-7-2-Ranger插件Test-Connection配置" class="headerlink" title="4.7.2 Ranger插件Test Connection配置"></a>4.7.2 Ranger插件Test Connection配置</h3><p>(1)ranger-hdfs-plugin</p>
+<p>当启动ha后，测试TestConnection需要在页面增加如下属性值的配置（属性值请从hc页面查看获取）</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dfs.ha.namenodes.</td>
+</tr>
+<tr>
+<td>dfs.namenode.rpc-address..nn1</td>
+</tr>
+<tr>
+<td>dfs.namenode.rpc-address..nn2</td>
+</tr>
+<tr>
+<td>dfs.nameservices</td>
+</tr>
+<tr>
+<td>dfs.client.failover.proxy.provider.</td>
+</tr>
+</tbody>
+</table>
+<p>其中nsid是指nameservice的id</p>
+<p>(2)ranger-hive-plugin</p>
+<p>当启动ha后，测试TestConnection需要在页面增加如下属性值的配置(属性值请从hc页面查看)</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>属性值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>jdbc.url</td>
+<td>jdbc:hive2://host1:2181,host2:2181,host3:2181/default;serviceDiscoveryMode=zookeeper;zooKeeperNamespace=hiveserver2</td>
+</tr>
+<tr>
+<td>hive.server2.zookeeper.namespace</td>
+<td>hiveserver2</td>
+</tr>
+<tr>
+<td>hive.metastore.uris</td>
+<td>thrift://host1:9083,thrift://host2:9083,thrift://host3:9083</td>
+</tr>
+<tr>
+<td>hive.zookeeper.quorum</td>
+<td>host1:2181,host2:2181,host3:2181</td>
+</tr>
+<tr>
+<td>hive.zookeeper.client.port</td>
+<td>2181</td>
+</tr>
+</tbody>
+</table>
+<p>说明：其中host1/host2/host3是指安装了zookeeper的主机名称。</p>
+<h3 id="4-7-3-Ldap日志配置"><a href="#4-7-3-Ldap日志配置" class="headerlink" title="4.7.3 Ldap日志配置"></a>4.7.3 Ldap日志配置</h3><p>CentOS上通过yum安装的ldap默认是日志不开启，如需开启，请参考如下配置：</p>
+<p>执行service rsyslog status或者service syslog status,查看是否拥有系统日志功能</p>
+<p>如果系统log是rsyslog，则修改/etc/rsyslog.conf 配置，增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">local4.* /var/log/ldap.log</div></pre></td></tr></table></figure>
+<p>如果系统log是syslog，则修改/etc/syslog.conf 配置，增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">local4.* /var/log/ldap.log</div></pre></td></tr></table></figure>
+<p>后台执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service rsyslog restart或者service syslog restart</div><div class="line">service slapd restart</div></pre></td></tr></table></figure>
+<p>在/var/log/ldap.log可看到日志。</p>
+<h3 id="4-7-4-RDB部署"><a href="#4-7-4-RDB部署" class="headerlink" title="4.7.4 RDB部署"></a>4.7.4 RDB部署</h3><p>选择3台机器，假设是host1/host2/host3部署rbd步骤如下：</p>
+<p>1.安装rdb在三台机器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install bcrdb socat percona-xtrabackup -y</div></pre></td></tr></table></figure>
+<p>2.修改配置/etc/bcrdb/my.cnf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">主要修改如下内容：</div><div class="line">各种内存参数根据服务器硬件配置进行调整，主要修改innodb_buffer_pool_size参数，单独RDB服务器可配置为服务器总内存的60%-80%。</div><div class="line">bind_address  监听IP。配置为服务器业务网IP。</div><div class="line">wsrep_node_address 心跳IP。配置为服务器心跳网地址，如不区分业务、心跳网，可以配置相同的IP，或注释掉该参数。</div><div class="line">wsrep_cluster_name 集群名。可以不修改，如果有多个集群，建议取不同的集群名。</div><div class="line">wsrep_node_name= node1 节点名。各节点必须取不同的节点名，比如node2、node3。</div><div class="line">wsrep_cluster_address= &quot;gcomm://10.133.17.171,10.133.17.107&quot;  指定除了本节点以外的其他节点的心跳网IP。</div><div class="line">log_bin_trust_function_creators = 1 参数加在wsrep_provider_options参数的下一行。（RANGER 元数据库使用该参数）</div></pre></td></tr></table></figure>
+<p>3.启动rdb。选择host1作为第一个节点，执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service bcrdbd bootstrap</div></pre></td></tr></table></figure>
+<p>host2/host3执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">service bcrdbd start</div></pre></td></tr></table></figure>
+<p>4.登录host1/host2/host3任一节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/usr/lib/bcrdb/bin/mysql -pbcrdb</div><div class="line"> </div><div class="line">验证rdb是否正确安装：</div><div class="line">show status like &apos;wsrep%&apos;;</div><div class="line">如果wsrep_cluster_size==说明OK</div></pre></td></tr></table></figure>
+<p>6.其他说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">bcrdb的目录说明  </div><div class="line">程序主目录             /usr/lib/bcrdb/</div><div class="line">数据目录                /var/lib/bcrdb/</div><div class="line">日志目录                /var/log/bcrdb/</div><div class="line">pid、socket目录     /var/run/bcrdb/</div><div class="line">配置文件目录         /etc/bcrdb/</div></pre></td></tr></table></figure>
+<h1 id="5如何获得帮助"><a href="#5如何获得帮助" class="headerlink" title="5如何获得帮助"></a>5如何获得帮助</h1><p>可访问HControl官方网站<a href="http://10.254.2.95/bdoc/index.html寻找解决办法，或联系相关运维人员取得帮助。" target="_blank" rel="external">http://10.254.2.95/bdoc/index.html寻找解决办法，或联系相关运维人员取得帮助。</a></p>
+<h1 id="6本软件系统售后服务的做法与原则"><a href="#6本软件系统售后服务的做法与原则" class="headerlink" title="6本软件系统售后服务的做法与原则"></a>6本软件系统售后服务的做法与原则</h1><p>本软件在使用过程中若存在问题或者疑问，可以联系相关运维人员。</p>
+<h1 id="7常见问题解答"><a href="#7常见问题解答" class="headerlink" title="7常见问题解答"></a>7常见问题解答</h1><ol>
+<li><p>未配置yum源，导致no packager错误；<br>解决方法：参考部署文档。</p>
+</li>
+<li><p>注册失败<br>解决办法：<br>（1）检查防火墙是否关闭；<br>（2）检查openssl版本是否大于等于30；<br>（3）检查主机名称是否正确；<br>（4）检查ambari-agent.ini是否配正确server的主机名称；<br>（5）重启agent。</p>
+</li>
+<li><p>主kerberos崩溃后，采用如下方法恢复：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">假设节点hostname为master  和 slave，现场环境master崩溃  </div><div class="line">1.修改页面krb5-conf 中admin_server=&#123;&#123;slave&#125;&#125; ，并刷新配置到每一个kdc client （在主机页面的client端后有该按钮） </div><div class="line">2.登陆slave节点，将/var/kerberos/krb5kdc/kpropd.acl  mv到其他任意目录，后执行service kadmin start;</div></pre></td></tr></table></figure>
+</li>
+<li><p>由于ranger默认使用数据库为mysql，不同版本的mysql在字段定义存在区别。如果使用mysql5.7系列，在安装ranger过程中会报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2017-04-21 17:08:21,556  [JISQL] /usr/jdk64/jdk1.7.0_67/bin/java -cp /usr/share/java/mysql-connector-java-5.1.17.jar:/cmss/bch/bc1.3.3/ranger/ranger-admin/jisql/lib/* org.apache.util.sql.Jisql -driver mysqlconj -cstring jdbc:mysql://docker1.cmss.com/ranger -u &apos;rangerdba&apos; -p &apos;********&apos; -noheader -trim -c \; -input /cmss/bch/bc1.3.3/ranger/ranger-admin/db/mysql/create_dbversion_catalog.sql</div><div class="line">Error executing: create table if not exists x_db_version_h  ( 	id				bigint not null auto_increment primary key, 	version   		varchar(64) not null, 	inst_at 	    timestamp not null default current_timestamp, 	inst_by 	    varchar(256) not null, 	updated_at      timestamp not null,     updated_by      varchar(256) not null, 	active          ENUM(&apos;Y&apos;, &apos;N&apos;) default &apos;Y&apos; ) ; </div><div class="line">com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Invalid default value for &apos;updated_at&apos;</div><div class="line">SQLException : SQL state: 42000 com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Invalid default value for &apos;updated_at&apos; ErrorCode: 1067</div><div class="line">2017-04-21 17:08:22,192  [E] create_dbversion_catalog.sql DB schema import failed!</div><div class="line">2017-04-21 17:08:22,204  [E] DB schema setup failed! Please contact Administrator</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>后台修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/cmss/bch/bc&#123;version&#125;/ranger/ranger-admin/db/mysql/create_dbversion_catalog.sql中</div><div class="line">updated_at      timestamp not null  default current_timestamp，即可</div></pre></td></tr></table></figure>
+<p>原因：5.7的时间戳需要设置默认值，已提官网patch。</p>
+<p>5.使用namenode的高可用之后，impala service check会出现“operation category read is not supported in state standby”,原因是因为impala的元数据中关于hdfs的配置并未修改，解决方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">（1）登录impala数据库所在节点的mysql或者rdb:mysql或者/usr/lib/bcrpd/bin/mysql</div><div class="line">（2）进入impala数据库：use impala;</div><div class="line">（3）修改元数据SDS中LOCATION，设置其hdfs地址为启动nn高可用之后的地址即可</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/18/storm安装/" rel="next" title="storm常见操作">
+                <i class="fa fa-chevron-left"></i> storm常见操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/13/CDH5安装/" rel="prev" title="CDH5安装">
+                CDH5安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg"
+               alt="姚昕" />
+          <p class="site-author-name" itemprop="name">姚昕</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cnblockchain/bigdata" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2960664564" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0-概述"><span class="nav-number">1.</span> <span class="nav-text">0 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-关于本手册"><span class="nav-number">2.</span> <span class="nav-text">1 关于本手册</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-系统运行环境与安装"><span class="nav-number">3.</span> <span class="nav-text">2 系统运行环境与安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-硬件环境"><span class="nav-number">3.1.</span> <span class="nav-text">2.1    硬件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-软件环境"><span class="nav-number">3.2.</span> <span class="nav-text">2.2    软件环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-软件的安装"><span class="nav-number">3.3.</span> <span class="nav-text">2.3    软件的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-yum源配置"><span class="nav-number">3.3.1.</span> <span class="nav-text">2.3.1 yum源配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-安装前准备"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.3.2 安装前准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-安装HControl"><span class="nav-number">3.3.3.</span> <span class="nav-text">2.3.3 安装HControl</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4软件的卸载"><span class="nav-number">3.4.</span> <span class="nav-text">2.4软件的卸载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-系统功能介绍"><span class="nav-number">4.</span> <span class="nav-text">3 系统功能介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-管理员用户"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 管理员用户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-用户管理"><span class="nav-number">4.1.1.</span> <span class="nav-text">3.1 用户管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-仪表盘管理"><span class="nav-number">4.1.2.</span> <span class="nav-text">3.2 仪表盘管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-服务管理"><span class="nav-number">4.1.3.</span> <span class="nav-text">3.3 服务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-主机管理"><span class="nav-number">4.1.4.</span> <span class="nav-text">3.4 主机管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-告警管理"><span class="nav-number">4.1.5.</span> <span class="nav-text">3.5 告警管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-审计日志管理"><span class="nav-number">4.1.6.</span> <span class="nav-text">3.6 审计日志管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-普通用户"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 普通用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-特殊用户"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 特殊用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-运维工作者"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 运维工作者</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-操作指南"><span class="nav-number">5.</span> <span class="nav-text">4 操作指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-用户管理"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 用户管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-仪表盘管理"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 仪表盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-指标管理"><span class="nav-number">5.2.1.</span> <span class="nav-text">4.2.1 指标管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-1-查看历史指标信息"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">4.2.1.1 查看历史指标信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-热力图"><span class="nav-number">5.2.2.</span> <span class="nav-text">4.2.2 热力图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-配置历史"><span class="nav-number">5.2.3.</span> <span class="nav-text">4.2.3 配置历史</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-服务管理"><span class="nav-number">5.3.</span> <span class="nav-text">4.3 服务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-服务增删"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1 服务增删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-服务启停"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2 服务启停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-3-服务检测"><span class="nav-number">5.3.3.</span> <span class="nav-text">4.3.3 服务检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-4-下载客户端配置"><span class="nav-number">5.3.4.</span> <span class="nav-text">4.3.4 下载客户端配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-5-维修模式启停"><span class="nav-number">5.3.5.</span> <span class="nav-text">4.3.5 维修模式启停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-6-配置修改"><span class="nav-number">5.3.6.</span> <span class="nav-text">4.3.6 配置修改</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-7-快速链接"><span class="nav-number">5.3.7.</span> <span class="nav-text">4.3.7 快速链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-8-高可用管理"><span class="nav-number">5.3.8.</span> <span class="nav-text">4.3.8 高可用管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-1-HDFS和YARN高可用"><span class="nav-number">5.3.8.1.</span> <span class="nav-text">4.3.8.1 HDFS和YARN高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-2-Hive高可用"><span class="nav-number">5.3.8.2.</span> <span class="nav-text">4.3.8.2 Hive高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-3-LDAP高可用"><span class="nav-number">5.3.8.3.</span> <span class="nav-text">4.3.8.3 LDAP高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-4-MR-HistoryServer高可用"><span class="nav-number">5.3.8.4.</span> <span class="nav-text">4.3.8.4 MR HistoryServer高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-5-Ranger高可用"><span class="nav-number">5.3.8.5.</span> <span class="nav-text">4.3.8.5 Ranger高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-6-Haproxy高可用"><span class="nav-number">5.3.8.6.</span> <span class="nav-text">4.3.8.6 Haproxy高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-7-Kerberos高可用"><span class="nav-number">5.3.8.7.</span> <span class="nav-text">4.3.8.7 Kerberos高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-8-Slider高可用"><span class="nav-number">5.3.8.8.</span> <span class="nav-text">4.3.8.8 Slider高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-9-NTP高可用"><span class="nav-number">5.3.8.9.</span> <span class="nav-text">4.3.8.9 NTP高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-10-Storm高可用"><span class="nav-number">5.3.8.10.</span> <span class="nav-text">4.3.8.10 Storm高可用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-8-11-数据库高可用"><span class="nav-number">5.3.8.11.</span> <span class="nav-text">4.3.8.11 数据库高可用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-9-kerberos启停"><span class="nav-number">5.3.9.</span> <span class="nav-text">4.3.9 kerberos启停</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-9-1-开启kerberos后注意事项"><span class="nav-number">5.3.9.1.</span> <span class="nav-text">4.3.9.1 开启kerberos后注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-10-bcid配置"><span class="nav-number">5.3.10.</span> <span class="nav-text">4.3.10 bcid配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-10-1-hadoop的bcid认证开启配置"><span class="nav-number">5.3.10.1.</span> <span class="nav-text">4.3.10.1 hadoop的bcid认证开启配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-10-2-hive的bcid认证开启配置"><span class="nav-number">5.3.10.2.</span> <span class="nav-text">4.3.10.2 hive的bcid认证开启配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-10-3-spark-thrift-server配置bcid"><span class="nav-number">5.3.10.3.</span> <span class="nav-text">4.3.10.3 spark thrift server配置bcid</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-10-4-开启bcid认证后注意事项"><span class="nav-number">5.3.10.4.</span> <span class="nav-text">4.3.10.4 开启bcid认证后注意事项</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-11-hadoop混合模式配置"><span class="nav-number">5.3.11.</span> <span class="nav-text">4.3.11  hadoop混合模式配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-12-agent心跳管理"><span class="nav-number">5.3.12.</span> <span class="nav-text">4.3.12 agent心跳管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-13-server超时配置"><span class="nav-number">5.3.13.</span> <span class="nav-text">4.3.13 server超时配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-主机管理"><span class="nav-number">5.4.</span> <span class="nav-text">4.4 主机管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-1-主机增删"><span class="nav-number">5.4.1.</span> <span class="nav-text">4.4.1 主机增删</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-2-组件启停"><span class="nav-number">5.4.2.</span> <span class="nav-text">4.4.2 组件启停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-3-维护模式启停"><span class="nav-number">5.4.3.</span> <span class="nav-text">4.4.3 维护模式启停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-4-机架设置"><span class="nav-number">5.4.4.</span> <span class="nav-text">4.4.4 机架设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-5-主机删选"><span class="nav-number">5.4.5.</span> <span class="nav-text">4.4.5 主机删选</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-告警管理"><span class="nav-number">5.5.</span> <span class="nav-text">4.5 告警管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-1-告警组操作"><span class="nav-number">5.5.1.</span> <span class="nav-text">4.5.1 告警组操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-2-告警组管理"><span class="nav-number">5.5.2.</span> <span class="nav-text">4.5.2 告警组管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-审计日志管理"><span class="nav-number">5.6.</span> <span class="nav-text">4.6 审计日志管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-1-hc-server审计日志"><span class="nav-number">5.6.1.</span> <span class="nav-text">4.6.1 hc-server审计日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-2-yarn审计日志"><span class="nav-number">5.6.2.</span> <span class="nav-text">4.6.2 yarn审计日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-3-hive审计日志"><span class="nav-number">5.6.3.</span> <span class="nav-text">4.6.3 hive审计日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-其他说明"><span class="nav-number">5.7.</span> <span class="nav-text">4.7 其他说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-1-Ranger服务安装"><span class="nav-number">5.7.1.</span> <span class="nav-text">4.7.1 Ranger服务安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-2-Ranger插件Test-Connection配置"><span class="nav-number">5.7.2.</span> <span class="nav-text">4.7.2 Ranger插件Test Connection配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-3-Ldap日志配置"><span class="nav-number">5.7.3.</span> <span class="nav-text">4.7.3 Ldap日志配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-4-RDB部署"><span class="nav-number">5.7.4.</span> <span class="nav-text">4.7.4 RDB部署</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5如何获得帮助"><span class="nav-number">6.</span> <span class="nav-text">5如何获得帮助</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6本软件系统售后服务的做法与原则"><span class="nav-number">7.</span> <span class="nav-text">6本软件系统售后服务的做法与原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7常见问题解答"><span class="nav-number">8.</span> <span class="nav-text">7常见问题解答</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">姚昕</span>  
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
