@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="n7cP0Ev7dCSQxFCLmu3ZM5WcdRxwl8lTNzodZ4rkuQg" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="dj60UPGgkl" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="kerberos,security," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="什么是kerberos“Kerberos 服务”是一种客户机/服务器体系结构，用于在网络上提供安全事务。该服务可提供功能强大的用户验证以及完整性和保密性。通过验证，可保证网络事务的发送者和接收者的身份真实。该服务还可以检验来回传递的数据的有效性（完整性），并在传输过程中对数据进行加密（保密性）。使用 Kerberos 服务，可以安全登录到其他计算机、执行命令、交换数据以及传输文件。此外，该服务还提">
+<meta name="keywords" content="kerberos,security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kerberos服务">
+<meta property="og:url" content="http://bigclouder.net/2017/11/07/Kerberos服务/index.html">
+<meta property="og:site_name" content="BigData">
+<meta property="og:description" content="什么是kerberos“Kerberos 服务”是一种客户机/服务器体系结构，用于在网络上提供安全事务。该服务可提供功能强大的用户验证以及完整性和保密性。通过验证，可保证网络事务的发送者和接收者的身份真实。该服务还可以检验来回传递的数据的有效性（完整性），并在传输过程中对数据进行加密（保密性）。使用 Kerberos 服务，可以安全登录到其他计算机、执行命令、交换数据以及传输文件。此外，该服务还提">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/8326cffc1e178a820b22021efe03738da977e876.jpg.png">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/SimpKerbExch1.png">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/SimpKerbExch2.png">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/Realms1.png">
+<meta property="og:image" content="http://ouh6z710l.bkt.clouddn.com/Realms2.png">
+<meta property="og:updated_time" content="2017-11-08T01:39:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kerberos服务">
+<meta name="twitter:description" content="什么是kerberos“Kerberos 服务”是一种客户机/服务器体系结构，用于在网络上提供安全事务。该服务可提供功能强大的用户验证以及完整性和保密性。通过验证，可保证网络事务的发送者和接收者的身份真实。该服务还可以检验来回传递的数据的有效性（完整性），并在传输过程中对数据进行加密（保密性）。使用 Kerberos 服务，可以安全登录到其他计算机、执行命令、交换数据以及传输文件。此外，该服务还提">
+<meta name="twitter:image" content="http://ouh6z710l.bkt.clouddn.com/8326cffc1e178a820b22021efe03738da977e876.jpg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bigclouder.net/2017/11/07/Kerberos服务/"/>
+
+
+
+
+
+  <title>Kerberos服务 | BigData</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?true";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">BigData</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专注于数据库、大数据技术</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/11/07/Kerberos服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kerberos服务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T14:08:35+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kerberos/" itemprop="url" rel="index">
+                    <span itemprop="name">kerberos</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是kerberos"><a href="#什么是kerberos" class="headerlink" title="什么是kerberos"></a>什么是kerberos</h1><p><img src="http://ouh6z710l.bkt.clouddn.com/8326cffc1e178a820b22021efe03738da977e876.jpg.png" alt=""><br>“Kerberos 服务”是一种客户机/服务器体系结构，用于在网络上提供安全事务。该服务可提供功能强大的用户验证以及完整性和保密性。通过验证，可保证网络事务的发送者和接收者的身份真实。该服务还可以检验来回传递的数据的有效性（完整性），并在传输过程中对数据进行加密（保密性）。使用 Kerberos 服务，可以安全登录到其他计算机、执行命令、交换数据以及传输文件。此外，该服务还提供授权服务，这样，管理员便可限制对服务和计算机的访问。而且，作为 Kerberos 用户，您还可以控制其他用户对您帐户的访问。<br>Kerberos 服务是单点登录系统，这意味着您对于每个会话只需要向服务进行一次自我验证，即可自动保护该会话过程中所有后续事务的安全。服务对您进行验证后，便无需在每次使用基于 Kerberos 的命令（如 ftp 或 rsh）或访问 NFS 文件系统上数据时都进行自我验证。因此，无需在每次使用这些服务时都在网络上发送口令（口令在网络上可能会被拦截）。<br><a id="more"></a></p>
+<h1 id="Kerberos-服务的工作原理"><a href="#Kerberos-服务的工作原理" class="headerlink" title="Kerberos 服务的工作原理"></a>Kerberos 服务的工作原理</h1><p>Kerberos 系统的工作围绕票证的概念展开。票证(tickets)是一组标识用户或服务（如 NFS 服务）的电子信息。正如您的驾驶证可标识您的身份并表明您的驾驶级别一样，票证也可标识您的身份以及您的网络访问特权。执行基于 Kerberos 的事务时（例如，远程登录到另一台计算机），您将透明地向密钥分发中心 (Key Distribution Center, KDC) 发送票证请求。KDC 将访问数据库以验证您的身份，然后返回授予您访问其他计算机的权限的票证。“透明”意味着您无需显式请求票证。请求是在执行 rlogin 命令过程中进行的。因为只有通过验证的客户机可以获取特定服务的票证，所以其他客户机不能以虚假身份使用 rlogin。<br>具体过程如下：</p>
+<h2 id="初始验证：票证授予票证"><a href="#初始验证：票证授予票证" class="headerlink" title="初始验证：票证授予票证"></a>初始验证：票证授予票证</h2><p>Kerberos 验证分为两个阶段：允许进行后续验证的初始验证以及所有后续验证自身。</p>
+<p>下图显示了如何进行初始验证。<br><img src="http://ouh6z710l.bkt.clouddn.com/SimpKerbExch1.png" alt=""></p>
+<ol>
+<li>客户机（用户或 NFS 等服务）通过从密钥分发中心 (Key Distribution Center, KDC) 请求票证授予票证 (ticket-granting ticket, TGT 后面简称票据) 开始 Kerberos 会话。此请求通常在登录时自动完成。  </li>
+<li>要获取特定服务的其他票证，需要票据。票据类似于护照。与护照一样，票据可标识您的身份并允许您获取多个“签证”，此处的“签证”（票证）不是用于外国，而是用于远程计算机或网络服务。与护照和签证一样，票据和其他各种票证具有有限的生命周期。区别在于基于 Kerberos 的命令会通知您拥有护照并为您取得签证。您不必亲自执行该事务。  </li>
+<li>与票据类似的另一种情况是可以在四个不同的滑雪场使用的三天滑雪入场卷。只要入场券未过期，您就可以在决定要去的任意一个滑雪场出示入场卷，并获取该滑雪场提供的缆车票。获取缆车票后，即可在该滑雪场随意滑雪。如果第二天去另一个滑雪场，您需要再次出示入场卷，并获取新滑雪场的另一张缆车票。区别在于基于 Kerberos 的命令会通知您拥有周末滑雪入场卷，并会为您取得缆车票。因此，您不必亲自执行该事务。  </li>
+<li>KDC 可创建票据，并采用加密形式将其发送回客户机。客户机使用其口令来解密票据。  </li>
+<li>拥有有效的票据后，只要该票据未过期，客户机便可以请求所有类型的网络操作（如 rlogin 或 telnet）的票证。此票证的有效期通常为几个小时。每次客户机执行唯一的网络操作时，都将从 KDC 请求该操作的票证。  </li>
+</ol>
+<h2 id="后续-Kerberos-验证"><a href="#后续-Kerberos-验证" class="headerlink" title="后续 Kerberos 验证"></a>后续 Kerberos 验证</h2><p>客户机收到初始验证后，每个后续验证都按下图所示的模式进行<br><img src="http://ouh6z710l.bkt.clouddn.com/SimpKerbExch2.png" alt="">  </p>
+<ol>
+<li><p>客户机通过向 KDC 发送票据作为其身份证明，从 KDC 请求特定服务（例如，远程登录到另一台计算机）的票证。</p>
+</li>
+<li><p>KDC 将该特定服务的票证发送到客户机。  例如，假设用户 joe 要访问已通过要求的 krb5 验证共享的 NFS 文件系统。由于该用户已经通过了验证（即，该用户已经拥有票据），因此当其尝试访问文件时，NFS 客户机系统将自动透明地从 KDC 获取 NFS 服务的票证。</p>
+</li>
+<li><p>客户机将票证发送到服务器。<br>使用 NFS 服务时，NFS 客户机会自动透明地将 NFS 服务的票证发送到 NFS 服务器。</p>
+</li>
+<li><p>服务器允许此客户机进行访问。</p>
+</li>
+</ol>
+<h1 id="Kerberos-主体"><a href="#Kerberos-主体" class="headerlink" title="Kerberos 主体"></a>Kerberos 主体</h1><p>Kerberos 服务中的客户机由其主体标识。主体是 KDC 可以为其分配票证的唯一标识。主体可以是用户（如 joe）或服务（如 nfs 或 telnet）。</p>
+<p>根据约定，主体名称分为三个部分：主名称、实例和领域。例如，典型的 Kerberos 主体可以是<br><code>joe/admin@ENG.EXAMPLE.COM</code><br>在此示例中：joe 是主名称。主名称可以是用户名（如此处所示）或服务（如 nfs）。主名称还可以是单词 host，这表示此主体是设置用于提供各种网络服务（如 ftp、rcp 和 rlogin 等）的服务主体。</p>
+<p>admin 是实例。对于用户主体，实例是可选的；但对于服务主体，实例则是必需的。例如，如果用户 joe 有时充当系统管理员，则他可以使用 joe/admin 将其自身与其平时的用户身份区分开来。同样，如果 joe 在两台不同的主机上拥有帐户，则他可以使用两个具有不同实例的主体名称，例如 joe/denver.example.com 和 joe/boston.example.com。请注意，Kerberos 服务会将 joe 和 joe/admin 视为两个完全不同的主体。</p>
+<p>对于服务主体，实例是全限定主机名。例如，bigmachine.eng.example.com 就是这种实例。此示例的主名称/实例可以为 ftp/bigmachine.eng.example.com 或 host/bigmachine.eng.example.com。</p>
+<p>ENG.EXAMPLE.COM 是 Kerberos 领域。领域将在Kerberos 领域中介绍。</p>
+<p>以下都是有效的主体名称：</p>
+<ul>
+<li>joe</li>
+<li>joe/admin</li>
+<li>joe/admin@ENG.EXAMPLE.COM</li>
+<li>nfs/host.eng.example.com@ENG.EXAMPLE.COM</li>
+<li>host/eng.example.com@ENG.EXAMPLE.COM</li>
+</ul>
+<p>#<br>链接到 oracle.com    Oracle Solaris 管理：安全服务     Oracle Solaris 11 Information Library (简体中文)<br> Oracle 技术网  文档库 PDF  打印视图  反馈<br>search filter icon<br>搜索<br> search icon<br>文档信息<br>前言<br>第 1 部分安全性概述</p>
+<ol>
+<li>安全性服务（概述）<br>第 2 部分系统、文件和设备安全性</li>
+<li>管理计算机安全性（概述）</li>
+<li>控制对系统的访问（任务）</li>
+<li>病毒扫描服务（任务）</li>
+<li>控制对设备的访问（任务）</li>
+<li>使用基本审计报告工具（任务）</li>
+<li>控制对文件的访问（任务）<br>第 3 部分角色、权限配置文件和特权</li>
+<li>使用角色和特权（概述）</li>
+<li>使用基于角色的访问控制（任务）</li>
+<li>Oracle Solaris 中的安全属性（参考）<br>第 4 部分加密服务</li>
+<li>加密框架（概述）</li>
+<li>加密框架（任务）</li>
+<li>密钥管理框架<br>第 5 部分验证服务和安全通信</li>
+<li>网络服务验证（任务）</li>
+<li>使用 PAM</li>
+<li>使用 SASL</li>
+<li>使用 安全 Shell（任务）</li>
+<li>安全 Shell（参考）<br>第 6 部分Kerberos 服务</li>
+<li>Kerberos 服务介绍<br>什么是 Kerberos 服务？<br>Kerberos 服务的工作原理<br>初始验证：票证授予票证<br>后续 Kerberos 验证<br>Kerberos 远程应用程序<br>Kerberos 主体<br>Kerberos 领域<br>Kerberos 服务器<br>Kerberos 安全服务<br>各种 Kerberos 发行版的组件<br>Kerberos 组件<br>关于 Oracle Solaris 11 发行版中的 Kerberos</li>
+<li>规划 Kerberos 服务</li>
+<li>配置 Kerberos 服务（任务）</li>
+<li>Kerberos 错误消息和故障排除</li>
+<li>管理 Kerberos 主体和策略（任务）</li>
+<li>使用 Kerberos 应用程序（任务）</li>
+<li>Kerberos 服务（参考）<br>第 7 部分在 Oracle Solaris 中审计</li>
+<li>审计（概述）</li>
+<li>规划审计</li>
+<li>管理审计（任务）</li>
+<li>审计（参考）<br>词汇表<br>索引<br>Kerberos 服务的工作原理</li>
+</ol>
+<p>下面概述了 Kerberos 验证系统。有关更详细的说明，请参见Kerberos 验证系统的工作原理。</p>
+<p>从用户的角度来看，启动 Kerberos 会话后，Kerberos 服务通常不可见。一些命令（如 rsh 或 ftp）也是如此。初始化 Kerberos 会话通常仅包括登录和提供 Kerberos 口令。</p>
+<p>Kerberos 系统的工作围绕票证的概念展开。票证是一组标识用户或服务（如 NFS 服务）的电子信息。正如您的驾驶证可标识您的身份并表明您的驾驶级别一样，票证也可标识您的身份以及您的网络访问特权。执行基于 Kerberos 的事务时（例如，远程登录到另一台计算机），您将透明地向密钥分发中心 (Key Distribution Center, KDC) 发送票证请求。KDC 将访问数据库以验证您的身份，然后返回授予您访问其他计算机的权限的票证。“透明”意味着您无需显式请求票证。请求是在执行 rlogin 命令过程中进行的。因为只有通过验证的客户机可以获取特定服务的票证，所以其他客户机不能以虚假身份使用 rlogin。</p>
+<p>票证具有与之关联的特定属性。例如，票证可以是可转发的，这意味着它可以在其他计算机上使用，而不必进行新的验证。票证也可以是以后生效的，这意味着它要到指定时间后才会生效。票证的使用方式（例如，如何指定允许哪些用户获取哪些类型的票证）由策略设置。策略在安装或管理 Kerberos 服务时确定。</p>
+<p>注 - 您可能会经常看到术语凭证和票证。在更为广泛的 Kerberos 范围内，两者通常可互换使用。但是，从技术上讲，凭证指的是票证和会话的会话密钥。使用 Kerberos 获取服务访问权限中对此区别进行了更详细的说明。</p>
+<p>以下各节将进一步说明 Kerberos 验证过程。</p>
+<p>初始验证：票证授予票证<br>Kerberos 验证分为两个阶段：允许进行后续验证的初始验证以及所有后续验证自身。</p>
+<p>下图显示了如何进行初始验证。</p>
+<p>图 19-1 Kerberos 会话的初始验证</p>
+<p>image:流程图显示了客户机从 KDC 请求 TGT，然后对 KDC 返回到客户机的 TGT 进行解密。<br>客户机（用户或 NFS 等服务）通过从密钥分发中心 (Key Distribution Center, KDC) 请求票证授予票证 (ticket-granting ticket, TGT) 开始 Kerberos 会话。此请求通常在登录时自动完成。</p>
+<p>要获取特定服务的其他票证，需要票证授予票证。票证授予票证类似于护照。与护照一样，票证授予票证可标识您的身份并允许您获取多个“签证”，此处的“签证”（票证）不是用于外国，而是用于远程计算机或网络服务。与护照和签证一样，票证授予票证和其他各种票证具有有限的生命周期。区别在于基于 Kerberos 的命令会通知您拥有护照并为您取得签证。您不必亲自执行该事务。</p>
+<p>与票证授予票证类似的另一种情况是可以在四个不同的滑雪场使用的三天滑雪入场卷。只要入场券未过期，您就可以在决定要去的任意一个滑雪场出示入场卷，并获取该滑雪场提供的缆车票。获取缆车票后，即可在该滑雪场随意滑雪。如果第二天去另一个滑雪场，您需要再次出示入场卷，并获取新滑雪场的另一张缆车票。区别在于基于 Kerberos 的命令会通知您拥有周末滑雪入场卷，并会为您取得缆车票。因此，您不必亲自执行该事务。</p>
+<p>KDC 可创建票证授予票证，并采用加密形式将其发送回客户机。客户机使用其口令来解密票证授予票证。</p>
+<p>拥有有效的票证授予票证后，只要该票证授予票证未过期，客户机便可以请求所有类型的网络操作（如 rlogin 或 telnet）的票证。此票证的有效期通常为几个小时。每次客户机执行唯一的网络操作时，都将从 KDC 请求该操作的票证。</p>
+<p>后续 Kerberos 验证<br>客户机收到初始验证后，每个后续验证都按下图所示的模式进行。</p>
+<p>图 19-2 使用 Kerberos 验证获取对服务的访问权</p>
+<p>image:流程图显示了客户机使用 TGT 从 KDC 请求票证，然后使用返回的票证访问服务器。<br>客户机通过向 KDC 发送其票证授予票证作为其身份证明，从 KDC 请求特定服务（例如，远程登录到另一台计算机）的票证。</p>
+<p>KDC 将该特定服务的票证发送到客户机。</p>
+<p>例如，假设用户 joe 要访问已通过要求的 krb5 验证共享的 NFS 文件系统。由于该用户已经通过了验证（即，该用户已经拥有票证授予票证），因此当其尝试访问文件时，NFS 客户机系统将自动透明地从 KDC 获取 NFS 服务的票证。</p>
+<p>例如，假设用户 joe 在服务器 boston 上使用 rlogin。由于该用户已经通过了验证（即，该用户已经拥有票证授予票证），所以在运行 rlogin 命令时，该用户将自动透明地获取票证。该用户使用此票证可随时远程登录到 boston，直到票证到期为止。如果 joe 要远程登录到计算机 denver，则需要按照步骤 1 获取另一个票证。</p>
+<p>客户机将票证发送到服务器。</p>
+<p>使用 NFS 服务时，NFS 客户机会自动透明地将 NFS 服务的票证发送到 NFS 服务器。</p>
+<p>服务器允许此客户机进行访问。</p>
+<p>从这些步骤来看，服务器似乎并未与 KDC 通信。但服务器实际上与 KDC 进行了通信，并向 KDC 注册了其自身，正如第一台客户机所执行的操作。为简单起见，该部分已省略。</p>
+<p>Kerberos 远程应用程序<br>用户（如 joe）可以使用的基于 Kerberos 的（即 “Kerberized”）命令包括：</p>
+<p>ftp</p>
+<p>rcp</p>
+<p>rlogin</p>
+<p>rsh</p>
+<p>ssh</p>
+<p>telnet</p>
+<p>这些应用程序与同名的 Solaris 应用程序相同。但是，它们已扩展为使用 Kerberos 主体来验证事务，因此会提供基于 Kerberos 的安全性。有关主体的信息，请参见Kerberos 主体。</p>
+<p>Kerberos 用户命令中将进一步介绍这些命令。</p>
+<p>Kerberos 主体<br>Kerberos 服务中的客户机由其主体标识。主体是 KDC 可以为其分配票证的唯一标识。主体可以是用户（如 joe）或服务（如 nfs 或 telnet）。</p>
+<p>根据约定，主体名称分为三个部分：主名称、实例和领域。例如，典型的 Kerberos 主体可以是 joe/admin@ENG.EXAMPLE.COM。在此示例中：</p>
+<p>joe 是主名称。主名称可以是用户名（如此处所示）或服务（如 nfs）。主名称还可以是单词 host，这表示此主体是设置用于提供各种网络服务（如 ftp、rcp 和 rlogin 等）的服务主体。</p>
+<p>admin 是实例。对于用户主体，实例是可选的；但对于服务主体，实例则是必需的。例如，如果用户 joe 有时充当系统管理员，则他可以使用 joe/admin 将其自身与其平时的用户身份区分开来。同样，如果 joe 在两台不同的主机上拥有帐户，则他可以使用两个具有不同实例的主体名称，例如 joe/denver.example.com 和 joe/boston.example.com。请注意，Kerberos 服务会将 joe 和 joe/admin 视为两个完全不同的主体。</p>
+<p>对于服务主体，实例是全限定主机名。例如，bigmachine.eng.example.com 就是这种实例。此示例的主名称/实例可以为 ftp/bigmachine.eng.example.com 或 host/bigmachine.eng.example.com。</p>
+<p>ENG.EXAMPLE.COM 是 Kerberos 领域。领域将在Kerberos 领域中介绍。</p>
+<p>以下都是有效的主体名称：</p>
+<p>joe</p>
+<p>joe/admin</p>
+<p>joe/admin@ENG.EXAMPLE.COM</p>
+<p>nfs/host.eng.example.com@ENG.EXAMPLE.COM</p>
+<p>host/eng.example.com@ENG.EXAMPLE.COM</p>
+<h1 id="Kerberos-领域"><a href="#Kerberos-领域" class="headerlink" title="Kerberos 领域"></a>Kerberos 领域</h1><p>领域是定义属于同一主 KDC 的一组系统的逻辑网络，类似于域。下图显示了各领域相互之间的关系。有些领域是层次化的，其中，一个领域是另一个领域的超集。另外一些领域是非层次化（或“直接”）的，必须定义两个领域之间的映射。Kerberos 服务的一种功能是它允许进行跨领域验证。每个领域只需在其 KDC 中有对应于另一个领域的主体项即可。此 Kerberos 功能称为跨领域验证。<br><img src="http://ouh6z710l.bkt.clouddn.com/Realms1.png" alt=""></p>
+<h1 id="Kerberos-服务器"><a href="#Kerberos-服务器" class="headerlink" title="Kerberos 服务器"></a>Kerberos 服务器</h1><p>每个领域都必须包括一台用于维护主体数据库主副本的服务器。此服务器称为主 KDC 服务器。此外，每个领域还应至少包含一台从 KDC 服务器，该服务器包含主体数据库的多个副本。主 KDC 服务器和从 KDC 服务器都可创建用于建立验证的票证。<br>下图显示了一个假设的领域可能包含的内容。<br><img src="http://ouh6z710l.bkt.clouddn.com/Realms2.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/kerberos/" rel="tag"># kerberos</a>
+          
+            <a href="/tags/security/" rel="tag"># security</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/25/hdfs-读取数据流程/" rel="next" title="hdfs 读取数据流程">
+                <i class="fa fa-chevron-left"></i> hdfs 读取数据流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/08/kerberos安装/" rel="prev" title="kerberos安装">
+                kerberos安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg"
+               alt="姚昕" />
+          <p class="site-author-name" itemprop="name">姚昕</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/cnblockchain/bigdata" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2960664564" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是kerberos"><span class="nav-number">1.</span> <span class="nav-text">什么是kerberos</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos-服务的工作原理"><span class="nav-number">2.</span> <span class="nav-text">Kerberos 服务的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始验证：票证授予票证"><span class="nav-number">2.1.</span> <span class="nav-text">初始验证：票证授予票证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后续-Kerberos-验证"><span class="nav-number">2.2.</span> <span class="nav-text">后续 Kerberos 验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos-主体"><span class="nav-number">3.</span> <span class="nav-text">Kerberos 主体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos-领域"><span class="nav-number">4.</span> <span class="nav-text">Kerberos 领域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kerberos-服务器"><span class="nav-number">5.</span> <span class="nav-text">Kerberos 服务器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">姚昕</span>  
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

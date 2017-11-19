@@ -312,6 +312,573 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/11/18/Oracle-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/18/Oracle-install/" itemprop="url">Oracle install</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-18T14:06:42+08:00">
+                2017-11-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Database/" itemprop="url" rel="index">
+                    <span itemprop="name">Database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="操作系统配置"><a href="#操作系统配置" class="headerlink" title="操作系统配置"></a>操作系统配置</h1><h2 id="配置网路"><a href="#配置网路" class="headerlink" title="配置网路"></a>配置网路</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/sysconfig/network-scriptsvi ifcfg-eth0</div><div class="line">```修改onboot=no  ===&gt; yes，其他保持不变  </div><div class="line">![](http://ouh6z710l.bkt.clouddn.com/WX20171118-141622@2x.png)</div><div class="line">重新启动linux网络  </div><div class="line">``` bash</div><div class="line">service network restart</div><div class="line">```  </div><div class="line">ip addr 查询到ip地址![](http://ouh6z710l.bkt.clouddn.com/WX20171118-141521@2x.png)</div><div class="line">检查网络是否连通</div><div class="line">![](http://ouh6z710l.bkt.clouddn.com/WX20171118-142542@2x.png)</div><div class="line">&lt;!-- more --&gt;</div><div class="line"></div><div class="line"><span class="comment">## 关闭防火墙</span></div><div class="line">关闭防火墙服务</div><div class="line">``` bash</div><div class="line">service iptables stop</div><div class="line">```  </div><div class="line">关闭防火墙开机自启动</div><div class="line">![](http://ouh6z710l.bkt.clouddn.com/WX20171118-142001@2x.png)</div><div class="line"><span class="comment">## 关闭selinux</span></div><div class="line">临时关闭</div><div class="line">``` bash</div><div class="line">[root@sannetocp ~]<span class="comment"># getenforce</span>Enforcing[root@sannetocp ~]<span class="comment"># setenforce 0</span>[root@sannetocp ~]<span class="comment"># getenforce</span>Permissive</div></pre></td></tr></table></figure>
+<p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-143436@2x.png" alt=""><br>永久关闭<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/selinux/config修改SELINUX= enforcing ==&gt;disabledreboot重启服务器[root@sannetocp ~]<span class="comment"># getenforce</span>Disabled</div></pre></td></tr></table></figure></p>
+<h2 id="添加主机名称解析"><a href="#添加主机名称解析" class="headerlink" title="添加主机名称解析"></a>添加主机名称解析</h2><p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-142410@2x.png" alt=""></p>
+<h2 id="检查操作系统缺包"><a href="#检查操作系统缺包" class="headerlink" title="检查操作系统缺包"></a>检查操作系统缺包</h2><p>由于Oracle软件安装，需要依赖很多的linux操作系统软件，所以我们需要安装很多的操作系统软件包，我们可以使用如下的命令来检查操作系统缺少的软件包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -q binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel expat gcc gcc-c++ glibc glibc-common glibc-devel glibc-headers libaio libaio-devel libgcc libstdc++ libstdc++-devel make pdksh sysstat unixODBC unixODBC-devel | grep <span class="string">"not installed"</span></div></pre></td></tr></table></figure></p>
+<p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-143542@2x.png" alt=""><br>使用yum install的命令安装相关软件包<br><strong>注意</strong><br>pdksh的包需要额外进行下载安装<br>上传pdksh的rpm包<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum localinstall pdksh-5.2.14-1.i386.rpm -y</div></pre></td></tr></table></figure></p>
+<p>安装完成后进行检查，确保没有缺包<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-145145@2x.png" alt=""></p>
+<h2 id="创建Oracle用户，创建相关文件夹"><a href="#创建Oracle用户，创建相关文件夹" class="headerlink" title="创建Oracle用户，创建相关文件夹"></a>创建Oracle用户，创建相关文件夹</h2><h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">groupadd dbagroupadd oinstalluseradd -g oinstall -G dba oracle</div></pre></td></tr></table></figure>
+<h3 id="设置oracle用户密码"><a href="#设置oracle用户密码" class="headerlink" title="设置oracle用户密码"></a>设置oracle用户密码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passwd oracle</div></pre></td></tr></table></figure>
+<p>设定oracle用户环境变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">su - oracle</div><div class="line">vi .bash_profile</div><div class="line">添加</div><div class="line"><span class="built_in">export</span> ORACLE_BASE=/u01/app/oracle<span class="built_in">export</span> ORACLE_SID=san<span class="built_in">export</span> ORACLE_HOME=<span class="variable">$ORACLE_BASE</span>/product/11.2.0/db<span class="built_in">export</span> PATH=<span class="variable">$ORACLE_HOME</span>/bin:<span class="variable">$PATH</span></div><div class="line"><span class="built_in">alias</span> sql=<span class="string">'sqlplus / as sysdba'</span></div></pre></td></tr></table></figure></p>
+<p>使环境变量生效<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">source</span> .bash_profile</div></pre></td></tr></table></figure></p>
+<p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154213@2x.png" alt=""></p>
+<h3 id="创建文件夹"><a href="#创建文件夹" class="headerlink" title="创建文件夹"></a>创建文件夹</h3><p>``` bash<br>mkdir -p /u01/app/oracle/product/11.2.0/db<br>chown -R oracle:oinstall /u01<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">![](http://ouh6z710l.bkt.clouddn.com/WX20171118-143833@2x.png)</div><div class="line"></div><div class="line">## 配置系统参数（可选项）</div><div class="line">### 设置sysctl.conf</div><div class="line">``` bash</div><div class="line">vi /etc/sysctl.confkernel.shmmni = 4096kernel.sem = 2048 65536 1024 256fs.file-max = 6815744fs.aio-max-nr = 1048576net.ipv4.ip_local_port_range = 9000 65500net.core.rmem_default = 262144net.core.rmem_max = 4194304net.core.wmem_default = 262144net.core.wmem_max = 1048576</div><div class="line">```  </div><div class="line">sysctl -p 使系统参数生效  </div><div class="line">### 设置用户在资源限制</div><div class="line">``` bash</div><div class="line">vi /etc/security/limits.conforacle soft nproc 65536oracle hard nproc 65536oracle soft nofile 65536oracle hard nofile 65536</div></pre></td></tr></table></figure></p>
+<h2 id="上传Oracle软件包"><a href="#上传Oracle软件包" class="headerlink" title="上传Oracle软件包"></a>上传Oracle软件包</h2><p>使用SecureFX软件上传Oracle软件包，并进行解压，修改文件加属组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chown -R oracle:oinstall /opt/database</div></pre></td></tr></table></figure></p>
+<h2 id="图形化安装Oracle软件"><a href="#图形化安装Oracle软件" class="headerlink" title="图形化安装Oracle软件"></a>图形化安装Oracle软件</h2><p><strong>重要</strong><br>运行xshell软件，使用Oracle用户登录服务器，执行runInstall的命令<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-152932@2x.png" alt=""><br>swap空间不足的解决办法<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-150514@2x.png" alt=""></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@sannet opt]<span class="comment">#  dd if=/dev/zero of=/opt/swap bs=1M count=5120</span></div><div class="line">5120+0 records <span class="keyword">in</span></div><div class="line">5120+0 records out</div><div class="line">5368709120 bytes (5.4 GB) copied, 14.335 s, 375 MB/s</div><div class="line">[root@sannet opt]<span class="comment"># mkswap /opt/swap</span></div><div class="line">mkswap: /opt/swap: warning: don<span class="string">'t erase bootbits sectors</span></div><div class="line"><span class="string">        on whole disk. Use -f to force.</span></div><div class="line"><span class="string">Setting up swapspace version 1, size = 5242876 KiB</span></div><div class="line"><span class="string">no label, UUID=700ed992-329b-4767-bcf6-9c649d3b1895</span></div><div class="line"><span class="string">[root@sannet opt]# swapon /opt/swap</span></div><div class="line"><span class="string">[root@sannet opt]# free -m</span></div><div class="line"><span class="string">             total       used       free     shared    buffers     cached</span></div><div class="line"><span class="string">Mem:          3818       3670        147          0          7       3173</span></div><div class="line"><span class="string">-/+ buffers/cache:        488       3329</span></div><div class="line"><span class="string">Swap:         5119          0       5119</span></div></pre></td></tr></table></figure>
+<p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-153036@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-153117@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-153220@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-153251@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-153345@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-153417@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154259@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154341@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154428@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154512@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154650@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154817@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-154851@2x.png" alt=""><br>执行两个脚本，oracle数据库软件安装完成<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155148@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155455@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155550@2x.png" alt=""></p>
+<h2 id="图形化配置网络"><a href="#图形化配置网络" class="headerlink" title="图形化配置网络"></a>图形化配置网络</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[oracle@sannet ~]$ netca</div><div class="line"></div><div class="line">Oracle Net Services Configuration:</div></pre></td></tr></table></figure>
+<p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155759@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155759@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155824@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-155847@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-161210@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-161351@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-161438@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-161518@2x.png" alt=""></p>
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-163624@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-163742@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-163810@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-163843@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-163919@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-164152@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-164217@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-164242@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-164338@2x.png" alt=""><br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-164406@2x.png" alt=""></p>
+<p>安装完成验证<br><img src="http://ouh6z710l.bkt.clouddn.com/WX20171118-165032@2x.png" alt=""></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/11/08/kerberos安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/08/kerberos安装/" itemprop="url">kerberos安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-08T11:31:16+08:00">
+                2017-11-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/11/07/Kerberos服务/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/Kerberos服务/" itemprop="url">Kerberos服务</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T14:08:35+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/kerberos/" itemprop="url" rel="index">
+                    <span itemprop="name">kerberos</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="什么是kerberos"><a href="#什么是kerberos" class="headerlink" title="什么是kerberos"></a>什么是kerberos</h1><p><img src="http://ouh6z710l.bkt.clouddn.com/8326cffc1e178a820b22021efe03738da977e876.jpg.png" alt=""><br>“Kerberos 服务”是一种客户机/服务器体系结构，用于在网络上提供安全事务。该服务可提供功能强大的用户验证以及完整性和保密性。通过验证，可保证网络事务的发送者和接收者的身份真实。该服务还可以检验来回传递的数据的有效性（完整性），并在传输过程中对数据进行加密（保密性）。使用 Kerberos 服务，可以安全登录到其他计算机、执行命令、交换数据以及传输文件。此外，该服务还提供授权服务，这样，管理员便可限制对服务和计算机的访问。而且，作为 Kerberos 用户，您还可以控制其他用户对您帐户的访问。<br>Kerberos 服务是单点登录系统，这意味着您对于每个会话只需要向服务进行一次自我验证，即可自动保护该会话过程中所有后续事务的安全。服务对您进行验证后，便无需在每次使用基于 Kerberos 的命令（如 ftp 或 rsh）或访问 NFS 文件系统上数据时都进行自我验证。因此，无需在每次使用这些服务时都在网络上发送口令（口令在网络上可能会被拦截）。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/07/Kerberos服务/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/10/25/hdfs-读取数据流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="姚昕">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BigData">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/25/hdfs-读取数据流程/" itemprop="url">hdfs 读取数据流程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T18:26:41+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HDFS/" itemprop="url" rel="index">
+                    <span itemprop="name">HDFS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/10/16/Namenode-HA详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1797,603 +2364,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/09/18/maven阿里云仓库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="姚昕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/18/maven阿里云仓库/" itemprop="url">maven阿里云仓库</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T13:48:37+08:00">
-                2017-09-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Maven/" itemprop="url" rel="index">
-                    <span itemprop="name">Maven</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>修改maven根目录下的conf文件夹中的setting.xml文件，内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">  　　<span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>        </div><div class="line">    <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/09/06/kafka关闭脚本/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="姚昕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/06/kafka关闭脚本/" itemprop="url">kafka关闭脚本</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T11:33:57+08:00">
-                2017-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">Kafka</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kafka/scripts/" itemprop="url" rel="index">
-                    <span itemprop="name">scripts</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line">COUNT=`cat /root/kafka.list |wc -l`</div><div class="line">passwd=123456</div><div class="line">USER=kafka</div><div class="line"><span class="keyword">for</span>((i=1;i&lt;=<span class="variable">$COUNT</span>;i++));</div><div class="line"><span class="keyword">do</span></div><div class="line">IP=`cat /root/kafka.list |sed -n <span class="string">"<span class="variable">$i</span> p"</span> `</div><div class="line"><span class="built_in">echo</span> <span class="variable">$IP</span></div><div class="line">./kill.sh <span class="variable">$IP</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"Kafka successfull stoped"</span></div><div class="line"><span class="keyword">done</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/06/kafka关闭脚本/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/09/05/kafka中partition和consumer关系/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="姚昕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/05/kafka中partition和consumer关系/" itemprop="url">kafka中partition和consumer关系</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T10:41:51+08:00">
-                2017-09-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">Kafka</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://bigclouder.net/2017/08/31/kafka常见操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="姚昕">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://ouh6z710l.bkt.clouddn.com/IMG_2536.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="BigData">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/31/kafka常见操作/" itemprop="url">kafka常见操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-31T15:37:10+08:00">
-                2017-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Kafka/" itemprop="url" rel="index">
-                    <span itemprop="name">Kafka</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Kafka脚本常用配置参数"><a href="#Kafka脚本常用配置参数" class="headerlink" title="Kafka脚本常用配置参数"></a>Kafka脚本常用配置参数</h1><h2 id="kafka-console-consumer-sh"><a href="#kafka-console-consumer-sh" class="headerlink" title="kafka-console-consumer.sh"></a>kafka-console-consumer.sh</h2><p>该脚本用于消费消息</p>
-<blockquote>
-<ul>
-<li><strong>–from-beginning</strong> : 设定消费的方式 </li>
-<li><strong>–topic <topic></topic></strong> : 创建的topic的名称</li>
-<li><strong>–zookeeper <urls> REQUIRED</urls></strong>: 指定连接到的zookeeper的节点信息，可以设置多个zk节点以便进行failover</li>
-<li><strong>–group <gid></gid></strong> : 指定一个消费者组<br>在consumer端，不需要指定broke-list，而是通过zookeeper和topic找到所有的持有topic消息的broker
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/31/kafka常见操作/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2439,7 +2414,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2450,7 +2425,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2461,7 +2436,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
